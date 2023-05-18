@@ -1,8 +1,10 @@
 package com.capstone.moru.ui.login
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.capstone.moru.R
+import android.view.WindowInsets
+import android.view.WindowManager
 import com.capstone.moru.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -14,5 +16,11 @@ class LoginActivity : AppCompatActivity() {
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupView()
+
+    }
+
+    private fun setupView() {
+        supportActionBar?.hide()
     }
 }

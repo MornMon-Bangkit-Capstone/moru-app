@@ -2,6 +2,7 @@
 <resources>
     <color name="orange">#FD5B32</color>
     <color name="grey">#FFC6C6C6</color>
+    <color name="semi_grey">#FFF5F5F5</color>
     <color name="light_grey">#FFEEEEEE</color>
     <color name="green">#FF58D58F</color>
     <color name="light_orange">#FFFFBD68</color>
@@ -10,4 +11,5 @@
     <color name="red">#FFF77469</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    c
 </resources>
