@@ -2,8 +2,14 @@
     <string name="app_name">Moru</string>
     <string name="login_acc">Login to Your\nAccount</string>
     <string name="no_acc">Don’t have an account?</string>
-    <string name="register">Register Now</string>
+    <string name="register_now">Register Now</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="back">Back</string>
+    <string name="register_acc">Register New\nAccount</string>
+    <string name="confirm_pass">Confirm Password</string>
+    <string name="have_acc">Already have an account?</string>
+    <string name="login_now">Login Now</string>
+    <string name="register">Register</string>
 </resources>

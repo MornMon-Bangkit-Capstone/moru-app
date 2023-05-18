@@ -15,7 +15,8 @@
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_back_24" />
+        app:srcCompat="@drawable/ic_arrow_back_24"
+        android:contentDescription="@string/back" />
 
     <TextView
         android:id="@+id/tv_login_acc"
@@ -92,7 +93,7 @@
         android:id="@+id/container_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="32dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -100,6 +101,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:textColor="@color/grey"
             android:id="@+id/tv_no_acc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,11 +110,11 @@
 
         <TextView
             android:id="@+id/tv_register"
+            style="@style/textStyleMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register"
-            style="@style/textStyleMedium"
-            android:textColor="@color/orange"/>
+            android:text="@string/register_now"
+            android:textColor="@color/orange" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
