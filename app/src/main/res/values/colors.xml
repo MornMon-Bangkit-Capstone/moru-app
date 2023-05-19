@@ -11,5 +11,6 @@
     <color name="red">#FFF77469</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    c
+    <color name="white_50">#FF808080</color>
+
 </resources>

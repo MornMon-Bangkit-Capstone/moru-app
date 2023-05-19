@@ -27,7 +27,9 @@
         <item name="fontFamily">@font/poppinsmedium</item>
     </style>
 
-
+    <style name="BottomNavigationLabelStyle" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textSize">10sp</item>
+    </style>
 
 
 </resources>
