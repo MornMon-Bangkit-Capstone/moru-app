@@ -23,4 +23,12 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="user">User</string>
+    <string name="example_email">example@gmail.com</string>
+    <string name="my_profile">My Profile</string>
+    <string name="profile_data">Profile Data</string>
+    <string name="change_password">Change Password</string>
+    <string name="subscription">Subscription</string>
+    <string name="logout">Logout</string>
+    <string name="image_profile">image profile</string>
 </resources>
