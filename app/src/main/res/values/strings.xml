@@ -41,5 +41,7 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur. Egestas purus volutpat varius neque eros eleifend blandit et elit. Augue mattis eget laoreet diam pretium sed gravida ut nequ</string>
     <string name="image_routine">Image Routine</string>
     <string name="to_detail_routines">To Detail Routines</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="waving_hand">Waving Hand</string>
 
 </resources>
