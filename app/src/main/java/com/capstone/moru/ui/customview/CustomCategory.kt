@@ -16,11 +16,6 @@ class CustomCategory : androidx.appcompat.widget.AppCompatTextView {
 
     private var category: String = ""
 
-    private val path = Path()
-    private val rect = RectF()
-
-    private val cornerRadius = 12f
-
     constructor(context: Context) : super(context) {
         init()
     }
@@ -46,16 +41,10 @@ class CustomCategory : androidx.appcompat.widget.AppCompatTextView {
 
     override fun onDraw(canvas: Canvas?) {
 
-        rect.set(0f, 0f, width.toFloat(), height.toFloat())
-        path.addRoundRect(rect, cornerRadius, cornerRadius, Path.Direction.CW)
-
-        canvas?.clipPath(path)
-
         super.onDraw(canvas)
     }
 
     private fun init() {
-
         text = resources.getString(R.string.category_default)
         setTextColor(ContextCompat.getColor(context, R.color.blue))
         setBackgroundColor(

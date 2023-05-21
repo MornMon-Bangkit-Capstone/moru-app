@@ -30,4 +30,18 @@
         android:name="com.capstone.moru.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/pickRoutineFragment"
+        android:name="com.capstone.moru.ui.add_routine.pick_routine.PickRoutineFragment"
+        android:label="fragment_pick_routine"
+        tools:layout="@layout/fragment_pick_routine" >
+        <action
+            android:id="@+id/action_pickRoutineFragment_to_pickScheduleFragment"
+            app:destination="@id/pickScheduleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pickScheduleFragment"
+        android:name="com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleFragment"
+        android:label="fragment_pick_schedule"
+        tools:layout="@layout/fragment_pick_schedule" />
 </navigation>
