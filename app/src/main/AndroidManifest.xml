@@ -11,9 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moru">
         <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            android:label="@string/title_activity_main" />
+            android:name=".ui.fill.FillProfileActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity
+            android:name=".ui.intro.IntroActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false"
