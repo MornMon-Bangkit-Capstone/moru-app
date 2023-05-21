@@ -4,12 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.add_routine.AddRoutineActivity">
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/placeholder"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    tools:context=".ui.add_routine.pick_schedule.PickScheduleActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,8 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moru">
         <activity
-            android:name=".ui.add_routine.AddRoutineActivity"
+            android:name=".ui.add_routine.pick_schedule.PickScheduleActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.add_routine.pick_routine.PickRoutineActivity"
+            android:exported="false"
+            android:label="@string/title_activity_pick_routine"
+            android:theme="@style/Theme.Moru.NoActionBar" />
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false"

@@ -1,20 +1,15 @@
 package com.capstone.moru.ui
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.WindowInsets
-import android.view.WindowManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityMainBinding
-import com.capstone.moru.ui.add_routine.AddRoutineActivity
-import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineFragment
-import com.capstone.moru.ui.routines.RoutinesFragment
+import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -45,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navViewController)
 
         binding.fab.setOnClickListener {
-            val intentToAddRoutine = Intent(this, AddRoutineActivity::class.java)
-            startActivity(intentToAddRoutine)
+            val intentToPickRoutine = Intent(this, PickRoutineActivity::class.java)
+            startActivity(intentToPickRoutine)
         }
     }
 
