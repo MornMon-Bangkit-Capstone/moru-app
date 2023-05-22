@@ -1,4 +1,4 @@
-package com.capstone.moru.ui.add_routine.pick_routine
+package com.capstone.moru.ui.routines
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,15 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.capstone.moru.R
 
-class RoutineListFragment : Fragment() {
 
+class RoutineListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onCreateView(
@@ -27,6 +24,6 @@ class RoutineListFragment : Fragment() {
     }
 
     companion object {
-        const val POSITION = "section_number"
+
     }
 }
