@@ -70,4 +70,9 @@
     <string name="favorite_exercise_category">Favorite Exercise Category</string>
     <string name="favorite_exercise">Favorite Exercise</string>
     <string name="exercise_name">Exercise Name</string>
+    <string name="my_statistic">My Statistic</string>
+    <string name="default_average_day">0 hours 0 minutes</string>
+    <string name="today_routines">Today routines</string>
+    <string name="today_average">Today Average</string>
+    <string name="this_week_routines">This week routines</string>
 </resources>
