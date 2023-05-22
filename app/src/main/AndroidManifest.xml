@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moru">
         <activity
-            android:name=".ProfileDataActivity"
+            android:name=".ui.profile.profile_data.ProfileDataActivity"
             android:exported="false" />
         <activity
-            android:name=".ChangePasswordActivity"
+            android:name=".ui.profile.change_password.ChangePasswordActivity"
             android:exported="false" />
         <activity
             android:name=".ui.add_routine.pick_schedule.PickScheduleActivity"

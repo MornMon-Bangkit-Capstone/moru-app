@@ -93,7 +93,7 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/custom_rounded_btn_bg"
         android:elevation="0dp"
-        android:padding="8dp"
+        android:padding="6dp"
         android:text="@string/choose"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

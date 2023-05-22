@@ -22,7 +22,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="user">User</string>
+    <string name="user">Username</string>
     <string name="example_email">example@gmail.com</string>
     <string name="my_profile">My Profile</string>
     <string name="profile_data">Profile Data</string>
@@ -56,4 +56,18 @@
     <string name="choose">Choose</string>
     <string name="exercise">Exercise</string>
     <string name="read">Read</string>
+    <string name="change_profile_data">Change</string>
+    <string name="name">Name</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="default_date">01 January 2002</string>
+    <string name="goals">Goals</string>
+    <string name="default_goals">This is my goals</string>
+    <string name="favorite_book_category">Favorite Book Category</string>
+    <string name="default_book_name">Book Name</string>
+    <string name="fav_book">Favorite Book</string>
+    <string name="fav_author">Favorite Author</string>
+    <string name="default_author">Author Name</string>
+    <string name="favorite_exercise_category">Favorite Exercise Category</string>
+    <string name="favorite_exercise">Favorite Exercise</string>
+    <string name="exercise_name">Exercise Name</string>
 </resources>

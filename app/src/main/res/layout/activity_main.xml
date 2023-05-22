@@ -18,7 +18,7 @@
         android:src="@drawable/ic_add_24"
         app:tint="@android:color/white"
         app:backgroundTint="@color/orange"
-        app:fabCustomSize="72dp"
+        app:fabCustomSize="64dp"
         app:fabSize="auto"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,9 +49,11 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/main_navigation"
         tools:ignore="FragmentTagUsage" />
 
