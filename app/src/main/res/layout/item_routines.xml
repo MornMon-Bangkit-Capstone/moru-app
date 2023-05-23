@@ -40,18 +40,28 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0">
 
-                <com.capstone.moru.ui.customview.CustomCategory
-                    android:id="@+id/custom_category"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/category_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="4dp"
-                    android:textSize="10sp"
-                    android:gravity="center"
-                    android:background="@drawable/custom_shape_category"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="SmallSp" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.capstone.moru.ui.customview.CustomCategory
+                        android:id="@+id/custom_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:textSize="10sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="SmallSp" />
+
+                </androidx.cardview.widget.CardView>
 
 
                 <TextView
@@ -64,7 +74,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/custom_category" />
+                    app:layout_constraintTop_toBottomOf="@+id/category_card" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"

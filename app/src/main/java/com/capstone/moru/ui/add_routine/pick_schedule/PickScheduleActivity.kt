@@ -8,5 +8,11 @@ class PickScheduleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pick_schedule)
+
+        setupView()
+    }
+
+    private fun setupView() {
+        supportActionBar?.hide()
     }
 }
