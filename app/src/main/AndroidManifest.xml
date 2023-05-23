@@ -12,14 +12,28 @@
         android:theme="@style/Theme.Moru">
         <activity
             android:name=".ui.fill.FillProfileActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".ui.intro.IntroActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".ui.profile.profile_data.ProfileDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.change_password.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.add_routine.pick_schedule.PickScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.add_routine.pick_routine.PickRoutineActivity"
+            android:exported="false"
+            android:label="@string/title_activity_pick_routine"
+            android:theme="@style/Theme.Moru.NoActionBar" />
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false"

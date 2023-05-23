@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.changepass.ChangePassActivity">
+    tools:context=".ui.profile.profile_data.ProfileDataActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

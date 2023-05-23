@@ -3,7 +3,7 @@
     <style name="Theme.Moru" parent="Theme.MaterialComponents.Light">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/orange</item>
@@ -31,9 +31,24 @@
         <item name="fontFamily">@font/poppinssemibold</item>
     </style>
 
+    <style name="tabTextStyle">
+
+        <item name="fontFamily">@font/poppinsmedium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="BottomNavigationLabelStyle" parent="@style/TextAppearance.AppCompat">
         <item name="android:textSize">10sp</item>
     </style>
+
+    <style name="Theme.Moru.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Moru.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Moru.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

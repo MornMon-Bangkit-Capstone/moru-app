@@ -1,11 +1,12 @@
-package com.capstone.moru.ui.changepass
+package com.capstone.moru.ui.alarm
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.capstone.moru.R
 
-class ChangePassActivity : AppCompatActivity() {
+class AlarmActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_pass)
+        setContentView(R.layout.activity_alarm)
     }
 }

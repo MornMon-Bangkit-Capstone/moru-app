@@ -17,7 +17,6 @@
     <string name="title_routines">Routines</string>
     <string name="title_stat">Stat</string>
     <string name="title_profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_dashboard">Dashboard</string>
@@ -31,4 +30,34 @@
     <string name="subscription">Subscription</string>
     <string name="logout">Logout</string>
     <string name="image_profile">image profile</string>
+    <string name="add_routines">Add Routines</string>
+    <string name="routine_name">Routine Name</string>
+    <string name="routine_time">Routine Time</string>
+    <string name="status_not_started">Not Started</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_skipped">Skipped</string>
+    <string name="category_default">Category</string>
+    <string name="more_info">More Info</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur. Egestas purus volutpat varius neque eros eleifend blandit et elit. Augue mattis eget laoreet diam pretium sed gravida ut nequ</string>
+    <string name="image_routine">Image Routine</string>
+    <string name="to_detail_routines">To Detail Routines</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="waving_hand">Waving Hand</string>
+    <string name="title_activity_alarm">AlarmActivity</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_pick_routine">PickRoutineActivity</string>
+    <string name="pick_routine">Pick Routine</string>
+    <string name="search">Search</string>
+    <string name="choose">Choose</string>
+    <string name="exercise">Exercise</string>
+    <string name="read">Read</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirmation_password">Confirmation Password</string>
+    <string name="save">Save</string>
 </resources>
