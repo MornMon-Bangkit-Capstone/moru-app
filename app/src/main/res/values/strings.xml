@@ -79,4 +79,6 @@
     <string name="new_password">New Password</string>
     <string name="confirmation_password">Confirmation Password</string>
     <string name="save">Save</string>
+    <string name="fill_your_personal_data">Fill Your Personal Data</string>
+    <string name="describe_your_goals">Describe Your Goals</string>
 </resources>

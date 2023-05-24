@@ -13,12 +13,11 @@
         android:layout_height="200dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tintro_baris1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246"
         app:srcCompat="@drawable/undrawfitnessstats" />
 
     <LinearLayout
@@ -106,37 +105,37 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/intro_register"
+        android:id="@+id/btn_intro_register"
         style="@style/buttonTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/custom_rounded_btn_bg"
         android:elevation="0dp"
-        android:padding="8dp"
+        android:padding="6dp"
         android:text="@string/register"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_intro_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introfitness"
-        app:layout_constraintVertical_bias="0.582" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/intro_login"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_intro_login"
         style="@style/buttonTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/intro_register"
+        android:layout_below="@id/btn_intro_register"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/custom_rounded_btn_bg"
+        android:background="@drawable/custom_border_button"
         android:elevation="0dp"
-        android:padding="8dp"
+        android:padding="12dp"
         android:text="@string/login"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,6 +143,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/introfitness"
         app:layout_constraintVertical_bias="0.905" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

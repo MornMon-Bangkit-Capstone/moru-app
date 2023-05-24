@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityRegisterBinding
 import com.capstone.moru.ui.MainActivity
+import com.capstone.moru.ui.fill.FillProfileActivity
 import com.capstone.moru.ui.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
@@ -28,8 +29,8 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.btnRegister.setOnClickListener {
-            val intentToMain = Intent(this, MainActivity::class.java)
-            startActivity(intentToMain)
+            val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
+            startActivity(intentToFillProfile)
         }
     }
 
