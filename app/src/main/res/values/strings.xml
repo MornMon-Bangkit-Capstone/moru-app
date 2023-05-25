@@ -81,4 +81,7 @@
     <string name="save">Save</string>
     <string name="fill_your_personal_data">Fill Your Personal Data</string>
     <string name="describe_your_goals">Describe Your Goals</string>
+    <string name="default_time">00 : 00</string>
+    <string name="watch_tutorial">Watch Tutorial</string>
+    <string name="finish_routine">Finish Routine</string>
 </resources>
