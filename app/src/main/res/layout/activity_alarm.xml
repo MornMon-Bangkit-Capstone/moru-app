@@ -7,7 +7,7 @@
     tools:context=".ui.alarm.AlarmActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/back_btn_alarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/ic_arrow_back_24" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tv_timer"
         style="@style/textStyleSemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,14 +66,14 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/tv_routine_name_alarm"
         style="@style/textStyleSemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="@string/routine_name"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/tv_timer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -82,7 +82,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintBottom_toTopOf="@+id/tv_routine_name_alarm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/placeholder_exercise" />

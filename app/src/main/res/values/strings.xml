@@ -84,4 +84,20 @@
     <string name="default_time">00 : 00</string>
     <string name="watch_tutorial">Watch Tutorial</string>
     <string name="finish_routine">Finish Routine</string>
+    <string name="pick_schedule">Pick Schedule</string>
+    <string name="routine_type">Routine Type</string>
+    <string name="date">Date</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="detail">Detail</string>
+    <string name="pages">Pages</string>
+    <string name="author">Author</string>
+    <string name="rating">Rating</string>
+    <string name="default_rating_book">0 / 5</string>
+    <string name="description">Description</string>
+    <string name="book_description">Book Description</string>
+    <string name="start_this_routine">Start This Routine</string>
+    <string name="default_pages">0 pages</string>
+    <string name="average_duration">Average Duration</string>
+    <string name="default_duration">10 minutes</string>
 </resources>

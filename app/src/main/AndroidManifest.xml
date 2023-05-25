@@ -11,10 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moru">
         <activity
+            android:name=".ui.detail.DetailBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.detail.DetailExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.detail.DetailRoutineActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.fill.FillProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.intro.IntroActivity"
             android:exported="false"
@@ -52,7 +61,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- <activity -->
@@ -65,7 +73,6 @@
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
         </activity>
     </application>
