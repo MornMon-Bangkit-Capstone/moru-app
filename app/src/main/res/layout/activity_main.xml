@@ -7,7 +7,7 @@
     tools:context=".ui.MainActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
@@ -16,13 +16,13 @@
         android:layout_marginBottom="20dp"
         android:contentDescription="@string/add_routines"
         android:src="@drawable/ic_add_24"
-        app:tint="@android:color/white"
         app:backgroundTint="@color/orange"
         app:fabCustomSize="64dp"
         app:fabSize="auto"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="36dp" />
+        app:maxImageSize="36dp"
+        app:tint="@android:color/white" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -56,5 +56,71 @@
         app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/main_navigation"
         tools:ignore="FragmentTagUsage" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_pick_routine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:contentDescription="@string/add_routines"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="64dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toTopOf="@+id/fab_menu"
+        app:layout_constraintEnd_toEndOf="@+id/fab_menu"
+        app:layout_constraintStart_toStartOf="@+id/fab_menu"
+        app:maxImageSize="32dp"
+        app:srcCompat="@drawable/ic_run_24"
+        app:tint="@color/orange" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_routine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:clickable="true"
+        android:contentDescription="@string/add_routines"
+        android:focusable="true"
+        android:visibility="invisible"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="64dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toTopOf="@+id/fab_pick_routine"
+        app:layout_constraintEnd_toEndOf="@+id/fab_pick_routine"
+        app:layout_constraintStart_toStartOf="@+id/fab_pick_routine"
+        app:maxImageSize="32dp"
+        app:srcCompat="@drawable/ic_edit_focus_24"
+        app:tint="@color/orange" />
+
+    <TextView
+        android:id="@+id/tv_add_routine"
+        style="@style/textStyleSemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/custom_text_container"
+        android:text="@string/add_routine"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_add_routine"
+        app:layout_constraintEnd_toStartOf="@+id/fab_add_routine"
+        app:layout_constraintTop_toTopOf="@+id/fab_add_routine" />
+
+    <TextView
+        android:id="@+id/tv_pick_routine"
+        style="@style/textStyleSemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/custom_text_container"
+        android:text="@string/pick_routine"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_pick_routine"
+        app:layout_constraintEnd_toStartOf="@+id/fab_pick_routine"
+        app:layout_constraintTop_toTopOf="@+id/fab_pick_routine" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

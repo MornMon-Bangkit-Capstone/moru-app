@@ -100,4 +100,5 @@
     <string name="default_pages">0 pages</string>
     <string name="average_duration">Average Duration</string>
     <string name="default_duration">10 minutes</string>
+    <string name="add_routine">Add Routine</string>
 </resources>
