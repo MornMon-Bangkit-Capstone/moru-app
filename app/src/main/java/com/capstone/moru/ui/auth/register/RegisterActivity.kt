@@ -1,5 +1,5 @@
 
-package com.capstone.moru.ui.register
+package com.capstone.moru.ui.auth.register
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityRegisterBinding
 import com.capstone.moru.ui.MainActivity
 import com.capstone.moru.ui.fill.FillProfileActivity
-import com.capstone.moru.ui.login.LoginActivity
+import com.capstone.moru.ui.auth.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
 

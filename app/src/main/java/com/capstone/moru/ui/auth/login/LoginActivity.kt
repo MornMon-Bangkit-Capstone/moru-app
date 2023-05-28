@@ -1,11 +1,11 @@
-package com.capstone.moru.ui.login
+package com.capstone.moru.ui.auth.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.capstone.moru.databinding.ActivityLoginBinding
 import com.capstone.moru.ui.MainActivity
-import com.capstone.moru.ui.register.RegisterActivity
+import com.capstone.moru.ui.auth.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     private var _binding: ActivityLoginBinding? = null

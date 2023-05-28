@@ -6,8 +6,8 @@ import android.os.Bundle
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityIntroBinding
 import com.capstone.moru.databinding.ActivitySplashBinding
-import com.capstone.moru.ui.login.LoginActivity
-import com.capstone.moru.ui.register.RegisterActivity
+import com.capstone.moru.ui.auth.login.LoginActivity
+import com.capstone.moru.ui.auth.register.RegisterActivity
 
 class IntroActivity : AppCompatActivity() {
     private var _binding: ActivityIntroBinding? = null
