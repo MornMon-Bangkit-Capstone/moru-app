@@ -50,6 +50,10 @@ class LoginActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
                 if (!Patterns.EMAIL_ADDRESS.matcher(p0!!).matches() && p0.isEmpty()) {
                     binding.edEmail.error = getString(R.string.wrong_email_format)
+                    binding.btnLogin.isEnabled = false
+                } else {
+                    binding.btnLogin.isEnabled = true
+
                 }
             }
 
@@ -67,9 +71,11 @@ class LoginActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
                 if (p0.toString().length < 8) {
                     binding.edPass.error = getString(R.string.wrong_password_format)
+                    binding.btnLogin.isEnabled = false
+                } else {
+                    binding.btnLogin.isEnabled = true
                 }
             }
-
         })
 
 
@@ -99,12 +105,11 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         loginViewModel.message.observe(this) { message ->
                             val msg = getString(R.string.wrong_credential)
-                            displayToast("$message : $msg")
+                            displayToast(msg)
                         }
                     }
                 }
             }
-
         }
 
         loginViewModel.isLoading.observe(this) {

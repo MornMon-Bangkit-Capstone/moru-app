@@ -1,10 +1,15 @@
 package com.capstone.moru.ui.splash
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.moru.databinding.ActivitySplashBinding
+import com.capstone.moru.ui.MainActivity
 import com.capstone.moru.ui.factory.ViewModelFactory
+import com.capstone.moru.ui.intro.IntroActivity
 
 class SplashActivity : AppCompatActivity() {
     private var _binding: ActivitySplashBinding? = null
@@ -23,11 +28,18 @@ class SplashActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         splashViewModel.getUserToken().observe(this) { token ->
-            if (token != "" || token.isEmpty()) {
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intentFromSplash = if (token != "" ) {
+                    Intent(this@SplashActivity, MainActivity::class.java)
+                } else {
+                    Intent(this@SplashActivity, IntroActivity::class.java)
+                }
+                startActivity(intentFromSplash)
+            }, DELAY.toLong())
 
-            }
         }
     }
+
 
     companion object {
         const val DELAY = 3000

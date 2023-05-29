@@ -2,17 +2,22 @@ package com.capstone.moru.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.capstone.moru.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.capstone.moru.databinding.FragmentProfileBinding
+import com.capstone.moru.ui.auth.login.LoginActivity
+import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.profile.profile_data.ProfileDataActivity
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var factory: ViewModelFactory
+    private val profileViewModel: ProfileViewModel by viewModels { factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,10 +30,19 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        factory = ViewModelFactory.getInstance(requireContext())
+
         binding.profileData.setOnClickListener {
             val intentToProfileData = Intent(requireContext(), ProfileDataActivity::class.java)
             startActivity(intentToProfileData)
+        }
 
+        binding.logout.setOnClickListener {
+            profileViewModel.logout()
+
+            val intentToLogin = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intentToLogin)
+            activity?.finish()
         }
 
     }
