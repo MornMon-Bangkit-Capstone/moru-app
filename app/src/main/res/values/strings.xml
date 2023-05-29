@@ -101,4 +101,8 @@
     <string name="average_duration">Average Duration</string>
     <string name="default_duration">10 minutes</string>
     <string name="add_routine">Add Routine</string>
+    <string name="wrong_email_format">Wrong email format</string>
+    <string name="wrong_password_format">Password length must at least 8 character </string>
+    <string name="fill_field">Please fill every field</string>
+    <string name="wrong_credential">Wrong email or password</string>
 </resources>

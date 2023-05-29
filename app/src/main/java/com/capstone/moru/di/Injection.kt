@@ -3,7 +3,9 @@ package com.capstone.moru.di
 import android.content.Context
 import com.capstone.moru.BuildConfig
 import com.capstone.moru.data.api.retrofit.ApiConfig
+import com.capstone.moru.data.datastore.SettingPreference
 import com.capstone.moru.data.repository.UserRepository
+import com.capstone.moru.ui.auth.login.dataStore
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -18,6 +20,8 @@ object Injection {
         val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
         val apiService = ApiConfig.getApiService(client)
 
-        return UserRepository.getInstance(apiService)
+        val pref = SettingPreference.getInstance(context.dataStore)
+
+        return UserRepository.getInstance(apiService, pref)
     }
 }

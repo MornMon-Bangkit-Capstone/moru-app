@@ -1,12 +1,14 @@
 package com.capstone.moru.ui.factory
 
 import android.content.Context
+import android.os.Build.VERSION_CODES.S
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.moru.data.repository.UserRepository
 import com.capstone.moru.di.Injection
 import com.capstone.moru.ui.auth.login.LoginViewModel
 import com.capstone.moru.ui.auth.register.RegisterViewModel
+import com.capstone.moru.ui.splash.SplashViewModel
 
 class ViewModelFactory private constructor(
     private val userRepository: UserRepository
@@ -27,6 +29,9 @@ class ViewModelFactory private constructor(
                 userRepository
             ) as T
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> RegisterViewModel(
+                userRepository
+            ) as T
+            modelClass.isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(
                 userRepository
             ) as T
             else -> throw java.lang.IllegalArgumentException("Unkown ViewModel class: ${modelClass.name}")

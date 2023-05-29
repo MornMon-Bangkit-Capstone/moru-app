@@ -1,36 +1,35 @@
 package com.capstone.moru.ui.splash
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import com.capstone.moru.R
-import com.capstone.moru.databinding.ActivityMainBinding
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.capstone.moru.databinding.ActivitySplashBinding
-import com.capstone.moru.ui.MainActivity
-import com.capstone.moru.ui.intro.IntroActivity
+import com.capstone.moru.ui.factory.ViewModelFactory
 
 class SplashActivity : AppCompatActivity() {
     private var _binding: ActivitySplashBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var factory: ViewModelFactory
+    private val splashViewModel: SplashViewModel by viewModels { factory }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         _binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        factory = ViewModelFactory.getInstance(this)
+
         supportActionBar?.hide()
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intentToIntro = Intent(this@SplashActivity, IntroActivity::class.java)
-            startActivity(intentToIntro)
-            finish()
-        }, DELAY.toLong())
+        splashViewModel.getUserToken().observe(this) { token ->
+            if (token != "" || token.isEmpty()) {
+
+            }
+        }
     }
 
-    companion object{
+    companion object {
         const val DELAY = 3000
 
     }
