@@ -42,6 +42,7 @@ class ProfileFragment : Fragment() {
         binding.logout.setOnClickListener {
             val logoutDialog = LogoutDialog()
             logoutDialog.show(parentFragmentManager, "Dialog")
+
         }
     }
 

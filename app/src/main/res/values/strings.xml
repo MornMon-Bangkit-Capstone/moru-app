@@ -111,4 +111,8 @@
     <string name="dialog_logout">logout</string>
     <string name="yes">YES</string>
     <string name="no">no</string>
+    <string name="question_mark">\?</string>
+    <string name="morning_routines">morning routines</string>
+    <string name="continue_your">Continue your</string>
+    <string name="continue_routine">Hey Krisna, let’s continue your morning routines for more productive and healthy life</string>
 </resources>
