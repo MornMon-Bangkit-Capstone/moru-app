@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.capstone.moru.databinding.FragmentProfileBinding
 import com.capstone.moru.ui.auth.login.LoginActivity
+import com.capstone.moru.ui.customview.LogoutDialog
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.profile.profile_data.ProfileDataActivity
 
@@ -35,18 +36,16 @@ class ProfileFragment : Fragment() {
         binding.profileData.setOnClickListener {
             val intentToProfileData = Intent(requireContext(), ProfileDataActivity::class.java)
             startActivity(intentToProfileData)
+
         }
 
         binding.logout.setOnClickListener {
-            profileViewModel.logout()
-
-            val intentToLogin = Intent(requireContext(), LoginActivity::class.java)
-            startActivity(intentToLogin)
-            activity?.finish()
+            val logoutDialog = LogoutDialog()
+            logoutDialog.show(parentFragmentManager, "Dialog")
         }
-
     }
 
     companion object {
+
     }
 }

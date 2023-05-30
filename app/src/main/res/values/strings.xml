@@ -105,4 +105,10 @@
     <string name="wrong_password_format">Password length must at least 8 character </string>
     <string name="fill_field">Please fill every field</string>
     <string name="wrong_credential">Wrong email or password</string>
+    <string name="register_success">Register success</string>
+    <string name="register_failed">Register failed</string>
+    <string name="are_you_sure">Are you sure want to</string>
+    <string name="dialog_logout">logout</string>
+    <string name="yes">YES</string>
+    <string name="no">no</string>
 </resources>

@@ -35,6 +35,7 @@ class SplashActivity : AppCompatActivity() {
                     Intent(this@SplashActivity, IntroActivity::class.java)
                 }
                 startActivity(intentFromSplash)
+                intentFromSplash.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             }, DELAY.toLong())
 
         }

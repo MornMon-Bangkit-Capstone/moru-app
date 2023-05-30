@@ -13,8 +13,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RegisterViewModel(private var userRepository: UserRepository) : ViewModel() {
-    private val _user = MutableLiveData<RegisterResponse?>()
-    val user: LiveData<RegisterResponse?> = _user
+    private val _user = MutableLiveData<String?>()
+    val user: LiveData<String?> = _user
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -25,9 +25,9 @@ class RegisterViewModel(private var userRepository: UserRepository) : ViewModel(
     private val _error = MutableLiveData<Boolean>()
     val error: LiveData<Boolean> = _error
 
-    fun userRegister(name: String, email: String, password: String) {
+    fun userRegister(email: String, password: String, passwordConfirm: String) {
         _isLoading.value = true
-        val client = userRepository.registerUser(name, email, password)
+        val client = userRepository.registerUser(email, password, passwordConfirm)
         client.enqueue(
             object : Callback<RegisterResponse> {
                 override fun onResponse(
@@ -39,7 +39,7 @@ class RegisterViewModel(private var userRepository: UserRepository) : ViewModel(
                     if (response.isSuccessful) {
                         Log.e(TAG, "registerUser: ${response.body()}")
 
-                        _user.value = response.body()
+                        _user.value = response.body()?.message
                         _error.value = false
                     } else {
                         Log.e(TAG, "On failure ${response.message()} + ${response.code()}")

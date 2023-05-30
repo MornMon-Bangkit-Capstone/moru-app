@@ -12,12 +12,12 @@ class UserRepository(
     private val apiService: ApiService,
     private val preference: SettingPreference,
 ) {
-    fun registerUser(name: String, email: String, password: String): Call<RegisterResponse> {
-        return apiService.registerUser(name = name, email = email, password = password)
+    fun registerUser( email: String, password: String, passwordConfirm: String): Call<RegisterResponse> {
+        return apiService.registerUser(email, password, passwordConfirm)
     }
 
     fun loginUser(email: String, password: String): Call<LoginResponse> {
-        return apiService.loginUser(email = email, password = password)
+        return apiService.loginUser(email, password)
     }
 
     fun getUserToken(): LiveData<String> {

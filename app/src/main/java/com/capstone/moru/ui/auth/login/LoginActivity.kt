@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (!Patterns.EMAIL_ADDRESS.matcher(p0!!).matches() && p0.isEmpty()) {
+                if (!Patterns.EMAIL_ADDRESS.matcher(p0!!).matches()) {
                     binding.edEmail.error = getString(R.string.wrong_email_format)
                     binding.btnLogin.isEnabled = false
                 } else {

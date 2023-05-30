@@ -12,9 +12,9 @@ interface ApiService {
     @FormUrlEncoded
     @POST("auth/register")
     fun registerUser(
-        @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
+        @Field("passwordConfirm") passwordConfirm: String,
     ): Call<RegisterResponse>
 
     @FormUrlEncoded
