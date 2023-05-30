@@ -84,7 +84,7 @@ class RegisterActivity : AppCompatActivity() {
                 registerViewModel.error.observe(this) { error ->
                     if (!error) {
                         registerViewModel.user.observe(this) { user ->
-                            if (user == "User created") {
+                            if (user == "User Created") {
                                 val msg = getString(R.string.register_success)
                                 displayToast(msg)
 
