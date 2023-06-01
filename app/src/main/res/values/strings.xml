@@ -115,4 +115,10 @@
     <string name="morning_routines">morning routines</string>
     <string name="continue_your">Continue your</string>
     <string name="continue_routine">Hey Krisna, let’s continue your morning routines for more productive and healthy life</string>
+    <string name="update_routine">Update Routine</string>
+    <string name="delete_routine">Delete Routine</string>
+    <string name="default_notes">This is my notes</string>
+    <string name="default_avg_duration">0 minutes - 0 minutes</string>
+    <string name="default_description">This is my description</string>
+    <string name="notes">Notes</string>
 </resources>

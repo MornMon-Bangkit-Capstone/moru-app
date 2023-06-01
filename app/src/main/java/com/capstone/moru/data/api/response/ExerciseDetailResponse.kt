@@ -14,7 +14,7 @@ data class ExerciseDetailResponse(
 	val message: String? = null
 )
 
-data class Book(
+data class Exercise(
 
 	@field:SerializedName("duration")
 	val duration: String? = null,
