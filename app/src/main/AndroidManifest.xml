@@ -11,8 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="sensorPortrait"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Moru">
+        android:theme="@style/Theme.Moru"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".AddCustomRoutineActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.detail.DetailBookActivity"
             android:exported="false" />

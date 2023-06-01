@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityMainBinding
+import com.capstone.moru.ui.add_routine.add_custom_routine.AddCustomRoutineActivity
 import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -64,6 +65,11 @@ class MainActivity : AppCompatActivity() {
         binding.fabPickRoutine.setOnClickListener {
             val intentToPickRoutine = Intent(this, PickRoutineActivity::class.java)
             startActivity(intentToPickRoutine)
+        }
+
+        binding.fabAddRoutine.setOnClickListener{
+            val intentToAddRoutine = Intent(this, AddCustomRoutineActivity::class.java)
+            startActivity(intentToAddRoutine)
         }
     }
 
