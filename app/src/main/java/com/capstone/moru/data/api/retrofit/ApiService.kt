@@ -1,11 +1,12 @@
 package com.capstone.moru.data.api.retrofit
 
+import com.capstone.moru.data.api.response.FillProfileResponse
 import com.capstone.moru.data.api.response.LoginResponse
+import com.capstone.moru.data.api.response.ProfileResponse
 import com.capstone.moru.data.api.response.RegisterResponse
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
+import java.util.*
 
 interface ApiService {
 
@@ -23,4 +24,34 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String,
     ): Call<LoginResponse>
+
+    @FormUrlEncoded
+    @POST("/auth/fill/data")
+    fun fillPersonalDataUser(
+        @Field("name") name: String,
+        @Field("birthdate") birthDate: String,
+        @Field("goal") goal: String,
+    ): Call<FillProfileResponse>
+
+    @FormUrlEncoded
+    @GET("profile/{id}")
+    fun getProfileUser(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): Call<ProfileResponse>
+
+    @PUT("profile/{id}")
+    fun updateProfileUser(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Field("Name") name: String,
+        @Field("Date") date: Date,
+        @Field("Goals") goals: String,
+        @Field("Favorite Book Category") favBookCategory: String,
+        @Field("Favorite Book") favBook: String,
+        @Field("Favorite Author") favAuthor: String,
+        @Field("Favorite Exercise Category") favExerciseCategory: String,
+        @Field("Favorite Exercise") favExercise: String,
+        @Field("Favorite Duration") faveExerciseDuration: String,
+        ): Call<ProfileResponse>
 }
