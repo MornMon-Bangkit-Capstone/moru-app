@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Moru"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".AddCustomRoutineActivity"
+            android:name=".ui.add_routine.add_custom_routine.AddCustomRoutineActivity"
             android:exported="false" />
         <activity
             android:name=".ui.detail.DetailBookActivity"

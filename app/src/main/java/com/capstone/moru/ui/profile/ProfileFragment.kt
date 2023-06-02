@@ -13,7 +13,7 @@ import com.capstone.moru.ui.customview.LogoutDialog
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.profile.profile_data.ProfileDataActivity
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(){
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -46,7 +46,9 @@ class ProfileFragment : Fragment() {
         }
     }
 
+
     companion object {
 
     }
+
 }

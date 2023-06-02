@@ -19,6 +19,8 @@ class AddCustomRoutineActivity : AppCompatActivity() {
         _binding = ActivityAddCustomRoutineBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupView()
+
         val addCustomRoutineSectionsAdapter = AddCustomRoutineSectionsAdapter(this)
         binding.viewPager.adapter = addCustomRoutineSectionsAdapter
 
@@ -27,6 +29,11 @@ class AddCustomRoutineActivity : AppCompatActivity() {
         }.attach()
 
         supportActionBar?.elevation = 0f
+
+    }
+
+    private fun setupView() {
+        supportActionBar?.hide()
     }
 
     companion object{

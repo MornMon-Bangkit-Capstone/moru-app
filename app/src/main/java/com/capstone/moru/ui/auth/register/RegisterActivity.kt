@@ -1,11 +1,14 @@
 package com.capstone.moru.ui.auth.register
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -79,7 +82,10 @@ class RegisterActivity : AppCompatActivity() {
             if (email.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
                 val msg = getString(R.string.fill_field)
                 displayToast(msg)
-            } else {
+            } else if(password != passwordConfirm){
+                val msg = getString(R.string.password_not_match)
+                displayToast(msg)
+            }else {
                 registerViewModel.userRegister(email, password, passwordConfirm)
                 registerViewModel.error.observe(this) { error ->
                     if (!error) {

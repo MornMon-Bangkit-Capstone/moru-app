@@ -1,9 +1,6 @@
 package com.capstone.moru.data.api.retrofit
 
-import com.capstone.moru.data.api.response.FillProfileResponse
-import com.capstone.moru.data.api.response.LoginResponse
-import com.capstone.moru.data.api.response.ProfileResponse
-import com.capstone.moru.data.api.response.RegisterResponse
+import com.capstone.moru.data.api.response.*
 import retrofit2.Call
 import retrofit2.http.*
 import java.util.*
@@ -54,4 +51,9 @@ interface ApiService {
         @Field("Favorite Exercise") favExercise: String,
         @Field("Favorite Duration") faveExerciseDuration: String,
         ): Call<ProfileResponse>
+
+    fun getAllExercises(
+
+
+    ):Call<RoutineResponse>
 }
