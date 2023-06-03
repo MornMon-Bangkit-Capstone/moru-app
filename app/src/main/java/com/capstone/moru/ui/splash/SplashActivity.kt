@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import com.capstone.moru.ui.MainActivity
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.intro.IntroActivity
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private var _binding: ActivitySplashBinding? = null
     private val binding get() = _binding!!
@@ -29,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
 
         splashViewModel.getUserToken().observe(this) { token ->
             Handler(Looper.getMainLooper()).postDelayed({
-                val intentFromSplash = if (token != "" ) {
+                val intentFromSplash = if (token != "") {
                     Intent(this@SplashActivity, MainActivity::class.java)
                 } else {
                     Intent(this@SplashActivity, IntroActivity::class.java)
@@ -41,7 +43,6 @@ class SplashActivity : AppCompatActivity() {
 
         }
     }
-
 
 
     companion object {

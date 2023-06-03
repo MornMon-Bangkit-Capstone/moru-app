@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class RoutineResponse(
 
-	@field:SerializedName("listRecommendations")
-	val listRecommendations: List<ListRecommendationsItem?>? = null,
+	@field:SerializedName("list")
+	val list: List<ListItem?>? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,
@@ -14,7 +14,7 @@ data class RoutineResponse(
 	val message: String? = null
 )
 
-data class ListRecommendationsItem(
+data class ListItem(
 
 	@field:SerializedName("img-url")
 	val imgUrl: String? = null,

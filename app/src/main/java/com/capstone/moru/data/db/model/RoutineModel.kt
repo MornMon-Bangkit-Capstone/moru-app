@@ -6,7 +6,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-
 @Entity(tableName = "user_routines")
 @Parcelize
 data class RoutineModel(

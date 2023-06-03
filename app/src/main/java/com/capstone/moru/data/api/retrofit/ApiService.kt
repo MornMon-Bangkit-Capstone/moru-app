@@ -50,10 +50,12 @@ interface ApiService {
         @Field("Favorite Exercise Category") favExerciseCategory: String,
         @Field("Favorite Exercise") favExercise: String,
         @Field("Favorite Duration") faveExerciseDuration: String,
-        ): Call<ProfileResponse>
+    ): Call<ProfileResponse>
 
+    @GET("routine/exercises")
     fun getAllExercises(
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null
 
-
-    ):Call<RoutineResponse>
+    ): Call<RoutineResponse>
 }

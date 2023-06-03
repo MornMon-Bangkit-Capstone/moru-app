@@ -123,4 +123,7 @@
     <string name="default_avg_duration">0 minutes - 0 minutes</string>
     <string name="default_description">This is my description</string>
     <string name="notes">Notes</string>
+
+    <string name="retry">Reload</string>
+    <string name="failed_load_data">Failed to load data</string>
 </resources>

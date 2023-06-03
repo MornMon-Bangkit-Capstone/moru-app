@@ -4,6 +4,7 @@ import android.content.Context
 import com.capstone.moru.BuildConfig
 import com.capstone.moru.data.api.retrofit.ApiConfig
 import com.capstone.moru.data.datastore.SettingPreference
+import com.capstone.moru.data.db.user_routine.UserRoutineDatabase
 import com.capstone.moru.data.repository.UserRepository
 import com.capstone.moru.ui.auth.login.dataStore
 import okhttp3.OkHttpClient
@@ -22,6 +23,8 @@ object Injection {
 
         val pref = SettingPreference.getInstance(context.dataStore)
 
-        return UserRepository.getInstance(apiService, pref)
+        val userRoutineDatabase = UserRoutineDatabase.getDatabase(context)
+
+        return UserRepository.getInstance(apiService, pref, userRoutineDatabase)
     }
 }

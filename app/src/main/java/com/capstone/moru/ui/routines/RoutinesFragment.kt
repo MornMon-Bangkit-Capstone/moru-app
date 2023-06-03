@@ -1,21 +1,24 @@
 package com.capstone.moru.ui.routines
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.moru.R
 import com.capstone.moru.databinding.FragmentRoutinesBinding
-import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickRoutineSectionsAdapter
+import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.routines.adapter.RoutinesSectionAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
 class RoutinesFragment : Fragment() {
     private var _binding: FragmentRoutinesBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var factory: ViewModelFactory
+    private val routineViewModel: RoutineViewModel by viewModels { factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,9 +34,10 @@ class RoutinesFragment : Fragment() {
         val pickRoutineSectionsAdapter = RoutinesSectionAdapter(this)
         binding.viewPager.adapter = pickRoutineSectionsAdapter
 
-        TabLayoutMediator(binding.tabs, binding.viewPager){
-            tab, position -> tab.text = resources.getString(TAB_TITLES[position])
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
+
     }
 
 
@@ -43,5 +47,6 @@ class RoutinesFragment : Fragment() {
             R.string.read,
             R.string.exercise,
         )
+
     }
 }

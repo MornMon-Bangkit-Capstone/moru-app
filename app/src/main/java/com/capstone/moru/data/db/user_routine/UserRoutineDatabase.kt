@@ -5,10 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.capstone.moru.data.db.model.RoutineModel
+import com.capstone.moru.data.db.remote_key.RemoteKeys
+import com.capstone.moru.data.db.remote_key.RemoteKeysDao
 
-@Database(entities = [RoutineModel::class], version = 1, exportSchema = false)
+@Database(entities = [RoutineModel::class, RemoteKeys::class], version = 1, exportSchema = false)
 abstract class UserRoutineDatabase : RoomDatabase() {
     abstract fun userRoutineDao(): UserRoutineDao
+
+    abstract fun remoteKeysDao(): RemoteKeysDao
 
     companion object {
         @Volatile
