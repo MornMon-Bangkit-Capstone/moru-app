@@ -16,7 +16,7 @@ data class RoutineResponse(
 
 data class ListItem(
 
-	@field:SerializedName("img-url")
+	@field:SerializedName("img_url")
 	val imgUrl: String? = null,
 
 	@field:SerializedName("description")

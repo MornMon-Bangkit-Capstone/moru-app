@@ -126,4 +126,5 @@
 
     <string name="retry">Reload</string>
     <string name="failed_load_data">Failed to load data</string>
+    <string name="routine_image">Routine Image</string>
 </resources>

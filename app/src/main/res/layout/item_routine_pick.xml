@@ -25,7 +25,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/placeholder_book" />
+                app:srcCompat="@drawable/placeholder_book"
+                android:contentDescription="@string/routine_image" />
 
             <RadioButton
                 android:id="@+id/radioButton"
