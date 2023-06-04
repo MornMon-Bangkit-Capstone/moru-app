@@ -45,7 +45,7 @@ class UserRepository(
     fun getAllExercise(token: String): LiveData<PagingData<RoutineModel>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 10,
+                pageSize = 5,
                 enablePlaceholders = false,
             ),
             remoteMediator = RoutineRemoteMediator(

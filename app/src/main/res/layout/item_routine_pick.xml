@@ -8,12 +8,16 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00ff0000"
+        app:cardElevation="0dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/custom_pick_routine_card_border"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -22,11 +26,13 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="@string/routine_image"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/placeholder_book"
-                android:contentDescription="@string/routine_image" />
+                app:srcCompat="@drawable/placeholder_book" />
 
             <RadioButton
                 android:id="@+id/radioButton"
