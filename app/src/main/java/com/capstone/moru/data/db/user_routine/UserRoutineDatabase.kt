@@ -4,11 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.capstone.moru.data.db.model.BooksRoutineModel
 import com.capstone.moru.data.db.model.ExerciseRoutineModel
+import com.capstone.moru.data.db.remote_key.BooksRemoteKeys
 import com.capstone.moru.data.db.remote_key.ExerciseRemoteKey
 import com.capstone.moru.data.db.remote_key.RemoteKeysDao
 
-@Database(entities = [ExerciseRoutineModel::class, ExerciseRemoteKey::class], version = 2, exportSchema = false)
+@Database(
+    entities = [ExerciseRoutineModel::class, ExerciseRemoteKey::class, BooksRoutineModel::class, BooksRemoteKeys::class],
+    version = 2,
+    exportSchema = false
+)
 abstract class UserRoutineDatabase : RoomDatabase() {
     abstract fun userRoutineDao(): UserRoutineDao
 

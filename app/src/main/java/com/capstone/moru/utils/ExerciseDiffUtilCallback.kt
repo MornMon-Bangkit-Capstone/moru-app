@@ -3,7 +3,7 @@ package com.capstone.moru.utils
 import androidx.recyclerview.widget.DiffUtil
 import com.capstone.moru.data.db.model.ExerciseRoutineModel
 
-class DiffUtilCallback : DiffUtil.ItemCallback<ExerciseRoutineModel>() {
+class ExerciseDiffUtilCallback : DiffUtil.ItemCallback<ExerciseRoutineModel>() {
     override fun areItemsTheSame(oldItem: ExerciseRoutineModel, newItem: ExerciseRoutineModel): Boolean {
         return oldItem == newItem
     }

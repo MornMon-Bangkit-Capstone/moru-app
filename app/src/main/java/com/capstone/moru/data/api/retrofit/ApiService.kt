@@ -58,4 +58,13 @@ interface ApiService {
         @Query("size") size: Int? = null
 
     ): Call<RoutineResponse>
+
+    @GET("routine/books")
+    fun getAllBooks(
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null
+
+    ): Call<RoutineResponse>
+
+
 }

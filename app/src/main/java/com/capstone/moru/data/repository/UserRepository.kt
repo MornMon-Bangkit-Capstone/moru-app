@@ -7,7 +7,9 @@ import com.capstone.moru.data.api.response.LoginResponse
 import com.capstone.moru.data.api.response.RegisterResponse
 import com.capstone.moru.data.api.retrofit.ApiService
 import com.capstone.moru.data.datastore.SettingPreference
+import com.capstone.moru.data.db.model.BooksRoutineModel
 import com.capstone.moru.data.db.model.ExerciseRoutineModel
+import com.capstone.moru.data.db.paging.BooksRoutineRemoteMediator
 import com.capstone.moru.data.db.paging.ExerciseRoutineRemoteMediator
 import com.capstone.moru.data.db.user_routine.UserRoutineDatabase
 import retrofit2.Call
@@ -55,6 +57,24 @@ class UserRepository(
             ),
             pagingSourceFactory = {
                userRoutineDatabase.userRoutineDao().getAllUserExerciseRoutines()
+            }
+        ).liveData
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    fun getAllBooks(token: String): LiveData<PagingData<BooksRoutineModel>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5,
+                enablePlaceholders = false,
+            ),
+            remoteMediator = BooksRoutineRemoteMediator(
+                userRoutineDatabase,
+                apiService,
+                token,
+            ),
+            pagingSourceFactory = {
+                userRoutineDatabase.userRoutineDao().getAllUserBooksRoutines()
             }
         ).liveData
     }

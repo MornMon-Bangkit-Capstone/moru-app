@@ -1,7 +1,6 @@
 package com.capstone.moru.ui.routines
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.moru.databinding.FragmentRoutineListBinding
+import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineListFragment.Companion.POSITION
 import com.capstone.moru.ui.factory.ViewModelFactory
-import com.capstone.moru.ui.routines.adapter.RoutineListAdapter
-import com.capstone.moru.utils.LoadingStateListAdapter
+import com.capstone.moru.ui.routines.adapter.BooksRoutineListAdapter
+import com.capstone.moru.ui.routines.adapter.ExerciseRoutineListAdapter
 
 
 class RoutineListFragment : Fragment() {
@@ -20,7 +20,9 @@ class RoutineListFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var factory: ViewModelFactory
     private val routineViewModel: RoutineViewModel by viewModels { factory }
-    private lateinit var routineLisAdapter: RoutineListAdapter
+    private lateinit var exerciseRoutineListAdapter: ExerciseRoutineListAdapter
+    private lateinit var bookRoutineListAdapter: BooksRoutineListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,7 +39,16 @@ class RoutineListFragment : Fragment() {
     }
 
     private fun setRoutinesData() {
+//        val position = arguments?.getInt(POSITION)
+
+//        if (position == 2) {
+//            routineViewModel.getAllExercise()
+//        }else{
+//            routineViewModel.getAllBooks()
+//        }
+
         routineViewModel.getAllExercise()
+        routineViewModel.getAllBooks()
         initRecyclerView()
     }
 
@@ -45,8 +56,19 @@ class RoutineListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.rvRoutine.layoutManager = layoutManager
 
-        routineLisAdapter = RoutineListAdapter()
-        routineLisAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+        exerciseRoutineListAdapter = ExerciseRoutineListAdapter()
+        bookRoutineListAdapter = BooksRoutineListAdapter()
+
+        exerciseRoutineListAdapter.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                if (positionStart == 0) {
+                    layoutManager.scrollToPosition(0)
+                }
+            }
+        })
+        bookRoutineListAdapter.registerAdapterDataObserver(object :
+            RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 if (positionStart == 0) {
                     layoutManager.scrollToPosition(0)
@@ -55,14 +77,27 @@ class RoutineListFragment : Fragment() {
         })
 
         routineViewModel.userExerciseRoutines.observe(viewLifecycleOwner) {
-            routineLisAdapter.submitData(lifecycle, it)
+            exerciseRoutineListAdapter.submitData(lifecycle, it)
+        }
+
+        routineViewModel.userBooksRoutines.observe(viewLifecycleOwner) {
+            bookRoutineListAdapter.submitData(lifecycle, it)
         }
 
 //        binding.rvRoutine.adapter = routineLisAdapter.withLoadStateFooter(
 //            footer = LoadingStateListAdapter { routineLisAdapter.retry() }
 //        )
 
-        binding.rvRoutine.adapter = routineLisAdapter
+        val position = arguments?.getInt(POSITION)
+
+        if (position == 1){
+            binding.rvRoutine.adapter = bookRoutineListAdapter
+        }else{
+            binding.rvRoutine.adapter = exerciseRoutineListAdapter
+        }
+//        binding.rvRoutine.adapter = exerciseRoutineListAdapter
+//        binding.rvRoutine.adapter = bookRoutineListAdapter
+
     }
 
     companion object {
