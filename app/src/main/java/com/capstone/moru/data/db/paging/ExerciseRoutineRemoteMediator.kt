@@ -6,21 +6,21 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.capstone.moru.data.api.retrofit.ApiService
-import com.capstone.moru.data.db.model.RoutineModel
-import com.capstone.moru.data.db.remote_key.RemoteKeys
+import com.capstone.moru.data.db.model.ExerciseRoutineModel
+import com.capstone.moru.data.db.remote_key.ExerciseRemoteKey
 import com.capstone.moru.data.db.user_routine.UserRoutineDatabase
 import retrofit2.awaitResponse
 
 @OptIn(ExperimentalPagingApi::class)
-class RoutineRemoteMediator(
+class ExerciseRoutineRemoteMediator(
     private val userRoutineDatabase: UserRoutineDatabase,
     private val apiService: ApiService,
     private val token: String
-) : RemoteMediator<Int, RoutineModel>() {
+) : RemoteMediator<Int, ExerciseRoutineModel>() {
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, RoutineModel>
+        state: PagingState<Int, ExerciseRoutineModel>
     ): MediatorResult {
 
         val page = when (loadType) {
@@ -58,7 +58,7 @@ class RoutineRemoteMediator(
                 val nextKey = if (endOfPaginationReached!!) null else page + 1
                 val prevKey = if (page == INITIAL_PAGE_INDEX) null else page - 1
                 val keys = response.list.map {
-                    RemoteKeys(
+                    ExerciseRemoteKey(
                         id = it?.id!!,
                         prevKey = prevKey,
                         nextKey = nextKey
@@ -68,7 +68,7 @@ class RoutineRemoteMediator(
                 userRoutineDatabase.remoteKeysDao().insertAllKey(keys)
 
                 val responseData = response.list.map { item ->
-                    RoutineModel(
+                    ExerciseRoutineModel(
                         item?.id!!,
                         item.title,
                         item.imgUrl,
@@ -77,7 +77,7 @@ class RoutineRemoteMediator(
                     )
                 }
 
-                userRoutineDatabase.userRoutineDao().insertUserRoutine(responseData)
+                userRoutineDatabase.userRoutineDao().insertUserExerciseRoutine(responseData)
             }
 
 
@@ -94,7 +94,7 @@ class RoutineRemoteMediator(
         return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 
-    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, RoutineModel>): RemoteKeys? {
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, ExerciseRoutineModel>): ExerciseRemoteKey? {
         return state.pages.lastOrNull {
             it.data.isNotEmpty()
         }?.data?.lastOrNull()?.let { data ->
@@ -102,7 +102,7 @@ class RoutineRemoteMediator(
         }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, RoutineModel>): RemoteKeys? {
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, ExerciseRoutineModel>): ExerciseRemoteKey? {
         return state.pages.firstOrNull {
             it.data.isNotEmpty()
         }?.data?.firstOrNull()?.let { data ->
@@ -110,7 +110,7 @@ class RoutineRemoteMediator(
         }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, RoutineModel>): RemoteKeys? {
+    private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, ExerciseRoutineModel>): ExerciseRemoteKey? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
                 userRoutineDatabase.remoteKeysDao().getRemoteKey(id)

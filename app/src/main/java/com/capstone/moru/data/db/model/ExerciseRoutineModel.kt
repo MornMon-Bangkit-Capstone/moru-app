@@ -6,9 +6,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "user_routines")
+@Entity(tableName = "user_exercise_routines")
 @Parcelize
-data class RoutineModel(
+data class ExerciseRoutineModel(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: String,

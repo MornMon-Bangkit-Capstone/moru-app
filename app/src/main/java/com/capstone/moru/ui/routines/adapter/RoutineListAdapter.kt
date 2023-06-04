@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.capstone.moru.data.db.model.RoutineModel
+import com.capstone.moru.data.db.model.ExerciseRoutineModel
 import com.capstone.moru.databinding.ItemRoutinePickBinding
 import com.capstone.moru.databinding.ItemRoutinesBinding
 import com.capstone.moru.utils.DiffUtilCallback
 import kotlinx.coroutines.NonDisposableHandle
 import kotlinx.coroutines.NonDisposableHandle.parent
 
-class RoutineListAdapter : PagingDataAdapter<RoutineModel, RoutineListAdapter.ViewHolder>(DiffUtilCallback()) {
+class RoutineListAdapter : PagingDataAdapter<ExerciseRoutineModel, RoutineListAdapter.ViewHolder>(DiffUtilCallback()) {
 
    class ViewHolder(val binding: ItemRoutinesBinding): RecyclerView.ViewHolder(binding.root)
 

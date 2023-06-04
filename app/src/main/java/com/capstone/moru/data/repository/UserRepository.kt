@@ -7,8 +7,8 @@ import com.capstone.moru.data.api.response.LoginResponse
 import com.capstone.moru.data.api.response.RegisterResponse
 import com.capstone.moru.data.api.retrofit.ApiService
 import com.capstone.moru.data.datastore.SettingPreference
-import com.capstone.moru.data.db.model.RoutineModel
-import com.capstone.moru.data.db.paging.RoutineRemoteMediator
+import com.capstone.moru.data.db.model.ExerciseRoutineModel
+import com.capstone.moru.data.db.paging.ExerciseRoutineRemoteMediator
 import com.capstone.moru.data.db.user_routine.UserRoutineDatabase
 import retrofit2.Call
 
@@ -42,19 +42,19 @@ class UserRepository(
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getAllExercise(token: String): LiveData<PagingData<RoutineModel>> {
+    fun getAllExercise(token: String): LiveData<PagingData<ExerciseRoutineModel>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 5,
                 enablePlaceholders = false,
             ),
-            remoteMediator = RoutineRemoteMediator(
+            remoteMediator = ExerciseRoutineRemoteMediator(
                 userRoutineDatabase,
                 apiService,
                 token,
             ),
             pagingSourceFactory = {
-                userRoutineDatabase.userRoutineDao().getAllUserRoutines()
+               userRoutineDatabase.userRoutineDao().getAllUserExerciseRoutines()
             }
         ).liveData
     }

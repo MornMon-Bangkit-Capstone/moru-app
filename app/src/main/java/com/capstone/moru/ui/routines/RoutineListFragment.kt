@@ -54,13 +54,15 @@ class RoutineListFragment : Fragment() {
             }
         })
 
-        routineViewModel.userRoutines.observe(viewLifecycleOwner) {
+        routineViewModel.userExerciseRoutines.observe(viewLifecycleOwner) {
             routineLisAdapter.submitData(lifecycle, it)
         }
 
-        binding.rvRoutine.adapter = routineLisAdapter.withLoadStateFooter(
-            footer = LoadingStateListAdapter { routineLisAdapter.retry() }
-        )
+//        binding.rvRoutine.adapter = routineLisAdapter.withLoadStateFooter(
+//            footer = LoadingStateListAdapter { routineLisAdapter.retry() }
+//        )
+
+        binding.rvRoutine.adapter = routineLisAdapter
     }
 
     companion object {

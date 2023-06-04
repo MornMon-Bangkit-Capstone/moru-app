@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.capstone.moru.data.db.model.RoutineModel
+import com.capstone.moru.data.db.model.ExerciseRoutineModel
 import com.capstone.moru.data.repository.UserRepository
 
 class RoutineViewModel(private var userRepository: UserRepository): ViewModel() {
-    lateinit var userRoutines: LiveData<PagingData<RoutineModel>>
+    lateinit var userExerciseRoutines: LiveData<PagingData<ExerciseRoutineModel>>
 
     private var _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
@@ -20,6 +20,6 @@ class RoutineViewModel(private var userRepository: UserRepository): ViewModel() 
     }
 
     fun getAllExercise(){
-        userRoutines = userRepository.getAllExercise("").cachedIn(viewModelScope)
+        userExerciseRoutines = userRepository.getAllExercise("").cachedIn(viewModelScope)
     }
 }

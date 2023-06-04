@@ -5,16 +5,16 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.capstone.moru.data.db.model.RoutineModel
+import com.capstone.moru.data.db.model.ExerciseRoutineModel
 
 @Dao
 interface UserRoutineDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUserRoutine(routine: List<RoutineModel>)
+    suspend fun insertUserExerciseRoutine(routine: List<ExerciseRoutineModel>)
 
-    @Query("SELECT * FROM user_routines")
-    fun getAllUserRoutines(): PagingSource<Int, RoutineModel>
+    @Query("SELECT * FROM user_exercise_routines")
+    fun getAllUserExerciseRoutines(): PagingSource<Int, ExerciseRoutineModel>
 
-    @Query("DELETE FROM user_routines")
+    @Query("DELETE FROM user_exercise_routines")
     suspend fun deleteAllUserRoutines()
 }

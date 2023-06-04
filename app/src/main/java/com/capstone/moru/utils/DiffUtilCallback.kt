@@ -1,14 +1,14 @@
 package com.capstone.moru.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.capstone.moru.data.db.model.RoutineModel
+import com.capstone.moru.data.db.model.ExerciseRoutineModel
 
-class DiffUtilCallback : DiffUtil.ItemCallback<RoutineModel>() {
-    override fun areItemsTheSame(oldItem: RoutineModel, newItem: RoutineModel): Boolean {
+class DiffUtilCallback : DiffUtil.ItemCallback<ExerciseRoutineModel>() {
+    override fun areItemsTheSame(oldItem: ExerciseRoutineModel, newItem: ExerciseRoutineModel): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: RoutineModel, newItem: RoutineModel): Boolean {
+    override fun areContentsTheSame(oldItem: ExerciseRoutineModel, newItem: ExerciseRoutineModel): Boolean {
         return when {
             oldItem.id != newItem.id -> false
             oldItem.imgUrl != newItem.imgUrl -> false
