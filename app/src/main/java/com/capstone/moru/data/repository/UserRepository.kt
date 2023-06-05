@@ -3,10 +3,7 @@ package com.capstone.moru.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.paging.*
-import com.capstone.moru.data.api.response.ListItem
-import com.capstone.moru.data.api.response.LoginResponse
-import com.capstone.moru.data.api.response.RegisterResponse
-import com.capstone.moru.data.api.response.RoutineResponse
+import com.capstone.moru.data.api.response.*
 import com.capstone.moru.data.api.retrofit.ApiService
 import com.capstone.moru.data.datastore.SettingPreference
 import com.capstone.moru.data.db.model.BooksRoutineModel
@@ -51,6 +48,10 @@ class UserRepository(
 
     fun getAllBooksRoutine():Call<RoutineResponse>{
         return apiService.getAllBooksRoutine()
+    }
+
+    fun getBookRoutineDetail(token: String, id:String): Call<DetailRoutineResponse>{
+        return apiService.getBookRoutineDetail(token, id)
     }
 
     // *FOR PAGINATION*

@@ -1,4 +1,4 @@
-package com.capstone.moru.ui.detail
+package com.capstone.moru.ui.detail.user_routine
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

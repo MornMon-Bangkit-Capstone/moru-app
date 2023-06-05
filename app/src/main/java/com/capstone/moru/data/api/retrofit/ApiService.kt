@@ -71,4 +71,10 @@ interface ApiService {
 
     @GET("routine/books")
     fun getAllBooksRoutine(): Call<RoutineResponse>
+
+    @GET("routine/books/{id}")
+    fun getBookRoutineDetail(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Call<DetailRoutineResponse>
 }

@@ -100,6 +100,22 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
         })
     }
 
+//    fun getBookRoutineDetail(token: String, id: String){
+//        _isLoading.value = true
+//        val client = userRepository.getBookRoutineDetail(token, id)
+//        client.enqueue(object : Callback<RoutineResponse> {
+//            override fun onResponse(
+//                call: Call<RoutineResponse>,
+//                response: Response<RoutineResponse>
+//            ) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onFailure(call: Call<RoutineResponse>, t: Throwable) {
+//                TODO("Not yet implemented")
+//            }
+//        })
+//    }
 
     // *FOR PAGINATION*
     fun getAllExercise() {

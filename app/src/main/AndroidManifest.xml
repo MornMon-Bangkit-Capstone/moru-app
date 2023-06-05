@@ -17,13 +17,13 @@
             android:name=".ui.add_routine.add_custom_routine.AddCustomRoutineActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detail.DetailBookActivity"
+            android:name=".ui.detail.book_routine.DetailBookActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detail.DetailExerciseActivity"
+            android:name=".ui.detail.exercise_routine.DetailExerciseActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.detail.DetailRoutineActivity"
+            android:name=".ui.detail.user_routine.DetailRoutineActivity"
             android:exported="false" />
         <activity
             android:name=".ui.fill.FillProfileActivity"

@@ -47,14 +47,10 @@ class RoutineListFragment : Fragment() {
         }
 
         routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routines ->
-            Log.e("TEST","INI selanjutnya 1")
-
             initRecyclerView(routines)
         }
 
         routineViewModel.exerciseRoutine.observe(viewLifecycleOwner) { routines ->
-            Log.e("TEST","INI selanjutnya 1")
-
             initRecyclerView(routines)
         }
     }
@@ -127,11 +123,15 @@ class RoutineListFragment : Fragment() {
 ////        binding.rvRoutine.adapter = exerciseRoutineListAdapter
 ////        binding.rvRoutine.adapter = bookRoutineListAdapter
 
-        routineListAdapter = RoutineListAdapter(routines)
-        routineListAdapter.submitList(routines)
+        val adapter = RoutineListAdapter(routines)
 
-        Log.e("ROUTINES", routines.toString())
-        binding.rvRoutine.adapter =  RoutineListAdapter(routines)
+        binding.rvRoutine.adapter =  adapter
+        adapter.setOnItemClickCallback(object: RoutineListAdapter.OnItemClickCallback{
+            override fun onItemClicked(user: ListItem?) {
+
+            }
+
+        })
     }
 
     private fun showLoading(isLoading: Boolean) {
