@@ -58,7 +58,6 @@ class DetailBookViewModel(private var userRepository: UserRepository) : ViewMode
                 Log.e("DETAIL BOOK 3", t.message.toString())
 
             }
-
         })
     }
 

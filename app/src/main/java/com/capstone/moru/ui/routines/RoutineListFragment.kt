@@ -12,8 +12,6 @@ import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.databinding.FragmentRoutineListBinding
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.routines.adapter.RoutineListAdapter
-import com.capstone.moru.ui.routines.adapter.pagination_adapter.BooksRoutineListAdapter
-import com.capstone.moru.ui.routines.adapter.pagination_adapter.ExerciseRoutineListAdapter
 
 
 class RoutineListFragment : Fragment() {
@@ -21,10 +19,10 @@ class RoutineListFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var factory: ViewModelFactory
     private val routineViewModel: RoutineViewModel by viewModels { factory }
-//    private lateinit var exerciseRoutineListAdapter: ExerciseRoutineListAdapter
+
+    //    private lateinit var exerciseRoutineListAdapter: ExerciseRoutineListAdapter
 //    private lateinit var bookRoutineListAdapter: BooksRoutineListAdapter
     private lateinit var routineListAdapter: RoutineListAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,12 +35,9 @@ class RoutineListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         factory = ViewModelFactory.getInstance(requireContext())
 
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.rvRoutine.layoutManager = layoutManager
-
         setRoutinesData()
 
-        routineViewModel.isLoading.observe(viewLifecycleOwner){
+        routineViewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
 
@@ -69,10 +64,8 @@ class RoutineListFragment : Fragment() {
 
         val position = arguments?.getInt(POSITION)
         if (position == 1) {
-            Log.e("TEST","INI POSISI 1")
             routineViewModel.getAllBooksRoutine()
         } else {
-            Log.e("TEST","INI POSISI 2")
             routineViewModel.getAllExerciseRoutine()
         }
     }
@@ -123,10 +116,12 @@ class RoutineListFragment : Fragment() {
 ////        binding.rvRoutine.adapter = exerciseRoutineListAdapter
 ////        binding.rvRoutine.adapter = bookRoutineListAdapter
 
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvRoutine.layoutManager = layoutManager
         val adapter = RoutineListAdapter(routines)
 
-        binding.rvRoutine.adapter =  adapter
-        adapter.setOnItemClickCallback(object: RoutineListAdapter.OnItemClickCallback{
+        binding.rvRoutine.adapter = adapter
+        adapter.setOnItemClickCallback(object : RoutineListAdapter.OnItemClickCallback {
             override fun onItemClicked(user: ListItem?) {
 
             }

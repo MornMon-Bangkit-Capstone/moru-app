@@ -30,8 +30,6 @@ class PickRoutineActivity : AppCompatActivity() {
         supportActionBar?.elevation = 0f
 
         binding.backBtnPickRoutine.setOnClickListener {
-            val intentToHome = Intent(this, MainActivity::class.java)
-            startActivity(intentToHome)
             finish()
         }
     }

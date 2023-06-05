@@ -42,6 +42,10 @@ class DetailBookActivity : AppCompatActivity() {
         detailBookViewModel.isLoading.observe(this){
             showLoading(it)
         }
+
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setRoutineData(listRoutine: ListRoutine) {
