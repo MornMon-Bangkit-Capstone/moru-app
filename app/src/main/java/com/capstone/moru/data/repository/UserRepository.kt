@@ -42,16 +42,20 @@ class UserRepository(
         return preference.clearCache()
     }
 
-    fun getAllExerciseRoutine():Call<RoutineResponse>{
+    fun getAllExerciseRoutine(): Call<RoutineResponse> {
         return apiService.getAllExerciseRoutine()
     }
 
-    fun getAllBooksRoutine():Call<RoutineResponse>{
+    fun getAllBooksRoutine(): Call<RoutineResponse> {
         return apiService.getAllBooksRoutine()
     }
 
-    fun getBookRoutineDetail(token: String, id:String): Call<DetailRoutineResponse>{
+    fun getBookRoutineDetail(token: String, id: String): Call<DetailRoutineResponse> {
         return apiService.getBookRoutineDetail(token, id)
+    }
+
+    fun getExerciseRoutineDetail(token: String, id: String): Call<RoutineResponse> {
+        return apiService.getExerciseRoutineDetail(token, id)
     }
 
     // *FOR PAGINATION*
@@ -68,7 +72,7 @@ class UserRepository(
                 token,
             ),
             pagingSourceFactory = {
-               userRoutineDatabase.userRoutineDao().getAllUserExerciseRoutines()
+                userRoutineDatabase.userRoutineDao().getAllUserExerciseRoutines()
             }
         ).liveData
     }
@@ -91,7 +95,6 @@ class UserRepository(
         ).liveData
     }
     // *FOR PAGINATION*
-
 
 
     companion object {

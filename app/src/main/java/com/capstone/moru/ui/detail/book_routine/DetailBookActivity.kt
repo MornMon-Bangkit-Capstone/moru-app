@@ -58,7 +58,6 @@ class DetailBookActivity : AppCompatActivity() {
             }
         }
 
-
         Glide.with(this).load(listRoutine.imgUrl).into(binding.ivRoutine)
         binding.tvRoutineName.text = listRoutine.title
         binding.customCategory.text = formatCategory
@@ -74,7 +73,6 @@ class DetailBookActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val KEY_EXERCISE_ROUTINE = "key_exercise_routine"
         const val KEY_BOOK_ROUTINE = "key_book_routine"
     }
 }

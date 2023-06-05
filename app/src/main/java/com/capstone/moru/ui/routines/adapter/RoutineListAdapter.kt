@@ -47,9 +47,8 @@ class RoutineListAdapter(private val listRoutine: List<ListItem?>?) :
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(routine)
 
-            Log.e("ADAPTER", "$routine = ${routine?.id?.subSequence(0, 8)}")
-
             val routineId = routine?.id?.subSequence(0, 8)
+
             if (routineId == "exercise") {
                 val intentToExerciseDetail =
                     Intent(holder.itemView.context, DetailExerciseActivity::class.java)

@@ -127,4 +127,5 @@
     <string name="retry">Reload</string>
     <string name="failed_load_data">Failed to load data</string>
     <string name="routine_image">Routine Image</string>
+    <string name="exercise_description">Exercise Description</string>
 </resources>

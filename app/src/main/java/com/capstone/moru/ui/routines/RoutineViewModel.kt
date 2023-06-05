@@ -59,12 +59,17 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
                 } else {
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"
+
+                    Log.e("RoutineViewModel", _message.value.toString())
+
                 }
             }
 
             override fun onFailure(call: Call<RoutineResponse>, t: Throwable) {
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
+
+                Log.e("RoutineViewModel", _message.value.toString())
             }
         })
     }
@@ -87,15 +92,20 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
                     _bookRoutine.value = response.body()?.list
 
                 } else {
-
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"
+
+                    Log.e("RoutineViewModel", _message.value.toString())
+
                 }
             }
 
             override fun onFailure(call: Call<RoutineResponse>, t: Throwable) {
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
+
+                Log.e("RoutineViewModel", _message.value.toString())
+
             }
         })
     }

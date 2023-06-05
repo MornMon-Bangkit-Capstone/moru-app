@@ -77,4 +77,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): Call<DetailRoutineResponse>
+
+    @GET("routine/exercises/{id}")
+    fun getExerciseRoutineDetail(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Call<RoutineResponse>
 }
