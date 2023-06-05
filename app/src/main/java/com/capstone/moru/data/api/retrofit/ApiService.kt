@@ -66,5 +66,9 @@ interface ApiService {
 
     ): Call<RoutineResponse>
 
+    @GET("routine/exercises")
+    fun getAllExerciseRoutine(): Call<RoutineResponse>
 
+    @GET("routine/books")
+    fun getAllBooksRoutine(): Call<RoutineResponse>
 }

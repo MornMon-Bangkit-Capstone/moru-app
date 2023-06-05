@@ -3,8 +3,10 @@ package com.capstone.moru.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.paging.*
+import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.data.api.response.LoginResponse
 import com.capstone.moru.data.api.response.RegisterResponse
+import com.capstone.moru.data.api.response.RoutineResponse
 import com.capstone.moru.data.api.retrofit.ApiService
 import com.capstone.moru.data.datastore.SettingPreference
 import com.capstone.moru.data.db.model.BooksRoutineModel
@@ -43,6 +45,15 @@ class UserRepository(
         return preference.clearCache()
     }
 
+    fun getAllExerciseRoutine():Call<RoutineResponse>{
+        return apiService.getAllExerciseRoutine()
+    }
+
+    fun getAllBooksRoutine():Call<RoutineResponse>{
+        return apiService.getAllBooksRoutine()
+    }
+
+    // *FOR PAGINATION*
     @OptIn(ExperimentalPagingApi::class)
     fun getAllExercise(token: String): LiveData<PagingData<ExerciseRoutineModel>> {
         return Pager(
@@ -78,6 +89,9 @@ class UserRepository(
             }
         ).liveData
     }
+    // *FOR PAGINATION*
+
+
 
     companion object {
         @Volatile

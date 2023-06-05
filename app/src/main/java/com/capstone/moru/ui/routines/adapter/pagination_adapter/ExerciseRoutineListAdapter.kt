@@ -1,4 +1,4 @@
-package com.capstone.moru.ui.routines.adapter
+package com.capstone.moru.ui.routines.adapter.pagination_adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
