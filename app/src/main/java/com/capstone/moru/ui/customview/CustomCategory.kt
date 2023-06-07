@@ -46,12 +46,12 @@ class CustomCategory : androidx.appcompat.widget.AppCompatTextView {
 
     private fun init() {
         text = resources.getString(R.string.category_default)
-        setTextColor(ContextCompat.getColor(context, R.color.blue))
+        setTextColor(ContextCompat.getColor(context, R.color.orange))
         setBackgroundColor(
             ColorUtils.setAlphaComponent(
                 ContextCompat.getColor(
                     context,
-                    R.color.blue
+                    R.color.orange
                 ), ALPHA_OPACITY
             )
         )

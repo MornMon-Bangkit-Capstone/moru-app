@@ -17,7 +17,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@drawable/custom_pick_routine_card_border"
+            android:id="@+id/card_pick_routine"
+            android:background="@drawable/custom_pick_routince_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -39,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:buttonTint="@color/light_grey"
+                android:buttonTint="@color/orange"
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"

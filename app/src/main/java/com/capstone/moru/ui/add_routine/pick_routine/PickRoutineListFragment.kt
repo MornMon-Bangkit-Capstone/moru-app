@@ -19,10 +19,15 @@ class PickRoutineListFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var factory: ViewModelFactory
     private val routineViewModel: RoutineViewModel by viewModels { factory }
+    private var itemClickListener: OnItemClickListener? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentPickRoutineListBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,23 +61,24 @@ class PickRoutineListFragment : Fragment() {
     private fun initRecyclerView(routines: List<ListItem?>?) {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvRoutine.layoutManager = layoutManager
-        val adapter = PickRoutineListAdapter(routines)
+
+        val recyclerView = binding.rvRoutine
+        val adapter = PickRoutineListAdapter(routines, recyclerView)
 
         binding.rvRoutine.adapter = adapter
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentPickRoutineListBinding.inflate(layoutInflater)
-        return binding.root
+        adapter.setOnItemClickCallback(object: PickRoutineListAdapter.OnItemClickCallback{
+            override fun onItemClicked(user: ListItem?) {
+            }
+        })
     }
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
+    interface OnItemClickListener {
+        fun onItemClicked(item: ListItem)
+    }
 
     companion object {
         const val POSITION = "section_number"

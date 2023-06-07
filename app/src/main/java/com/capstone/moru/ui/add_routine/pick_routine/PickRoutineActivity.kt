@@ -32,6 +32,10 @@ class PickRoutineActivity : AppCompatActivity() {
         binding.backBtnPickRoutine.setOnClickListener {
             finish()
         }
+
+        binding.btnChoose.setOnClickListener {
+
+        }
     }
 
     companion object {

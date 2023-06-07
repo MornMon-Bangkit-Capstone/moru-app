@@ -22,7 +22,8 @@ class RoutineListFragment : Fragment() {
 
     //    private lateinit var exerciseRoutineListAdapter: ExerciseRoutineListAdapter
 //    private lateinit var bookRoutineListAdapter: BooksRoutineListAdapter
-    private lateinit var routineListAdapter: RoutineListAdapter
+//    private lateinit var routineListAdapter: RoutineListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -131,6 +132,10 @@ class RoutineListFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    interface OnItemClickListener {
+        fun onItemClicked(item: ListItem)
     }
 
     companion object {
