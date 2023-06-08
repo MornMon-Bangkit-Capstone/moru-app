@@ -102,13 +102,12 @@ interface ApiService {
     @POST("schedule")
     fun postUserSchedule(
         @Header("Authorization") token: String,
-        @Path("id") id: String,
         @Field("type") type: String,
-        @Field("title") title: String,
+        @Field("name") title: String,
         @Field("date") date: String,
         @Field("startTime") startTime: String,
-        @Field("endTime ") endTime: String,
-        @Field("description ") description: String,
+        @Field("endTime") endTime: String,
+        @Field("description") description: String,
     ): Call<DefaultResponse>
 
     @FormUrlEncoded

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.capstone.moru.data.repository.UserRepository
 import com.capstone.moru.di.Injection
 import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickRoutineViewModel
+import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleViewModel
 import com.capstone.moru.ui.auth.login.LoginViewModel
 import com.capstone.moru.ui.auth.register.RegisterViewModel
 import com.capstone.moru.ui.detail.book_routine.DetailBookViewModel
@@ -51,6 +52,9 @@ class ViewModelFactory private constructor(
                 userRepository
             ) as T
             modelClass.isAssignableFrom(PickRoutineViewModel::class.java) -> PickRoutineViewModel(
+                userRepository
+            ) as T
+            modelClass.isAssignableFrom(PickScheduleViewModel::class.java) -> PickScheduleViewModel(
                 userRepository
             ) as T
             else -> throw java.lang.IllegalArgumentException("Unkown ViewModel class: ${modelClass.name}")

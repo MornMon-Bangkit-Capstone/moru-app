@@ -58,7 +58,26 @@ class UserRepository(
         return apiService.getExerciseRoutineDetail(token, id)
     }
 
-//    fun postUserSchedule():
+    fun postUserSchedule(
+        token: String,
+        type: String,
+        title: String,
+        date: String,
+        startTime: String,
+        endTime: String,
+        description: String
+    ): Call<DefaultResponse> {
+        return apiService.postUserSchedule(
+            token,
+            type,
+            title,
+            date,
+            startTime,
+            endTime,
+            description
+        )
+    }
+
 
     // *FOR PAGINATION*
     @OptIn(ExperimentalPagingApi::class)

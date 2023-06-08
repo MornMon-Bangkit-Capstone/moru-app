@@ -60,9 +60,6 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
                 } else {
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"
-
-                    Log.e("RoutineViewModel", _message.value.toString())
-
                 }
             }
 

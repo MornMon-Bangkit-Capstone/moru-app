@@ -22,7 +22,7 @@ class PickRoutineListAdapter(
     class ViewHolder(val binding: ItemRoutinePickBinding) : RecyclerView.ViewHolder(binding.root)
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private var selectedItemPosition: Int = 0
+    private var selectedItemPosition: Int = -1
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
@@ -49,6 +49,8 @@ class PickRoutineListAdapter(
         }
 
         holder.binding.radioButton.isChecked = selectedItemPosition == position
+//        val itemChecked = pickRoutine?.get(position)?.isChecked ?: false
+//        holder.binding.radioButton.isChecked = itemChecked
 
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(routine)
@@ -72,45 +74,20 @@ class PickRoutineListAdapter(
         pickedRoutine: List<PickRoutineDataClass>?,
     ) {
 
-        Log.e("TEST", pickedRoutine.toString())
-        Log.e("TEST", selectedItemPosition.toString())
-
-//        if (selectedItemPosition != position) {
-//            val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
-//            prevHolder.let {
-//                val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
-//                prevRadioButton?.isChecked = false
-//                Log.e("TEST", "Keluar: $position")
-//            }
-//
-//            pickedRoutine?.get(selectedItemPosition)?.isChecked = false
-//
-//        } else {
-////            val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
-////            prevHolder.let {
-////                val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
-////                prevRadioButton?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
-////                Log.e("TEST", "Masuk $position")
-////                Log.e("TEST", "Masuk2 $selectedItemPosition")
-////            }
-//
-//            pickedRoutine?.get(selectedItemPosition)?.isChecked = !pickedRoutine?.get(selectedItemPosition)?.isChecked!!
-//        }
-
-        if (selectedItemPosition != position) {
-            pickedRoutine?.get(selectedItemPosition)?.isChecked = false
+        if (selectedItemPosition != position && selectedItemPosition != -1) {
             val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
             prevHolder.let {
                 val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
                 prevRadioButton?.isChecked = false
+                notifyItemChanged(selectedItemPosition)
             }
-            holder.binding.radioButton.isChecked =
-                pickedRoutine?.get(selectedItemPosition)?.isChecked!!
+            holder.binding.radioButton.isChecked = pickedRoutine?.get(selectedItemPosition)?.isChecked!!
         }
 
         selectedItemPosition = position
         pickedRoutine?.get(position)?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
-        holder.binding.radioButton.isChecked = pickedRoutine?.get(position)?.isChecked!!
+        holder.binding.radioButton.isChecked = pickedRoutine.get(position).isChecked
+
     }
 
     interface OnItemClickCallback {
