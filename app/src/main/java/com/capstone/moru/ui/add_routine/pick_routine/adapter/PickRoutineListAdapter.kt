@@ -1,11 +1,10 @@
 package com.capstone.moru.ui.add_routine.pick_routine.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.RadioButton
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
+import android.widget.CheckBox
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,6 +12,7 @@ import com.capstone.moru.R
 import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.databinding.ItemRoutinePickBinding
 import com.capstone.moru.utils.DiffUtilCallback
+import com.capstone.moru.utils.PickRoutineDataClass
 
 class PickRoutineListAdapter(
     private val listRoutine: List<ListItem?>?,
@@ -22,7 +22,7 @@ class PickRoutineListAdapter(
     class ViewHolder(val binding: ItemRoutinePickBinding) : RecyclerView.ViewHolder(binding.root)
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private var selectedItemPosition: Int = -1
+    private var selectedItemPosition: Int = 0
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
@@ -38,6 +38,9 @@ class PickRoutineListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         val routine = listRoutine?.get(position)
+        val pickRoutine = listRoutine?.map {
+            PickRoutineDataClass(it)
+        }
 
         holder.apply {
             Glide.with(holder.itemView.context).load(routine?.imgUrl).into(holder.binding.imageView)
@@ -46,20 +49,17 @@ class PickRoutineListAdapter(
         }
 
         holder.binding.radioButton.isChecked = selectedItemPosition == position
-        holder.binding.radioButton.apply {
-            holder.binding.radioButton.isChecked = selectedItemPosition == position
-        }
-
 
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(routine)
-            updateItemSelected(holder, position)
+            updateItemSelected(holder, position, pickRoutine)
         }
 
         holder.binding.radioButton.setOnClickListener {
             onItemClickCallback.onItemClicked(routine)
-            updateItemSelected(holder, position)
+            updateItemSelected(holder, position, pickRoutine)
         }
+
     }
 
     override fun getItemCount(): Int {
@@ -68,37 +68,52 @@ class PickRoutineListAdapter(
 
     private fun updateItemSelected(
         holder: ViewHolder,
-        @SuppressLint("RecyclerView") position: Int
+        @SuppressLint("RecyclerView") position: Int,
+        pickedRoutine: List<PickRoutineDataClass>?,
     ) {
+
+        Log.e("TEST", pickedRoutine.toString())
+        Log.e("TEST", selectedItemPosition.toString())
+
+//        if (selectedItemPosition != position) {
+//            val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
+//            prevHolder.let {
+//                val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
+//                prevRadioButton?.isChecked = false
+//                Log.e("TEST", "Keluar: $position")
+//            }
+//
+//            pickedRoutine?.get(selectedItemPosition)?.isChecked = false
+//
+//        } else {
+////            val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
+////            prevHolder.let {
+////                val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
+////                prevRadioButton?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
+////                Log.e("TEST", "Masuk $position")
+////                Log.e("TEST", "Masuk2 $selectedItemPosition")
+////            }
+//
+//            pickedRoutine?.get(selectedItemPosition)?.isChecked = !pickedRoutine?.get(selectedItemPosition)?.isChecked!!
+//        }
+
         if (selectedItemPosition != position) {
+            pickedRoutine?.get(selectedItemPosition)?.isChecked = false
             val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
             prevHolder.let {
-                val prevRadioButton = it?.itemView?.findViewById<RadioButton>(R.id.radioButton)
+                val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
                 prevRadioButton?.isChecked = false
-
-                val prevCard = it?.itemView?.findViewById<ConstraintLayout>(R.id.card_pick_routine)
-                prevCard?.background = ContextCompat.getDrawable(
-                    holder.itemView.context,
-                    R.drawable.custom_pick_routince_card
-                )
             }
-        } else {
-            holder.binding.radioButton.isChecked = false
-            holder.binding.cardPickRoutine.background = ContextCompat.getDrawable(
-                holder.itemView.context,
-                R.drawable.custom_pick_routince_card
-            )
+            holder.binding.radioButton.isChecked =
+                pickedRoutine?.get(selectedItemPosition)?.isChecked!!
         }
 
         selectedItemPosition = position
-        holder.binding.radioButton.isChecked = true
-        holder.binding.cardPickRoutine.background = ContextCompat.getDrawable(
-            holder.itemView.context,
-            R.drawable.custom_pick_routine_card_border
-        )
+        pickedRoutine?.get(position)?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
+        holder.binding.radioButton.isChecked = pickedRoutine?.get(position)?.isChecked!!
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(user: ListItem?)
+        fun onItemClicked(item: ListItem?)
     }
 }

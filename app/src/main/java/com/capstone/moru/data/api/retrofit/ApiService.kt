@@ -63,14 +63,17 @@ interface ApiService {
     fun getAllBooks(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null
-
     ): Call<RoutineResponse>
 
     @GET("routine/exercises")
-    fun getAllExerciseRoutine(): Call<RoutineResponse>
+    fun getAllExerciseRoutine(
+        @Header("Authorization") token: String,
+    ): Call<RoutineResponse>
 
     @GET("routine/books")
-    fun getAllBooksRoutine(): Call<RoutineResponse>
+    fun getAllBooksRoutine(
+        @Header("Authorization") token: String,
+    ): Call<RoutineResponse>
 
     @GET("routine/books/{id}")
     fun getBookRoutineDetail(
@@ -83,4 +86,47 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): Call<RoutineResponse>
+
+    @GET("/schedule")
+    fun getUserSchedule(
+        @Header("Authorization") token: String,
+    ): Call<ScheduleListResponse>
+
+    @GET("/schedule/{id}")
+    fun getUserSchedule(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Call<ScheduleDetailResponse>
+
+    @FormUrlEncoded
+    @POST("schedule")
+    fun postUserSchedule(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Field("type") type: String,
+        @Field("title") title: String,
+        @Field("date") date: String,
+        @Field("startTime") startTime: String,
+        @Field("endTime ") endTime: String,
+        @Field("description ") description: String,
+    ): Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @PUT("schedule/{id}")
+    fun putUserSchedule(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Field("type") type: String,
+        @Field("title") title: String,
+        @Field("date") date: String,
+        @Field("startTime") startTime: String,
+        @Field("endTime ") endTime: String,
+        @Field("description ") description: String,
+    ): Call<DefaultResponse>
+
+    @DELETE("schedule/{id}")
+    fun deleteUserSchedule(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): Call<DefaultResponse>
 }

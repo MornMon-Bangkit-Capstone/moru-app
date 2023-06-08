@@ -40,9 +40,10 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
         return userRepository.getUserToken()
     }
 
-    fun getAllExerciseRoutine() {
+    fun getAllExerciseRoutine(token: String) {
         _isLoading.value = true
-        val client = userRepository.getAllExerciseRoutine()
+        val formatToken = "Bearer $token"
+        val client = userRepository.getAllExerciseRoutine(formatToken)
 
         client.enqueue(object : Callback<RoutineResponse> {
             override fun onResponse(
@@ -66,6 +67,7 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
             }
 
             override fun onFailure(call: Call<RoutineResponse>, t: Throwable) {
+                _error.value = true
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
 
@@ -74,9 +76,10 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
         })
     }
 
-    fun getAllBooksRoutine() {
+    fun getAllBooksRoutine(token: String) {
         _isLoading.value = true
-        val client = userRepository.getAllBooksRoutine()
+        val formatToken = "Bearer $token"
+        val client = userRepository.getAllBooksRoutine(formatToken)
 
         client.enqueue(object : Callback<RoutineResponse> {
             override fun onResponse(
@@ -101,6 +104,7 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
             }
 
             override fun onFailure(call: Call<RoutineResponse>, t: Throwable) {
+                _error.value = true
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
 

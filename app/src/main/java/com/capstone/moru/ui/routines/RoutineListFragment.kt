@@ -1,7 +1,6 @@
 package com.capstone.moru.ui.routines
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,11 +62,13 @@ class RoutineListFragment : Fragment() {
 //        routineViewModel.getAllBooks()
 
 
-        val position = arguments?.getInt(POSITION)
-        if (position == 1) {
-            routineViewModel.getAllBooksRoutine()
-        } else {
-            routineViewModel.getAllExerciseRoutine()
+        routineViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
+            val position = arguments?.getInt(POSITION)
+            if (position == 1) {
+                routineViewModel.getAllBooksRoutine(token)
+            } else {
+                routineViewModel.getAllExerciseRoutine(token)
+            }
         }
     }
 

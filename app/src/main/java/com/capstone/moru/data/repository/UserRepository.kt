@@ -42,12 +42,12 @@ class UserRepository(
         return preference.clearCache()
     }
 
-    fun getAllExerciseRoutine(): Call<RoutineResponse> {
-        return apiService.getAllExerciseRoutine()
+    fun getAllExerciseRoutine(token: String): Call<RoutineResponse> {
+        return apiService.getAllExerciseRoutine(token)
     }
 
-    fun getAllBooksRoutine(): Call<RoutineResponse> {
-        return apiService.getAllBooksRoutine()
+    fun getAllBooksRoutine(token: String): Call<RoutineResponse> {
+        return apiService.getAllBooksRoutine(token)
     }
 
     fun getBookRoutineDetail(token: String, id: String): Call<DetailRoutineResponse> {
@@ -57,6 +57,8 @@ class UserRepository(
     fun getExerciseRoutineDetail(token: String, id: String): Call<RoutineResponse> {
         return apiService.getExerciseRoutineDetail(token, id)
     }
+
+//    fun postUserSchedule():
 
     // *FOR PAGINATION*
     @OptIn(ExperimentalPagingApi::class)
