@@ -3,14 +3,17 @@ package com.capstone.moru.ui.add_routine.pick_routine
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.StringRes
 import com.capstone.moru.R
+import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.databinding.ActivityPickRoutineBinding
 import com.capstone.moru.ui.MainActivity
 import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickRoutineSectionsAdapter
+import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
-class PickRoutineActivity : AppCompatActivity() {
+class PickRoutineActivity : AppCompatActivity(), PickRoutineListFragment.OnItemClickListener {
     private var _binding: ActivityPickRoutineBinding? = null
     private val binding get() = _binding!!
 
@@ -30,10 +33,17 @@ class PickRoutineActivity : AppCompatActivity() {
         supportActionBar?.elevation = 0f
 
         binding.backBtnPickRoutine.setOnClickListener {
-            val intentToHome = Intent(this, MainActivity::class.java)
-            startActivity(intentToHome)
             finish()
         }
+
+        binding.btnChoose.setOnClickListener {
+            val intentToPickSchedule = Intent(this, PickScheduleActivity::class.java)
+            startActivity(intentToPickSchedule)
+        }
+    }
+
+    override fun onItemClicked(item: ListItem) {
+        Log.e("Pick Routine Activity", item.title.toString())
     }
 
     companion object {
