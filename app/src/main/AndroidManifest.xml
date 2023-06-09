@@ -26,6 +26,15 @@
             android:name=".ui.detail.user_routine.DetailRoutineActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.fill.FillExercisePrefActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.routine_detail.RoutineDetailExercise"
+            android:exported="false" />
+        <activity
+            android:name=".ui.fill.FillBookPrefActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.fill.FillProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
