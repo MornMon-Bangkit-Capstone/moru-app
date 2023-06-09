@@ -42,11 +42,11 @@ class UserRepository(
         return preference.clearCache()
     }
 
-    fun getAllExerciseRoutine(token: String): Call<RoutineResponse> {
+    fun getAllExerciseRoutine(token: String): Call<ExerciseListResponse> {
         return apiService.getAllExerciseRoutine(token)
     }
 
-    fun getAllBooksRoutine(token: String): Call<RoutineResponse> {
+    fun getAllBooksRoutine(token: String): Call<BookListResponse> {
         return apiService.getAllBooksRoutine(token)
     }
 
@@ -76,6 +76,33 @@ class UserRepository(
             endTime,
             description
         )
+    }
+
+    fun updateUserSchedule(token: String,
+                           id:String,
+                           type: String,
+                           title: String,
+                           date: String,
+                           startTime: String,
+                           endTime: String,
+                           description: String,): Call<DefaultResponse>{
+        return apiService.putUserSchedule(
+            token,
+            id,
+            type,
+            title,
+            date,
+            startTime,
+            endTime,
+            description)
+    }
+
+    fun getUserScheduleList(token: String): Call<ScheduleListResponse>{
+        return apiService.getUserScheduleList(token)
+    }
+
+    fun getUserScheduleDetail(token: String, id: String): Call<ScheduleDetailResponse>{
+        return apiService.getUserScheduleDetail(token, id)
     }
 
 

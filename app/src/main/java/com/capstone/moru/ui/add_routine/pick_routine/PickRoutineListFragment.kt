@@ -20,6 +20,7 @@ class PickRoutineListFragment : Fragment() {
     private lateinit var factory: ViewModelFactory
     private val routineViewModel: RoutineViewModel by viewModels { factory }
     private var itemClickListener: OnItemClickListener? = null
+    private var adapter: PickRoutineListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,14 +40,19 @@ class PickRoutineListFragment : Fragment() {
             showLoading(it)
         }
 
-        routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routines ->
-            initRecyclerView(routines)
-        }
-
-        routineViewModel.exerciseRoutine.observe(viewLifecycleOwner) { routines ->
-            initRecyclerView(routines)
-        }
+//        routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routines ->
+//            initRecyclerView(routines)
+//        }
+//
+//        routineViewModel.exerciseRoutine.observe(viewLifecycleOwner) { routines ->
+//            initRecyclerView(routines)
+//        }
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        adapter?.resetRadioButtons(false)
+//    }
 
     private fun setRoutinesData() {
         routineViewModel.getUserToken().observe(viewLifecycleOwner) {token ->
@@ -57,7 +63,6 @@ class PickRoutineListFragment : Fragment() {
                 routineViewModel.getAllExerciseRoutine(token)
             }
         }
-
     }
 
     private fun initRecyclerView(routines: List<ListItem?>?) {
@@ -65,10 +70,10 @@ class PickRoutineListFragment : Fragment() {
         binding.rvRoutine.layoutManager = layoutManager
 
         val recyclerView = binding.rvRoutine
-        val adapter = PickRoutineListAdapter(routines, recyclerView)
+        adapter = PickRoutineListAdapter(routines, recyclerView, 0)
 
         binding.rvRoutine.adapter = adapter
-        adapter.setOnItemClickCallback(object : PickRoutineListAdapter.OnItemClickCallback {
+        adapter!!.setOnItemClickCallback(object : PickRoutineListAdapter.OnItemClickCallback {
             override fun onItemClicked(item: ListItem?) {
                 if (item != null) {
                     itemClickListener?.onItemClicked(item)

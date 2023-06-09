@@ -41,13 +41,13 @@ class RoutineListFragment : Fragment() {
             showLoading(it)
         }
 
-        routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routines ->
-            initRecyclerView(routines)
-        }
-
-        routineViewModel.exerciseRoutine.observe(viewLifecycleOwner) { routines ->
-            initRecyclerView(routines)
-        }
+//        routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routines ->
+//            initRecyclerView(routines)
+//        }
+//
+//        routineViewModel.exerciseRoutine.observe(viewLifecycleOwner) { routines ->
+//            initRecyclerView(routines)
+//        }
     }
 
     private fun setRoutinesData() {

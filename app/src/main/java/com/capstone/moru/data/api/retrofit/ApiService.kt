@@ -52,6 +52,7 @@ interface ApiService {
         @Field("Favorite Duration") faveExerciseDuration: String,
     ): Call<ProfileResponse>
 
+    // *PAGINATION*
     @GET("routine/exercises")
     fun getAllExercises(
         @Query("page") page: Int? = null,
@@ -64,16 +65,18 @@ interface ApiService {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null
     ): Call<RoutineResponse>
+    // *PAGINATION*
+
 
     @GET("routine/exercises")
     fun getAllExerciseRoutine(
         @Header("Authorization") token: String,
-    ): Call<RoutineResponse>
+    ): Call<ExerciseListResponse>
 
     @GET("routine/books")
     fun getAllBooksRoutine(
         @Header("Authorization") token: String,
-    ): Call<RoutineResponse>
+    ): Call<BookListResponse>
 
     @GET("routine/books/{id}")
     fun getBookRoutineDetail(
@@ -88,12 +91,12 @@ interface ApiService {
     ): Call<RoutineResponse>
 
     @GET("/schedule")
-    fun getUserSchedule(
+    fun getUserScheduleList(
         @Header("Authorization") token: String,
     ): Call<ScheduleListResponse>
 
     @GET("/schedule/{id}")
-    fun getUserSchedule(
+    fun getUserScheduleDetail(
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): Call<ScheduleDetailResponse>
@@ -119,8 +122,8 @@ interface ApiService {
         @Field("title") title: String,
         @Field("date") date: String,
         @Field("startTime") startTime: String,
-        @Field("endTime ") endTime: String,
-        @Field("description ") description: String,
+        @Field("endTime") endTime: String,
+        @Field("description") description: String,
     ): Call<DefaultResponse>
 
     @DELETE("schedule/{id}")
