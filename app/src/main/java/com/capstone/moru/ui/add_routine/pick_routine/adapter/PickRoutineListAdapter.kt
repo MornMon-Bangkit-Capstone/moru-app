@@ -25,6 +25,7 @@ class PickRoutineListAdapter(
     private lateinit var onItemClickCallback: OnItemClickCallback
     private var selectedItemPosition: Int = -1
     private var resetRadioButtons: Boolean = false
+    private var flagClicked = 0
 
     var userPickedRoutine: ListItem? = null
     var tempBooksRoutine: List<PickRoutineDataClass>? = null
@@ -32,15 +33,15 @@ class PickRoutineListAdapter(
 
 
     private fun populateData(position: Int) {
-        if (position == 1) {
-            tempBooksRoutine = listRoutine?.map {
-                PickRoutineDataClass(it)
-            }
-        } else {
-            tempExerciseRoutine = listRoutine?.map {
-                PickRoutineDataClass(it)
-            }
-        }
+//        if (position == 1) {
+//            tempBooksRoutine = listRoutine?.map {
+//                PickRoutineDataClass(it)
+//            }
+//        } else {
+//            tempExerciseRoutine = listRoutine?.map {
+//                PickRoutineDataClass(it)
+//            }
+//        }
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -86,11 +87,10 @@ class PickRoutineListAdapter(
             updateItemSelected(holder, position, pickRoutine)
         }
 
-        if (resetRadioButtons) {
-            pickRoutine?.get(selectedItemPosition)?.isChecked = false
-            holder.binding.radioButton.isChecked = false
-        }
-
+//        if (resetRadioButtons) {
+//            pickRoutine?.get(selectedItemPosition)?.isChecked = false
+//            holder.binding.radioButton.isChecked = false
+//        }
     }
 
     override fun getItemCount(): Int {
@@ -116,15 +116,15 @@ class PickRoutineListAdapter(
         selectedItemPosition = position
         pickedRoutine?.get(position)?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
         holder.binding.radioButton.isChecked = pickedRoutine[position].isChecked
-        userPickedRoutine = pickedRoutine[position].routine
+//        userPickedRoutine = pickedRoutine[position].routine
 
         Log.e("RESET", resetRadioButtons.toString())
     }
 
-    fun resetRadioButtons(reset: Boolean) {
-        resetRadioButtons = reset
-        notifyDataSetChanged()
-    }
+//    fun resetRadioButtons(reset: Boolean) {
+//        resetRadioButtons = reset
+//        notifyDataSetChanged()
+//    }
 
     interface OnItemClickCallback {
         fun onItemClicked(item: ListItem?)

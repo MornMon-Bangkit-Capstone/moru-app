@@ -42,11 +42,11 @@ class UserRepository(
         return preference.clearCache()
     }
 
-    fun getAllExerciseRoutine(token: String): Call<RoutineResponse> {
+    fun getAllExerciseRoutine(token: String): Call<ExerciseListResponse> {
         return apiService.getAllExerciseRoutine(token)
     }
 
-    fun getAllBooksRoutine(token: String): Call<RoutineResponse> {
+    fun getAllBooksRoutine(token: String): Call<BookListResponse> {
         return apiService.getAllBooksRoutine(token)
     }
 

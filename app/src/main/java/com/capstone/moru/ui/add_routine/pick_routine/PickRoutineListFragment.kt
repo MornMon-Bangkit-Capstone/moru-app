@@ -1,14 +1,12 @@
 package com.capstone.moru.ui.add_routine.pick_routine
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.databinding.FragmentPickRoutineListBinding
 import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickRoutineListAdapter
@@ -42,19 +40,13 @@ class PickRoutineListFragment : Fragment() {
             showLoading(it)
         }
 
-        routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routines ->
-            initRecyclerView(routines)
-        }
-
-        routineViewModel.exerciseRoutine.observe(viewLifecycleOwner) { routines ->
-            initRecyclerView(routines)
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        adapter?.resetRadioButtons(true)
-        Log.e("PAUSE", "MASUK")
+//        routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routines ->
+//            initRecyclerView(routines)
+//        }
+//
+//        routineViewModel.exerciseRoutine.observe(viewLifecycleOwner) { routines ->
+//            initRecyclerView(routines)
+//        }
     }
 
 //    override fun onResume() {

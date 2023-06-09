@@ -52,6 +52,7 @@ interface ApiService {
         @Field("Favorite Duration") faveExerciseDuration: String,
     ): Call<ProfileResponse>
 
+    // *PAGINATION*
     @GET("routine/exercises")
     fun getAllExercises(
         @Query("page") page: Int? = null,
@@ -64,16 +65,18 @@ interface ApiService {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null
     ): Call<RoutineResponse>
+    // *PAGINATION*
+
 
     @GET("routine/exercises")
     fun getAllExerciseRoutine(
         @Header("Authorization") token: String,
-    ): Call<RoutineResponse>
+    ): Call<ExerciseListResponse>
 
     @GET("routine/books")
     fun getAllBooksRoutine(
         @Header("Authorization") token: String,
-    ): Call<RoutineResponse>
+    ): Call<BookListResponse>
 
     @GET("routine/books/{id}")
     fun getBookRoutineDetail(

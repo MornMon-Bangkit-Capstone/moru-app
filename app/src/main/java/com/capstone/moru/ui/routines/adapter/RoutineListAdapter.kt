@@ -19,10 +19,6 @@ class RoutineListAdapter(private val listRoutine: List<ListItem?>?) :
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
-
     override fun getItemCount(): Int {
         return listRoutine!!.size
     }
@@ -61,6 +57,10 @@ class RoutineListAdapter(private val listRoutine: List<ListItem?>?) :
                 holder.itemView.context.startActivity(intentToBookDetail)
             }
         }
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
     }
 
     interface OnItemClickCallback {

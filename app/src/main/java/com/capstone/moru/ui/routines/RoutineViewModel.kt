@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.capstone.moru.data.api.response.ListItem
-import com.capstone.moru.data.api.response.RoutineResponse
+import com.capstone.moru.data.api.response.*
 import com.capstone.moru.data.db.model.BooksRoutineModel
 import com.capstone.moru.data.db.model.ExerciseRoutineModel
 import com.capstone.moru.data.repository.UserRepository
@@ -24,11 +23,11 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
     private var _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
 
-    private val _bookRoutine = MutableLiveData<List<ListItem?>?>()
-    val bookRoutine: LiveData<List<ListItem?>?> = _bookRoutine
+    private val _bookRoutine = MutableLiveData<List<BookListItem?>?>()
+    val bookRoutine: LiveData<List<BookListItem?>?> = _bookRoutine
 
-    private val _exerciseRoutine = MutableLiveData<List<ListItem?>?>()
-    val exerciseRoutine: LiveData<List<ListItem?>?> = _exerciseRoutine
+    private val _exerciseRoutine = MutableLiveData<List<ExerciseListItem?>?>()
+    val exerciseRoutine: LiveData<List<ExerciseListItem?>?> = _exerciseRoutine
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -45,10 +44,10 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
         val formatToken = "Bearer $token"
         val client = userRepository.getAllExerciseRoutine(formatToken)
 
-        client.enqueue(object : Callback<RoutineResponse> {
+        client.enqueue(object : Callback<ExerciseListResponse> {
             override fun onResponse(
-                call: Call<RoutineResponse>,
-                response: Response<RoutineResponse>
+                call: Call<ExerciseListResponse>,
+                response: Response<ExerciseListResponse>
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
@@ -63,7 +62,7 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
                 }
             }
 
-            override fun onFailure(call: Call<RoutineResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ExerciseListResponse>, t: Throwable) {
                 _error.value = true
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
@@ -78,10 +77,10 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
         val formatToken = "Bearer $token"
         val client = userRepository.getAllBooksRoutine(formatToken)
 
-        client.enqueue(object : Callback<RoutineResponse> {
+        client.enqueue(object : Callback<BookListResponse> {
             override fun onResponse(
-                call: Call<RoutineResponse>,
-                response: Response<RoutineResponse>
+                call: Call<BookListResponse>,
+                response: Response<BookListResponse>
             ) {
 
                 _isLoading.value = false
@@ -100,7 +99,7 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
                 }
             }
 
-            override fun onFailure(call: Call<RoutineResponse>, t: Throwable) {
+            override fun onFailure(call: Call<BookListResponse>, t: Throwable) {
                 _error.value = true
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
