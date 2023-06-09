@@ -107,7 +107,6 @@
     <string name="wrong_credential">Wrong email or password</string>
     <string name="register_success">Register success</string>
     <string name="password_not_match">Password is not match</string>
-
     <string name="register_failed">Register failed</string>
     <string name="are_you_sure">Are you sure want to</string>
     <string name="dialog_logout">logout</string>
@@ -123,11 +122,19 @@
     <string name="default_avg_duration">0 minutes - 0 minutes</string>
     <string name="default_description">This is my description</string>
     <string name="notes">Notes</string>
-
     <string name="retry">Reload</string>
     <string name="failed_load_data">Failed to load data</string>
     <string name="routine_image">Routine Image</string>
     <string name="exercise_description">Exercise Description</string>
     <string name="post_schedule_success">New routine schedule is added</string>
     <string name="post_schedule_failed">New routine is failed to be added</string>
+    <string name="book_preferences">Book Preferences</string>
+    <string name="exercise_preferences">Exercise Preferences</string>
+    <string name="text_book_preferences">This will help us to recommend you suitable books for you morning routine</string>
+    <string name="text_exercise_preferences">This will help us to recommend you suitable exercise for you morning routine</string>
+    <string name="tell_us_your">Tell Us Your</string>
+    <string name="book">Book</string>
+    <string name="preferences">Preferences</string>
+    <string name="name_you_favorite_book">Name You Favorite Book</string>
+    <string name="workout_duration">Workout Duration</string>
 </resources>
