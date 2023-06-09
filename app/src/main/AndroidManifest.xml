@@ -11,10 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moru">
         <activity
+            android:name=".ui.fill.FillExercisePrefActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.routine_detail.RoutineDetailExercise"
+            android:exported="false" />
+        <activity
+            android:name=".ui.fill.FillBookPrefActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.fill.FillProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.intro.IntroActivity"
             android:exported="false"

@@ -68,7 +68,7 @@
     <string name="fav_author">Favorite Author</string>
     <string name="default_author">Author Name</string>
     <string name="favorite_exercise_category">Favorite Exercise Category</string>
-    <string name="favorite_exercise">Favorite Exercise</string>
+    <string name="name_your_favorite_exercise">Name Your Favorite Exercise</string>
     <string name="exercise_name">Exercise Name</string>
     <string name="my_statistic">My Statistic</string>
     <string name="default_average_day">0 hours 0 minutes</string>
@@ -79,4 +79,16 @@
     <string name="new_password">New Password</string>
     <string name="confirmation_password">Confirmation Password</string>
     <string name="save">Save</string>
+    <string name="detail">Detail</string>
+    <string name="book_preferences">Book Preferences</string>
+    <string name="exercise_preferences">Exercise Preferences</string>
+    <string name="text_book_preferences">This will help us to recommend you suitable books for you morning routine</string>
+    <string name="text_exercise_preferences">This will help us to recommend you suitable exercise for you morning routine</string>
+    <string name="fill_your_personal_data">Fill Your Personal Data</string>
+    <string name="describe_your_goals">Describe Your Goals</string>
+    <string name="tell_us_your">Tell Us Your</string>
+    <string name="book">Book</string>
+    <string name="preferences">Preferences</string>
+    <string name="name_you_favorite_book">Name You Favorite Book</string>
+    <string name="workout_duration">Workout Duration</string>
 </resources>
