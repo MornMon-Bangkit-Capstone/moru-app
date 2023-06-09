@@ -88,12 +88,12 @@ interface ApiService {
     ): Call<RoutineResponse>
 
     @GET("/schedule")
-    fun getUserSchedule(
+    fun getUserScheduleList(
         @Header("Authorization") token: String,
     ): Call<ScheduleListResponse>
 
     @GET("/schedule/{id}")
-    fun getUserSchedule(
+    fun getUserScheduleDetail(
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): Call<ScheduleDetailResponse>
@@ -119,8 +119,8 @@ interface ApiService {
         @Field("title") title: String,
         @Field("date") date: String,
         @Field("startTime") startTime: String,
-        @Field("endTime ") endTime: String,
-        @Field("description ") description: String,
+        @Field("endTime") endTime: String,
+        @Field("description") description: String,
     ): Call<DefaultResponse>
 
     @DELETE("schedule/{id}")

@@ -16,13 +16,33 @@ import com.capstone.moru.utils.PickRoutineDataClass
 
 class PickRoutineListAdapter(
     private val listRoutine: List<ListItem?>?,
-    private val recyclerView: RecyclerView
+    private val recyclerView: RecyclerView,
+    private val sectionPosition: Int?,
 ) :
     ListAdapter<ListItem, PickRoutineListAdapter.ViewHolder>(DiffUtilCallback()) {
     class ViewHolder(val binding: ItemRoutinePickBinding) : RecyclerView.ViewHolder(binding.root)
 
     private lateinit var onItemClickCallback: OnItemClickCallback
     private var selectedItemPosition: Int = -1
+    private var resetRadioButtons: Boolean = false
+
+    var userPickedRoutine: ListItem? = null
+    var tempBooksRoutine: List<PickRoutineDataClass>? = null
+    var tempExerciseRoutine: List<PickRoutineDataClass>? = null
+
+
+    private fun populateData(position: Int) {
+        if (position == 1) {
+            tempBooksRoutine = listRoutine?.map {
+                PickRoutineDataClass(it)
+            }
+        } else {
+            tempExerciseRoutine = listRoutine?.map {
+                PickRoutineDataClass(it)
+            }
+        }
+    }
+
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
@@ -37,9 +57,15 @@ class PickRoutineListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
+        if (sectionPosition != null) {
+            populateData(sectionPosition)
+        }
+
         val routine = listRoutine?.get(position)
-        val pickRoutine = listRoutine?.map {
-            PickRoutineDataClass(it)
+        val pickRoutine = if (sectionPosition == 1) {
+            tempBooksRoutine
+        } else {
+            tempExerciseRoutine
         }
 
         holder.apply {
@@ -49,8 +75,6 @@ class PickRoutineListAdapter(
         }
 
         holder.binding.radioButton.isChecked = selectedItemPosition == position
-//        val itemChecked = pickRoutine?.get(position)?.isChecked ?: false
-//        holder.binding.radioButton.isChecked = itemChecked
 
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(routine)
@@ -60,6 +84,11 @@ class PickRoutineListAdapter(
         holder.binding.radioButton.setOnClickListener {
             onItemClickCallback.onItemClicked(routine)
             updateItemSelected(holder, position, pickRoutine)
+        }
+
+        if (resetRadioButtons) {
+            pickRoutine?.get(selectedItemPosition)?.isChecked = false
+            holder.binding.radioButton.isChecked = false
         }
 
     }
@@ -73,7 +102,6 @@ class PickRoutineListAdapter(
         @SuppressLint("RecyclerView") position: Int,
         pickedRoutine: List<PickRoutineDataClass>?,
     ) {
-
         if (selectedItemPosition != position && selectedItemPosition != -1) {
             val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
             prevHolder.let {
@@ -81,13 +109,21 @@ class PickRoutineListAdapter(
                 prevRadioButton?.isChecked = false
                 notifyItemChanged(selectedItemPosition)
             }
-            holder.binding.radioButton.isChecked = pickedRoutine?.get(selectedItemPosition)?.isChecked!!
+            holder.binding.radioButton.isChecked =
+                pickedRoutine?.get(selectedItemPosition)?.isChecked!!
         }
 
         selectedItemPosition = position
         pickedRoutine?.get(position)?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
-        holder.binding.radioButton.isChecked = pickedRoutine.get(position).isChecked
+        holder.binding.radioButton.isChecked = pickedRoutine[position].isChecked
+        userPickedRoutine = pickedRoutine[position].routine
 
+        Log.e("RESET", resetRadioButtons.toString())
+    }
+
+    fun resetRadioButtons(reset: Boolean) {
+        resetRadioButtons = reset
+        notifyDataSetChanged()
     }
 
     interface OnItemClickCallback {

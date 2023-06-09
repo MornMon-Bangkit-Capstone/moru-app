@@ -1,12 +1,14 @@
 package com.capstone.moru.ui.add_routine.pick_routine
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.databinding.FragmentPickRoutineListBinding
 import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickRoutineListAdapter
@@ -20,6 +22,7 @@ class PickRoutineListFragment : Fragment() {
     private lateinit var factory: ViewModelFactory
     private val routineViewModel: RoutineViewModel by viewModels { factory }
     private var itemClickListener: OnItemClickListener? = null
+    private var adapter: PickRoutineListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +51,17 @@ class PickRoutineListFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        adapter?.resetRadioButtons(true)
+        Log.e("PAUSE", "MASUK")
+    }
+
+//    override fun onResume() {
+//        super.onResume()
+//        adapter?.resetRadioButtons(false)
+//    }
+
     private fun setRoutinesData() {
         routineViewModel.getUserToken().observe(viewLifecycleOwner) {token ->
             val position = arguments?.getInt(RoutineListFragment.POSITION)
@@ -57,7 +71,6 @@ class PickRoutineListFragment : Fragment() {
                 routineViewModel.getAllExerciseRoutine(token)
             }
         }
-
     }
 
     private fun initRecyclerView(routines: List<ListItem?>?) {
@@ -65,10 +78,10 @@ class PickRoutineListFragment : Fragment() {
         binding.rvRoutine.layoutManager = layoutManager
 
         val recyclerView = binding.rvRoutine
-        val adapter = PickRoutineListAdapter(routines, recyclerView)
+        adapter = PickRoutineListAdapter(routines, recyclerView, 0)
 
         binding.rvRoutine.adapter = adapter
-        adapter.setOnItemClickCallback(object : PickRoutineListAdapter.OnItemClickCallback {
+        adapter!!.setOnItemClickCallback(object : PickRoutineListAdapter.OnItemClickCallback {
             override fun onItemClicked(item: ListItem?) {
                 if (item != null) {
                     itemClickListener?.onItemClicked(item)

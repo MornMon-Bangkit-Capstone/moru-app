@@ -78,6 +78,33 @@ class UserRepository(
         )
     }
 
+    fun updateUserSchedule(token: String,
+                           id:String,
+                           type: String,
+                           title: String,
+                           date: String,
+                           startTime: String,
+                           endTime: String,
+                           description: String,): Call<DefaultResponse>{
+        return apiService.putUserSchedule(
+            token,
+            id,
+            type,
+            title,
+            date,
+            startTime,
+            endTime,
+            description)
+    }
+
+    fun getUserScheduleList(token: String): Call<ScheduleListResponse>{
+        return apiService.getUserScheduleList(token)
+    }
+
+    fun getUserScheduleDetail(token: String, id: String): Call<ScheduleDetailResponse>{
+        return apiService.getUserScheduleDetail(token, id)
+    }
+
 
     // *FOR PAGINATION*
     @OptIn(ExperimentalPagingApi::class)
