@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.detail.book_routine
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.capstone.moru.R
 import com.capstone.moru.data.api.response.BookListItem
 import com.capstone.moru.databinding.ActivityDetailBookBinding
+import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleActivity
 import com.capstone.moru.ui.factory.ViewModelFactory
 
 class DetailBookActivity : AppCompatActivity() {
@@ -17,7 +19,8 @@ class DetailBookActivity : AppCompatActivity() {
 
     private lateinit var factory: ViewModelFactory
     private val detailBookViewModel: DetailBookViewModel by viewModels { factory }
-
+    private var routineTitle: String? = null
+    private var routineType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,17 +50,15 @@ class DetailBookActivity : AppCompatActivity() {
         binding.ivBack.setOnClickListener {
             finish()
         }
+
+        binding.btnStart.setOnClickListener {
+            val intentToPickSchedule = Intent(this, PickScheduleActivity::class.java)
+            intentToPickSchedule.putExtra(KEY_BOOK, routineType)
+            intentToPickSchedule.putExtra(KEY_BOOK_TITLE, routineType)
+        }
     }
 
     private fun setRoutineData(listRoutine: BookListItem?) {
-//        var formatCategory = ""
-//        val separatedCategory = listRoutine?.genres?.split(", ")
-//        if (separatedCategory != null) {
-//            for (genre in separatedCategory) {
-//                val secondSeparatedCategory = genre.split("/")
-//                formatCategory = secondSeparatedCategory[0].trim()
-//            }
-//        }
         val formattedRoutine = listRoutine?.genres?.substring(
             listRoutine.genres.indexOf("[") + 1,
             listRoutine.genres.indexOf("]")
@@ -73,7 +74,8 @@ class DetailBookActivity : AppCompatActivity() {
         binding.tvDateBook.text = listRoutine?.yearOfPublication.toString()
         binding.tvRatingBook.text = formattedRating
 
-
+        routineTitle = listRoutine?.bookTitle
+        routineType = "Book"
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -88,5 +90,7 @@ class DetailBookActivity : AppCompatActivity() {
         const val KEY_BOOK_ROUTINE = "key_book_routine"
         const val KEY_ID_BOOK = "key_id_book"
 
+        const val KEY_BOOK = "key_book"
+        const val KEY_BOOK_TITLE = "key_book_title"
     }
 }

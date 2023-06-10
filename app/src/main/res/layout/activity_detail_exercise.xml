@@ -91,14 +91,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_routine_name" />
 
     <TextView
-        android:id="@+id/tv_pages_book"
+        android:id="@+id/tv_duration_exercise"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/default_duration"
         android:textColor="@color/grey"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_location"
         app:layout_constraintStart_toStartOf="@+id/tv_duration"
         app:layout_constraintTop_toBottomOf="@+id/tv_duration" />
 
@@ -172,4 +172,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        style="@style/textStyleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/location"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_duration"
+        app:layout_constraintStart_toEndOf="@+id/tv_duration"
+        app:layout_constraintTop_toTopOf="@+id/tv_duration" />
+
+    <TextView
+        android:id="@+id/tv_location_exercise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/default_location"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toStartOf="@+id/tv_equipment"
+        app:layout_constraintStart_toStartOf="@+id/tv_location"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location" />
+
+    <TextView
+        android:id="@+id/tv_equipment"
+        style="@style/textStyleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/equipment"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_location"
+        app:layout_constraintTop_toTopOf="@+id/tv_location" />
+
+    <TextView
+        android:id="@+id/tv_equipment_exercise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/yes"
+        android:textColor="@color/grey"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_equipment"
+        app:layout_constraintTop_toBottomOf="@+id/tv_equipment" />
 </androidx.constraintlayout.widget.ConstraintLayout>
