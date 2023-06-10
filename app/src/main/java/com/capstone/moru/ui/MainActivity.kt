@@ -129,4 +129,5 @@ class MainActivity : AppCompatActivity() {
     private fun setupView() {
         supportActionBar?.hide()
     }
+
 }

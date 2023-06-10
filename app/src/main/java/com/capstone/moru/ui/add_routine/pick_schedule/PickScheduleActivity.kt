@@ -23,7 +23,6 @@ class PickScheduleActivity : AppCompatActivity() {
     private val pickScheduleViewModel: PickScheduleViewModel by viewModels { factory }
     private val cal = Calendar.getInstance()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -113,7 +112,6 @@ class PickScheduleActivity : AppCompatActivity() {
         binding.edDate.inputType = InputType.TYPE_NULL
         binding.edStartTime.inputType = InputType.TYPE_NULL
         binding.edEndTime.inputType = InputType.TYPE_NULL
-
     }
 
     private fun dateDialog() {

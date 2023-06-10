@@ -6,7 +6,7 @@ import retrofit2.http.*
 import java.util.*
 
 interface ApiService {
-
+    // *USER*
     @FormUrlEncoded
     @POST("auth/register")
     fun registerUser(
@@ -51,6 +51,7 @@ interface ApiService {
         @Field("Favorite Exercise") favExercise: String,
         @Field("Favorite Duration") faveExerciseDuration: String,
     ): Call<ProfileResponse>
+    // *USER*
 
     // *PAGINATION*
     @GET("routine/exercises")
@@ -67,7 +68,7 @@ interface ApiService {
     ): Call<RoutineResponse>
     // *PAGINATION*
 
-
+    // *ROUTINE*
     @GET("routine/exercises")
     fun getAllExerciseRoutine(
         @Header("Authorization") token: String,
@@ -79,29 +80,33 @@ interface ApiService {
         @Query("key") key: String,
     ): Call<BookListResponse>
 
-    @GET("routine/books")
+    @GET("routine/exercises")
     fun findExerciseRoutine(
         @Header("Authorization") token: String,
         @Query("key") key: String,
-    ): Call<BookListResponse>
+    ): Call<ExerciseListResponse>
 
     @GET("routine/books")
     fun getAllBooksRoutine(
         @Header("Authorization") token: String,
     ): Call<BookListResponse>
 
-    @GET("routine/books/{id}")
+    @GET("routine/books/{id}/{isPublic}")
     fun getBookRoutineDetail(
         @Header("Authorization") token: String,
-        @Path("id") id: String,
-    ): Call<DetailRoutineResponse>
+        @Path("id") id: Int,
+        @Path("isPublic") isPublic: Int,
+        ): Call<BookListResponse>
 
-    @GET("routine/exercises/{id}")
+    @GET("routine/exercises/{id}/{isPublic}")
     fun getExerciseRoutineDetail(
         @Header("Authorization") token: String,
-        @Path("id") id: String,
-    ): Call<RoutineResponse>
+        @Path("id") id: Int,
+        @Path("isPublic") isPublic: Int,
+    ): Call<ExerciseListResponse>
+    // *ROUTINE*
 
+    // *SCHEDULE*
     @GET("/schedule")
     fun getUserScheduleList(
         @Header("Authorization") token: String,
@@ -143,4 +148,5 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): Call<DefaultResponse>
+    // *SCHEDULE*
 }

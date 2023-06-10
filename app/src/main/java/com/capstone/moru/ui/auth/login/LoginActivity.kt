@@ -22,8 +22,6 @@ import com.capstone.moru.ui.MainActivity
 import com.capstone.moru.ui.auth.register.RegisterActivity
 import com.capstone.moru.ui.factory.ViewModelFactory
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "setting")
-
 class LoginActivity : AppCompatActivity() {
     private var _binding: ActivityLoginBinding? = null
     private val binding get() = _binding!!
@@ -117,6 +115,10 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.isLoading.observe(this) {
             showLoading(it)
+        }
+
+        binding.backButton.setOnClickListener {
+            finish()
         }
 
 

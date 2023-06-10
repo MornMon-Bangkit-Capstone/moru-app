@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.routines.adapter
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.capstone.moru.ui.routines.BooksRoutineListFragment

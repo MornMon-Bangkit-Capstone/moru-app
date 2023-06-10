@@ -6,9 +6,11 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.capstone.moru.data.api.response.ExerciseListItem
 import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.data.api.response.ListRoutine
 import com.capstone.moru.databinding.ActivityDetailExerciseBinding
+import com.capstone.moru.ui.detail.book_routine.DetailBookActivity
 import com.capstone.moru.ui.factory.ViewModelFactory
 
 class DetailExerciseActivity : AppCompatActivity() {
@@ -28,11 +30,10 @@ class DetailExerciseActivity : AppCompatActivity() {
         setupView()
 
         detailExerciseViewModel.getUserToken().observe(this) { token ->
-            val routineId = intent.getStringExtra(KEY_EXERCISE_ROUTINE)
+            val routineId = intent.getIntExtra(KEY_EXERCISE_ROUTINE,1)
+            val isPublic = intent.getIntExtra(KEY_ID_EXERCISE, 1)
 
-            if (routineId != null) {
-                detailExerciseViewModel.getExerciseRoutineDetail(token, routineId)
-            }
+            detailExerciseViewModel.getExerciseRoutineDetail(token, routineId, isPublic)
         }
 
         detailExerciseViewModel.exerciseRoutine.observe(this) { routine ->
@@ -49,22 +50,20 @@ class DetailExerciseActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRoutineData(listRoutine: List<com.capstone.moru.data.api.response.ListItem?>?) {
-        val routines = listRoutine?.get(0)
+    private fun setRoutineData(listRoutine: ExerciseListItem?) {
+//        var formatCategory = ""
+//        val separatedCategory = listRoutine?.category?.split(", ")
+//        if (separatedCategory != null) {
+//            for (genre in separatedCategory) {
+//                val secondSeparatedCategory = genre.split("/")
+//                formatCategory = secondSeparatedCategory[0].trim()
+//            }
+//        }
 
-        var formatCategory = ""
-        val separatedCategory = routines?.type?.split(", ")
-        if (separatedCategory != null) {
-            for (genre in separatedCategory) {
-                val secondSeparatedCategory = genre.split("/")
-                formatCategory = secondSeparatedCategory[0].trim()
-            }
-        }
-
-        Glide.with(this).load(routines?.imgUrl).into(binding.ivRoutine)
-        binding.tvRoutineName.text = routines?.title
-        binding.customCategory.text = formatCategory
-        binding.tvDescriptionExercise.text = routines?.description
+        Glide.with(this).load(listRoutine?.visual).into(binding.ivRoutine)
+        binding.tvRoutineName.text = listRoutine?.sports
+        binding.customCategory.text = listRoutine?.category
+        binding.tvDescriptionExercise.text = listRoutine?.description
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -77,5 +76,6 @@ class DetailExerciseActivity : AppCompatActivity() {
 
     companion object {
         const val KEY_EXERCISE_ROUTINE = "key_exercise_routine"
+        const val KEY_ID_EXERCISE = "key_id_exercise"
     }
 }

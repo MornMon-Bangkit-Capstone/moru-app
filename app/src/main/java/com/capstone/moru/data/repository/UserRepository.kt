@@ -45,6 +45,14 @@ class UserRepository(
         return preference.clearCache()
     }
 
+    suspend fun setUserIsFirstTime(status: Boolean) {
+        return preference.setUserIsFirstTime(status)
+    }
+
+    suspend fun getUserIsFirstTime(): LiveData<Boolean> {
+        return preference.getUserIsFirstTime().asLiveData()
+    }
+
     fun getAllExerciseRoutine(token: String): Call<com.capstone.moru.data.api.response.ExerciseListResponse> {
         return apiService.getAllExerciseRoutine(token)
     }
@@ -55,23 +63,25 @@ class UserRepository(
 
     fun getBookRoutineDetail(
         token: String,
-        id: String
-    ): Call<com.capstone.moru.data.api.response.DetailRoutineResponse> {
-        return apiService.getBookRoutineDetail(token, id)
+        id: Int,
+        isPublic: Int
+    ): Call<BookListResponse> {
+        return apiService.getBookRoutineDetail(token, id, isPublic)
     }
 
     fun getExerciseRoutineDetail(
         token: String,
-        id: String
-    ): Call<com.capstone.moru.data.api.response.RoutineResponse> {
-        return apiService.getExerciseRoutineDetail(token, id)
+        id: Int,
+        isPublic: Int
+    ): Call<ExerciseListResponse> {
+        return apiService.getExerciseRoutineDetail(token, id, isPublic)
     }
 
     fun findBookRoutine(token: String, key: String): Call<BookListResponse> {
         return apiService.findBookRoutine(token, key)
     }
 
-    fun findExerciseRoutine(token: String, key: String): Call<BookListResponse> {
+    fun findExerciseRoutine(token: String, key: String): Call<ExerciseListResponse> {
         return apiService.findExerciseRoutine(token, key)
     }
 
@@ -166,7 +176,6 @@ class UserRepository(
         ).liveData
     }
     // *FOR PAGINATION*
-
 
     companion object {
         @Volatile

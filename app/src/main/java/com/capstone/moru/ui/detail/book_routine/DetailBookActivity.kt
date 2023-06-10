@@ -1,11 +1,13 @@
 package com.capstone.moru.ui.detail.book_routine
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.capstone.moru.data.api.response.ListRoutine
+import com.capstone.moru.R
+import com.capstone.moru.data.api.response.BookListItem
 import com.capstone.moru.databinding.ActivityDetailBookBinding
 import com.capstone.moru.ui.factory.ViewModelFactory
 
@@ -27,18 +29,18 @@ class DetailBookActivity : AppCompatActivity() {
         setupView()
 
         detailBookViewModel.getUserToken().observe(this) { token ->
-            val routineId = intent.getStringExtra(KEY_BOOK_ROUTINE)
+            val routineId = intent.getIntExtra(KEY_BOOK_ROUTINE,1 )
+            val isPublic = intent.getIntExtra(KEY_ID_BOOK, 1)
 
-            if (routineId != null) {
-                detailBookViewModel.getBookRoutineDetail(token, routineId)
-            }
+            Log.e("MASUK", routineId.toString())
+            detailBookViewModel.getBookRoutineDetail(token, routineId, isPublic)
         }
 
         detailBookViewModel.bookRoutine.observe(this) { routine ->
             setRoutineData(routine)
         }
 
-        detailBookViewModel.isLoading.observe(this){
+        detailBookViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
@@ -47,20 +49,31 @@ class DetailBookActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRoutineData(listRoutine: com.capstone.moru.data.api.response.ListRoutine) {
-        var formatCategory = ""
-        val separatedCategory = listRoutine.type?.split(", ")
-        if (separatedCategory != null) {
-            for (genre in separatedCategory) {
-                val secondSeparatedCategory = genre.split("/")
-                formatCategory = secondSeparatedCategory[0].trim()
-            }
+    private fun setRoutineData(listRoutine: BookListItem?) {
+//        var formatCategory = ""
+//        val separatedCategory = listRoutine?.genres?.split(", ")
+//        if (separatedCategory != null) {
+//            for (genre in separatedCategory) {
+//                val secondSeparatedCategory = genre.split("/")
+//                formatCategory = secondSeparatedCategory[0].trim()
+//            }
+//        }
+        val formattedRoutine = listRoutine?.genres?.substring(
+            listRoutine.genres.indexOf("[") + 1,
+            listRoutine.genres.indexOf("]")
+        )?.split(",")?.map {
+            it.trim()
         }
+        val formattedRating = getString(R.string.default_rating_book, listRoutine?.avgRating)
 
-        Glide.with(this).load(listRoutine.imgUrl).into(binding.ivRoutine)
-        binding.tvRoutineName.text = listRoutine.title
-        binding.customCategory.text = formatCategory
-        binding.tvDescriptionBook.text = listRoutine.description
+        Glide.with(this).load(listRoutine?.imageURLL).into(binding.ivRoutine)
+        binding.tvRoutineName.text = listRoutine?.bookTitle
+        binding.customCategory.text = formattedRoutine?.firstOrNull()
+        binding.tvDescriptionBook.text = listRoutine?.summary
+        binding.tvDateBook.text = listRoutine?.yearOfPublication.toString()
+        binding.tvRatingBook.text = formattedRating
+
+
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -73,5 +86,7 @@ class DetailBookActivity : AppCompatActivity() {
 
     companion object {
         const val KEY_BOOK_ROUTINE = "key_book_routine"
+        const val KEY_ID_BOOK = "key_id_book"
+
     }
 }

@@ -95,7 +95,7 @@
     <string name="pages">Pages</string>
     <string name="author">Author</string>
     <string name="rating">Rating</string>
-    <string name="default_rating_book">0 / 5</string>
+    <string name="default_rating_book">%s / 10</string>
     <string name="description">Description</string>
     <string name="book_description">Book Description</string>
     <string name="start_this_routine">Start This Routine</string>
@@ -140,4 +140,6 @@
     <string name="name_you_favorite_book">Name You Favorite Book</string>
     <string name="workout_duration">Workout Duration</string>
     <string name="name_your_favorite_exercise">Name Your Favorite Exercise (Pick One)</string>
+    <string name="release_date">Release Date</string>
+    <string name="default_release_date">2000</string>
 </resources>

@@ -79,29 +79,29 @@
         android:contentDescription="@string/routine_name" />
 
     <TextView
-        android:id="@+id/tv_pages"
+        android:id="@+id/tv_date"
         style="@style/textStyleMedium"
         android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="@string/pages"
+        android:text="@string/release_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_routine_name" />
 
     <TextView
-        android:id="@+id/tv_pages_book"
+        android:id="@+id/tv_date_book"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
-        android:text="@string/default_pages"
+        android:text="@string/default_release_date"
         android:textColor="@color/grey"
         app:layout_constraintEnd_toStartOf="@+id/tv_author_book"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pages" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
     <TextView
         android:id="@+id/tv_author"
@@ -110,10 +110,10 @@
         android:text="@string/author"
         android:textSize="16sp"
         style="@style/textStyleMedium"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_pages"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_pages" />
+        app:layout_constraintTop_toTopOf="@+id/tv_date" />
 
     <TextView
         android:id="@+id/tv_author_book"
@@ -160,7 +160,8 @@
         android:text="@string/description"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_pages_book" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_book" />
+
 
     <ScrollView
         android:layout_width="match_parent"

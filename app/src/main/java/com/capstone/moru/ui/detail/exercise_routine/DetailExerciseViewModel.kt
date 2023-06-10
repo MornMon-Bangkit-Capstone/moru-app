@@ -4,18 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.capstone.moru.data.api.response.DetailRoutineResponse
-import com.capstone.moru.data.api.response.ListItem
-import com.capstone.moru.data.api.response.ListRoutine
-import com.capstone.moru.data.api.response.RoutineResponse
 import com.capstone.moru.data.repository.UserRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DetailExerciseViewModel(private var userRepository: UserRepository) : ViewModel() {
-    private var _exerciseRoutine = MutableLiveData<List<com.capstone.moru.data.api.response.ListItem?>?>()
-    val exerciseRoutine: LiveData<List<com.capstone.moru.data.api.response.ListItem?>?> = _exerciseRoutine
+    private var _exerciseRoutine =
+        MutableLiveData<com.capstone.moru.data.api.response.ExerciseListItem?>()
+    val exerciseRoutine: LiveData<com.capstone.moru.data.api.response.ExerciseListItem?> =
+        _exerciseRoutine
 
     private var _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
@@ -30,22 +28,22 @@ class DetailExerciseViewModel(private var userRepository: UserRepository) : View
         return userRepository.getUserToken()
     }
 
-    fun getExerciseRoutineDetail(token: String, id: String) {
+    fun     getExerciseRoutineDetail(token: String, id: Int, isPublic: Int) {
         _isLoading.value = true
         val formatToken = "Bearer $token"
-        val client = userRepository.getExerciseRoutineDetail(formatToken, id)
+        val client = userRepository.getExerciseRoutineDetail(formatToken, id, isPublic)
 
-        client.enqueue(object : Callback<com.capstone.moru.data.api.response.RoutineResponse> {
+        client.enqueue(object : Callback<com.capstone.moru.data.api.response.ExerciseListResponse> {
             override fun onResponse(
-                call: Call<com.capstone.moru.data.api.response.RoutineResponse>,
-                response: Response<com.capstone.moru.data.api.response.RoutineResponse>
+                call: Call<com.capstone.moru.data.api.response.ExerciseListResponse>,
+                response: Response<com.capstone.moru.data.api.response.ExerciseListResponse>
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
                     _error.value = false
                     _message.value = response.message()
 
-                    _exerciseRoutine.value = response.body()?.list
+                    _exerciseRoutine.value = response.body()?.list?.firstOrNull()
 
                     Log.e("DETAIL EXERCISE 1", _message.value.toString())
 
@@ -58,7 +56,10 @@ class DetailExerciseViewModel(private var userRepository: UserRepository) : View
                 }
             }
 
-            override fun onFailure(call: Call<com.capstone.moru.data.api.response.RoutineResponse>, t: Throwable) {
+            override fun onFailure(
+                call: Call<com.capstone.moru.data.api.response.ExerciseListResponse>,
+                t: Throwable
+            ) {
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
 

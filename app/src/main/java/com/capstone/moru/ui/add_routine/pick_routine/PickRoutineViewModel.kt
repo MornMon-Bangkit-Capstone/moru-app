@@ -1,4 +1,4 @@
-package com.capstone.moru.ui.add_routine.pick_routine.adapter
+package com.capstone.moru.ui.add_routine.pick_routine
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -20,8 +20,12 @@ class PickBookRoutineAdapter(
     ) : ListAdapter<BookListItem, PickBookRoutineAdapter.ViewHolder>(BookRoutineDiffUtil()) {
 
     class ViewHolder(val binding: ItemRoutinePickBinding) : RecyclerView.ViewHolder(binding.root)
+
     private lateinit var onItemClickCallback: OnItemClickCallback
     private var selectedItemPosition: Int = -1
+    private val pickedRoutine = listBookRoutine?.map {
+        PickBookRoutineDataClass(it)
+    }
 
     override fun getItemCount(): Int {
         return listBookRoutine?.size!!
@@ -37,15 +41,12 @@ class PickBookRoutineAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-                val bookRoutine = listBookRoutine?.get(position)
-//        val formattedRoutine = bookRoutine?.genres?.substring(
-//            bookRoutine.genres.indexOf("[") + 1,
-//            bookRoutine.genres.indexOf("]")
-//        )?.split(",")?.map {
-//            it.trim()
-//        }
-        val pickedRoutine = listBookRoutine?.map {
-            PickBookRoutineDataClass(it)
+        val bookRoutine = listBookRoutine?.get(position)
+        val formattedRoutine = bookRoutine?.genres?.substring(
+            bookRoutine.genres.indexOf("[") + 1,
+            bookRoutine.genres.indexOf("]")
+        )?.split(",")?.map {
+            it.trim()
         }
 
         Log.e("TEST", pickedRoutine?.size.toString())
@@ -54,7 +55,7 @@ class PickBookRoutineAdapter(
         holder.apply {
             Glide.with(holder.itemView.context).load(bookRoutine?.imageURLL)
                 .into(holder.binding.imageView).onLoadFailed(placeholder)
-            binding.customCategory.text =bookRoutine?.genres
+            binding.customCategory.text = formattedRoutine?.firstOrNull()
             binding.textView.text = bookRoutine?.bookTitle
         }
 

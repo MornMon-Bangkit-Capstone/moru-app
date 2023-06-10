@@ -52,6 +52,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/search"
+        android:imeOptions="actionSearch"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:padding="16dp"

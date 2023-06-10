@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.auth.register
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -9,10 +10,16 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityRegisterBinding
 import com.capstone.moru.ui.auth.login.LoginActivity
 import com.capstone.moru.ui.factory.ViewModelFactory
+import com.capstone.moru.ui.fill.FillProfileActivity
+
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "setting")
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -82,27 +89,30 @@ class RegisterActivity : AppCompatActivity() {
                 val msg = getString(R.string.password_not_match)
                 displayToast(msg)
             } else {
+                val intentToFillProfile =
+                    Intent(this, FillProfileActivity::class.java)
+                startActivity(intentToFillProfile)
                 registerViewModel.userRegister(email, password, passwordConfirm)
-                registerViewModel.error.observe(this) { error ->
-                    if (!error) {
-                        registerViewModel.user.observe(this) { user ->
-                            if (user == "User Created") {
-                                val msg = getString(R.string.register_success)
-                                displayToast(msg)
-
-                                val intentLogin =
-                                    Intent(this@RegisterActivity, LoginActivity::class.java)
-                                startActivity(intentLogin)
-                                finish()
-                            }
-                        }
-                    } else {
-                        registerViewModel.message.observe(this) { message ->
-                            val msg = getString(R.string.register_failed)
-                            displayToast("$msg\n$message")
-                        }
-                    }
-                }
+//                registerViewModel.error.observe(this) { error ->
+//                    if (!error) {
+//                        registerViewModel.user.observe(this) { user ->
+//                            if (user == "User Created") {
+//                                val msg = getString(R.string.register_success)
+//                                displayToast(msg)
+//
+//                                val intentToFillProfile =
+//                                    Intent(this, FillProfileActivity::class.java)
+//                                startActivity(intentToFillProfile)
+//                                finish()
+//                            }
+//                        }
+//                    } else {
+//                        registerViewModel.message.observe(this) { message ->
+//                            val msg = getString(R.string.register_failed)
+//                            displayToast("$msg\n$message")
+//                        }
+//                    }
+//                }
             }
         }
 
@@ -113,6 +123,10 @@ class RegisterActivity : AppCompatActivity() {
         binding.tvLogin.setOnClickListener {
             val intentToLogin = Intent(this, LoginActivity::class.java)
             startActivity(intentToLogin)
+        }
+
+        binding.backButton.setOnClickListener {
+            finish()
         }
     }
 

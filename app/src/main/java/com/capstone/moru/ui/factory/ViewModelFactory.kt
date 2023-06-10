@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.moru.data.repository.UserRepository
 import com.capstone.moru.di.Injection
-import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickRoutineViewModel
+import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineViewModel
 import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleViewModel
 import com.capstone.moru.ui.auth.login.LoginViewModel
 import com.capstone.moru.ui.auth.register.RegisterViewModel

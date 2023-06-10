@@ -1,6 +1,7 @@
 package com.capstone.moru.ui.routines
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,7 @@ class BooksRoutineListFragment : Fragment() {
         }
 
         routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routine ->
+            Log.e("ROUTINE", routine.toString())
             initRecyclerView(routine)
         }
 
@@ -52,6 +54,11 @@ class BooksRoutineListFragment : Fragment() {
         routineViewModel.message.observe(viewLifecycleOwner){
             displayToast(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun displayToast(msg: String) {

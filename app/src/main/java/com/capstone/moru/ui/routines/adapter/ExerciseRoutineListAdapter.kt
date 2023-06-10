@@ -29,7 +29,6 @@ class ExerciseRoutineListAdapter(private val listExerciseRoutine: List<com.capst
         val routineExercise = listExerciseRoutine?.get(position)
         val placeholder = holder.itemView.context.resources.getDrawable(R.drawable.placeholder_book)
 
-
         holder.apply {
             Glide.with(holder.itemView.context).load(routineExercise?.visual)
                 .into(holder.binding.ivCardRoutine).onLoadFailed(placeholder)
@@ -42,6 +41,7 @@ class ExerciseRoutineListAdapter(private val listExerciseRoutine: List<com.capst
             onItemClickCallback.onItemClicked(routineExercise)
             val intentToExerciseDetail = Intent(holder.itemView.context, DetailExerciseActivity::class.java)
             intentToExerciseDetail.putExtra(KEY_EXERCISE_ROUTINE, routineExercise?.id)
+            intentToExerciseDetail.putExtra(KEY_ID_EXERCISE, routineExercise?.isPublic)
             holder.itemView.context.startActivity(intentToExerciseDetail)
         }
     }
@@ -60,5 +60,6 @@ class ExerciseRoutineListAdapter(private val listExerciseRoutine: List<com.capst
 
     companion object {
         const val KEY_EXERCISE_ROUTINE = "key_exercise_routine"
+        const val KEY_ID_EXERCISE = "key_id_exercise"
     }
 }

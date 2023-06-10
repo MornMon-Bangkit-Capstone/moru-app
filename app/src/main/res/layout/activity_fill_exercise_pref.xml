@@ -76,6 +76,8 @@
         android:id="@+id/ed_name"
         style="@style/textStyleMedium"
         android:layout_width="0dp"
+        android:textSize="14sp"
+
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="75dp"
@@ -103,6 +105,8 @@
         android:background="@drawable/custom_text_field_bg"
         android:drawablePadding="12dp"
         android:ems="10"
+        android:textSize="14sp"
+
         android:hint="@string/name_your_favorite_exercise"
         android:inputType="text"
         android:padding="16dp"
@@ -124,6 +128,8 @@
         android:drawableEnd="@drawable/ic_arrow_drop_down_24"
         android:drawablePadding="12dp"
         android:ems="10"
+        android:textSize="14sp"
+
         android:hint="@string/workout_duration"
         android:inputType="text"
         android:padding="16dp"
