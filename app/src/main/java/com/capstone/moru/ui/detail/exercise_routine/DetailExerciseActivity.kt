@@ -49,7 +49,7 @@ class DetailExerciseActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRoutineData(listRoutine: List<ListItem?>?) {
+    private fun setRoutineData(listRoutine: List<com.capstone.moru.data.api.response.ListItem?>?) {
         val routines = listRoutine?.get(0)
 
         var formatCategory = ""

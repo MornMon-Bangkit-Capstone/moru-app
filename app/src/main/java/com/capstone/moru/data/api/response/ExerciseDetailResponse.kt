@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ExerciseDetailResponse(
 
 	@field:SerializedName("book")
-	val book: Book? = null,
+	val book: com.capstone.moru.data.api.response.Book? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,

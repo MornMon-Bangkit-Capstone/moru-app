@@ -37,10 +37,10 @@ class PickScheduleViewModel(private var userRepository: UserRepository) : ViewMo
         val formatToken = "Bearer $token"
         val client = userRepository.postUserSchedule(formatToken, type, title, date, startTime, endTime, description)
 
-        client.enqueue(object: Callback<DefaultResponse>{
+        client.enqueue(object: Callback<com.capstone.moru.data.api.response.DefaultResponse>{
             override fun onResponse(
-                call: Call<DefaultResponse>,
-                response: Response<DefaultResponse>
+                call: Call<com.capstone.moru.data.api.response.DefaultResponse>,
+                response: Response<com.capstone.moru.data.api.response.DefaultResponse>
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful){
@@ -52,7 +52,7 @@ class PickScheduleViewModel(private var userRepository: UserRepository) : ViewMo
                 }
             }
 
-            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+            override fun onFailure(call: Call<com.capstone.moru.data.api.response.DefaultResponse>, t: Throwable) {
                 _error.value = true
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"

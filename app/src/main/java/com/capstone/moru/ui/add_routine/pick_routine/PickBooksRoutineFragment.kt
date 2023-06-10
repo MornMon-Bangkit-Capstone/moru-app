@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,9 +45,43 @@ class PickBooksRoutineFragment : Fragment() {
         routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routines ->
             initRecyclerView(routines)
         }
+
+        routineViewModel.error.observe(viewLifecycleOwner){
+            retry(it)
+        }
+
+        routineViewModel.message.observe(viewLifecycleOwner){
+            displayToast(it)
+        }
     }
 
-    private fun initRecyclerView(routines: List<BookListItem?>?) {
+    private fun displayToast(msg: String) {
+        return Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+    }
+
+    private fun retry(it: Boolean?) {
+        if (it!!){
+            binding.progressBar.visibility = View.GONE
+            binding.btnRetry.apply {
+                visibility = View.VISIBLE
+                isEnabled = true
+                setOnClickListener {
+                    routineViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
+                        routineViewModel.getAllBooksRoutine(token)
+                    }
+                    visibility = View.GONE
+                    isEnabled = false
+                }
+            }
+        }else{
+            binding.btnRetry.apply {
+                visibility = View.GONE
+                isEnabled = false
+            }
+        }
+    }
+
+    private fun initRecyclerView(routines: List<com.capstone.moru.data.api.response.BookListItem?>?) {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvRoutine.layoutManager = layoutManager
 
@@ -55,7 +90,7 @@ class PickBooksRoutineFragment : Fragment() {
 
         binding.rvRoutine.adapter = adapter
         adapter.setOnItemClickCallback(object : PickBookRoutineAdapter.OnItemClickCallback {
-            override fun onItemClicked(item: BookListItem?) {
+            override fun onItemClicked(item: com.capstone.moru.data.api.response.BookListItem?) {
             }
         })
     }

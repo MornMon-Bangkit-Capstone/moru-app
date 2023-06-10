@@ -11,7 +11,7 @@ data class ExerciseListResponse(
     val message: String? = null,
 
     @field:SerializedName("list")
-    val list: List<ExerciseListItem?>? = null
+    val list: List<com.capstone.moru.data.api.response.ExerciseListItem?>? = null
 )
 
 data class ExerciseListItem(

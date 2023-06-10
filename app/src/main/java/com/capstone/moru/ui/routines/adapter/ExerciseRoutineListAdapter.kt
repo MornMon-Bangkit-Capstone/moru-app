@@ -12,8 +12,8 @@ import com.capstone.moru.databinding.ItemRoutinesBinding
 import com.capstone.moru.ui.detail.exercise_routine.DetailExerciseActivity
 import com.capstone.moru.utils.ExerciseRoutineDiffUtil
 
-class ExerciseRoutineListAdapter(private val listExerciseRoutine: List<ExerciseListItem?>?) :
-    ListAdapter<ExerciseListItem, ExerciseRoutineListAdapter.ViewHolder>(ExerciseRoutineDiffUtil()) {
+class ExerciseRoutineListAdapter(private val listExerciseRoutine: List<com.capstone.moru.data.api.response.ExerciseListItem?>?) :
+    ListAdapter<com.capstone.moru.data.api.response.ExerciseListItem, ExerciseRoutineListAdapter.ViewHolder>(ExerciseRoutineDiffUtil()) {
 
     class ViewHolder(val binding: ItemRoutinesBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -55,7 +55,7 @@ class ExerciseRoutineListAdapter(private val listExerciseRoutine: List<ExerciseL
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(routineExercise: ExerciseListItem?)
+        fun onItemClicked(routineExercise: com.capstone.moru.data.api.response.ExerciseListItem?)
     }
 
     companion object {

@@ -85,6 +85,6 @@ class PickExerciseRoutineAdapter(
 
 
     interface OnItemClickCallback {
-        fun onItemClicked(item: ExerciseListItem?)
+        fun onItemClicked(item: com.capstone.moru.data.api.response.ExerciseListItem?)
     }
 }

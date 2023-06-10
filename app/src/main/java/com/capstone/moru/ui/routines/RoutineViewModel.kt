@@ -23,11 +23,11 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
     private var _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
 
-    private val _bookRoutine = MutableLiveData<List<BookListItem?>?>()
-    val bookRoutine: LiveData<List<BookListItem?>?> = _bookRoutine
+    private val _bookRoutine = MutableLiveData<List<com.capstone.moru.data.api.response.BookListItem?>?>()
+    val bookRoutine: LiveData<List<com.capstone.moru.data.api.response.BookListItem?>?> = _bookRoutine
 
-    private val _exerciseRoutine = MutableLiveData<List<ExerciseListItem?>?>()
-    val exerciseRoutine: LiveData<List<ExerciseListItem?>?> = _exerciseRoutine
+    private val _exerciseRoutine = MutableLiveData<List<com.capstone.moru.data.api.response.ExerciseListItem?>?>()
+    val exerciseRoutine: LiveData<List<com.capstone.moru.data.api.response.ExerciseListItem?>?> = _exerciseRoutine
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -44,10 +44,10 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
         val formatToken = "Bearer $token"
         val client = userRepository.getAllExerciseRoutine(formatToken)
 
-        client.enqueue(object : Callback<ExerciseListResponse> {
+        client.enqueue(object : Callback<com.capstone.moru.data.api.response.ExerciseListResponse> {
             override fun onResponse(
-                call: Call<ExerciseListResponse>,
-                response: Response<ExerciseListResponse>
+                call: Call<com.capstone.moru.data.api.response.ExerciseListResponse>,
+                response: Response<com.capstone.moru.data.api.response.ExerciseListResponse>
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
@@ -62,7 +62,7 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
                 }
             }
 
-            override fun onFailure(call: Call<ExerciseListResponse>, t: Throwable) {
+            override fun onFailure(call: Call<com.capstone.moru.data.api.response.ExerciseListResponse>, t: Throwable) {
                 _error.value = true
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
@@ -77,10 +77,10 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
         val formatToken = "Bearer $token"
         val client = userRepository.getAllBooksRoutine(formatToken)
 
-        client.enqueue(object : Callback<BookListResponse> {
+        client.enqueue(object : Callback<com.capstone.moru.data.api.response.BookListResponse> {
             override fun onResponse(
-                call: Call<BookListResponse>,
-                response: Response<BookListResponse>
+                call: Call<com.capstone.moru.data.api.response.BookListResponse>,
+                response: Response<com.capstone.moru.data.api.response.BookListResponse>
             ) {
 
                 _isLoading.value = false
@@ -99,7 +99,7 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
                 }
             }
 
-            override fun onFailure(call: Call<BookListResponse>, t: Throwable) {
+            override fun onFailure(call: Call<com.capstone.moru.data.api.response.BookListResponse>, t: Throwable) {
                 _error.value = true
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"

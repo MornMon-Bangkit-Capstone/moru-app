@@ -139,4 +139,5 @@
     <string name="preferences">Preferences</string>
     <string name="name_you_favorite_book">Name You Favorite Book</string>
     <string name="workout_duration">Workout Duration</string>
+    <string name="name_your_favorite_exercise">Name Your Favorite Exercise (Pick One)</string>
 </resources>

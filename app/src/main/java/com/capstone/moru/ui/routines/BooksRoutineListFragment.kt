@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,9 +44,43 @@ class BooksRoutineListFragment : Fragment() {
         routineViewModel.bookRoutine.observe(viewLifecycleOwner) { routine ->
             initRecyclerView(routine)
         }
+
+        routineViewModel.error.observe(viewLifecycleOwner){
+            retry(it)
+        }
+
+        routineViewModel.message.observe(viewLifecycleOwner){
+            displayToast(it)
+        }
     }
 
-    private fun initRecyclerView(routine: List<BookListItem?>?) {
+    private fun displayToast(msg: String) {
+        return Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+    }
+
+    private fun retry(it: Boolean?) {
+        if (it!!){
+            binding.progressBar.visibility = View.GONE
+            binding.btnRetry.apply {
+                visibility = View.VISIBLE
+                isEnabled = true
+                setOnClickListener {
+                    routineViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
+                        routineViewModel.getAllBooksRoutine(token)
+                    }
+                    visibility = View.GONE
+                    isEnabled = false
+                }
+            }
+        }else{
+            binding.btnRetry.apply {
+                visibility = View.GONE
+                isEnabled = false
+            }
+        }
+    }
+
+    private fun initRecyclerView(routine: List<com.capstone.moru.data.api.response.BookListItem?>?) {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvRoutine.layoutManager = layoutManager
 
@@ -52,7 +88,7 @@ class BooksRoutineListFragment : Fragment() {
         binding.rvRoutine.adapter = adapter
 
         adapter.setOnItemClickCallback(object : BooksRoutineListAdapter.OnItemClickCallback {
-            override fun onItemClicked(routineBooks: BookListItem?) {
+            override fun onItemClicked(routineBooks: com.capstone.moru.data.api.response.BookListItem?) {
             }
         })
 

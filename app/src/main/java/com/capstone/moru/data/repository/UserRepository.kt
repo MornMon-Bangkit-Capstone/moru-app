@@ -22,11 +22,14 @@ class UserRepository(
         email: String,
         password: String,
         passwordConfirm: String
-    ): Call<RegisterResponse> {
+    ): Call<com.capstone.moru.data.api.response.RegisterResponse> {
         return apiService.registerUser(email, password, passwordConfirm)
     }
 
-    fun loginUser(email: String, password: String): Call<LoginResponse> {
+    fun loginUser(
+        email: String,
+        password: String
+    ): Call<com.capstone.moru.data.api.response.LoginResponse> {
         return apiService.loginUser(email, password)
     }
 
@@ -42,20 +45,34 @@ class UserRepository(
         return preference.clearCache()
     }
 
-    fun getAllExerciseRoutine(token: String): Call<ExerciseListResponse> {
+    fun getAllExerciseRoutine(token: String): Call<com.capstone.moru.data.api.response.ExerciseListResponse> {
         return apiService.getAllExerciseRoutine(token)
     }
 
-    fun getAllBooksRoutine(token: String): Call<BookListResponse> {
+    fun getAllBooksRoutine(token: String): Call<com.capstone.moru.data.api.response.BookListResponse> {
         return apiService.getAllBooksRoutine(token)
     }
 
-    fun getBookRoutineDetail(token: String, id: String): Call<DetailRoutineResponse> {
+    fun getBookRoutineDetail(
+        token: String,
+        id: String
+    ): Call<com.capstone.moru.data.api.response.DetailRoutineResponse> {
         return apiService.getBookRoutineDetail(token, id)
     }
 
-    fun getExerciseRoutineDetail(token: String, id: String): Call<RoutineResponse> {
+    fun getExerciseRoutineDetail(
+        token: String,
+        id: String
+    ): Call<com.capstone.moru.data.api.response.RoutineResponse> {
         return apiService.getExerciseRoutineDetail(token, id)
+    }
+
+    fun findBookRoutine(token: String, key: String): Call<BookListResponse> {
+        return apiService.findBookRoutine(token, key)
+    }
+
+    fun findExerciseRoutine(token: String, key: String): Call<BookListResponse> {
+        return apiService.findExerciseRoutine(token, key)
     }
 
     fun postUserSchedule(
@@ -66,7 +83,7 @@ class UserRepository(
         startTime: String,
         endTime: String,
         description: String
-    ): Call<DefaultResponse> {
+    ): Call<com.capstone.moru.data.api.response.DefaultResponse> {
         return apiService.postUserSchedule(
             token,
             type,
@@ -78,14 +95,16 @@ class UserRepository(
         )
     }
 
-    fun updateUserSchedule(token: String,
-                           id:String,
-                           type: String,
-                           title: String,
-                           date: String,
-                           startTime: String,
-                           endTime: String,
-                           description: String,): Call<DefaultResponse>{
+    fun updateUserSchedule(
+        token: String,
+        id: String,
+        type: String,
+        title: String,
+        date: String,
+        startTime: String,
+        endTime: String,
+        description: String,
+    ): Call<com.capstone.moru.data.api.response.DefaultResponse> {
         return apiService.putUserSchedule(
             token,
             id,
@@ -94,14 +113,18 @@ class UserRepository(
             date,
             startTime,
             endTime,
-            description)
+            description
+        )
     }
 
-    fun getUserScheduleList(token: String): Call<ScheduleListResponse>{
+    fun getUserScheduleList(token: String): Call<com.capstone.moru.data.api.response.ScheduleListResponse> {
         return apiService.getUserScheduleList(token)
     }
 
-    fun getUserScheduleDetail(token: String, id: String): Call<ScheduleDetailResponse>{
+    fun getUserScheduleDetail(
+        token: String,
+        id: String
+    ): Call<com.capstone.moru.data.api.response.ScheduleDetailResponse> {
         return apiService.getUserScheduleDetail(token, id)
     }
 

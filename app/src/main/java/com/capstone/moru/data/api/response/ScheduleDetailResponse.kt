@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ScheduleDetailResponse(
 
 	@field:SerializedName("schedule")
-	val schedule: List<ScheduleItem?>? = null,
+	val schedule: List<com.capstone.moru.data.api.response.ScheduleItem?>? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,

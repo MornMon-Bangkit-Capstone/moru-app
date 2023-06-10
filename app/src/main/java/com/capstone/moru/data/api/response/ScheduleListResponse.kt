@@ -11,7 +11,7 @@ data class ScheduleListResponse(
     val message: String? = null,
 
     @field:SerializedName("list")
-    val list: List<ScheduleListItem?>? = null
+    val list: List<com.capstone.moru.data.api.response.ScheduleListItem?>? = null
 )
 
 data class ScheduleListItem(

@@ -74,6 +74,18 @@ interface ApiService {
     ): Call<ExerciseListResponse>
 
     @GET("routine/books")
+    fun findBookRoutine(
+        @Header("Authorization") token: String,
+        @Query("key") key: String,
+    ): Call<BookListResponse>
+
+    @GET("routine/books")
+    fun findExerciseRoutine(
+        @Header("Authorization") token: String,
+        @Query("key") key: String,
+    ): Call<BookListResponse>
+
+    @GET("routine/books")
     fun getAllBooksRoutine(
         @Header("Authorization") token: String,
     ): Call<BookListResponse>

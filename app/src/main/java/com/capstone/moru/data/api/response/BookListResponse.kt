@@ -11,7 +11,7 @@ data class BookListResponse(
 	val message: String? = null,
 
 	@field:SerializedName("list")
-	val list: List<BookListItem?>? = null
+	val list: List<com.capstone.moru.data.api.response.BookListItem?>? = null
 )
 
 data class BookListItem(

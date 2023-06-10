@@ -11,7 +11,7 @@ data class DetailRoutineResponse(
 	val message: String? = null,
 
 	@field:SerializedName("list")
-	val list: ListRoutine? = null
+	val list: com.capstone.moru.data.api.response.ListRoutine? = null
 )
 
 data class ListRoutine(

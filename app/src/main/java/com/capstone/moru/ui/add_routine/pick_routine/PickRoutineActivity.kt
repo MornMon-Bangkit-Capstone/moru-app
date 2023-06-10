@@ -13,7 +13,7 @@ import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickRoutineSections
 import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
-class PickRoutineActivity : AppCompatActivity(), PickRoutineListFragment.OnItemClickListener {
+class PickRoutineActivity : AppCompatActivity() {
     private var _binding: ActivityPickRoutineBinding? = null
     private val binding get() = _binding!!
 
@@ -40,10 +40,6 @@ class PickRoutineActivity : AppCompatActivity(), PickRoutineListFragment.OnItemC
             val intentToPickSchedule = Intent(this, PickScheduleActivity::class.java)
             startActivity(intentToPickSchedule)
         }
-    }
-
-    override fun onItemClicked(item: ListItem) {
-        Log.e("Pick Routine Activity", item.title.toString())
     }
 
     companion object {

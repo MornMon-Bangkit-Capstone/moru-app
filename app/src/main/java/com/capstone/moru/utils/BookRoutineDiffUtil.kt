@@ -3,12 +3,12 @@ package com.capstone.moru.utils
 import androidx.recyclerview.widget.DiffUtil
 import com.capstone.moru.data.api.response.BookListItem
 
-class BookRoutineDiffUtil : DiffUtil.ItemCallback<BookListItem>() {
-    override fun areItemsTheSame(oldItem: BookListItem, newItem: BookListItem): Boolean {
+class BookRoutineDiffUtil : DiffUtil.ItemCallback<com.capstone.moru.data.api.response.BookListItem>() {
+    override fun areItemsTheSame(oldItem: com.capstone.moru.data.api.response.BookListItem, newItem: com.capstone.moru.data.api.response.BookListItem): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: BookListItem, newItem: BookListItem): Boolean {
+    override fun areContentsTheSame(oldItem: com.capstone.moru.data.api.response.BookListItem, newItem: com.capstone.moru.data.api.response.BookListItem): Boolean {
         return when {
             oldItem.iSBN != newItem.iSBN -> false
             oldItem.bookTitle != newItem.bookTitle -> false

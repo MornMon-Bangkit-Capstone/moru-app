@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.add_routine.pick_routine.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
@@ -11,7 +12,6 @@ import com.capstone.moru.data.api.response.BookListItem
 import com.capstone.moru.databinding.ItemRoutinePickBinding
 import com.capstone.moru.utils.BookRoutineDiffUtil
 import com.capstone.moru.utils.PickBookRoutineDataClass
-import com.capstone.moru.utils.PickRoutineDataClass
 
 class PickBookRoutineAdapter(
     private val listBookRoutine: List<BookListItem?>?,
@@ -38,21 +38,23 @@ class PickBookRoutineAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
                 val bookRoutine = listBookRoutine?.get(position)
-        val formattedRoutine = bookRoutine?.genres?.substring(
-            bookRoutine.genres.indexOf("[") + 1,
-            bookRoutine.genres.indexOf("]")
-        )?.split(",")?.map {
-            it.trim()
-        }
+//        val formattedRoutine = bookRoutine?.genres?.substring(
+//            bookRoutine.genres.indexOf("[") + 1,
+//            bookRoutine.genres.indexOf("]")
+//        )?.split(",")?.map {
+//            it.trim()
+//        }
         val pickedRoutine = listBookRoutine?.map {
             PickBookRoutineDataClass(it)
         }
+
+        Log.e("TEST", pickedRoutine?.size.toString())
 
         val placeholder = holder.itemView.context.resources.getDrawable(R.drawable.placeholder_book)
         holder.apply {
             Glide.with(holder.itemView.context).load(bookRoutine?.imageURLL)
                 .into(holder.binding.imageView).onLoadFailed(placeholder)
-            binding.customCategory.text = formattedRoutine?.firstOrNull()
+            binding.customCategory.text =bookRoutine?.genres
             binding.textView.text = bookRoutine?.bookTitle
         }
 
@@ -94,6 +96,6 @@ class PickBookRoutineAdapter(
 
 
     interface OnItemClickCallback {
-        fun onItemClicked(item: BookListItem?)
+        fun onItemClicked(item: com.capstone.moru.data.api.response.BookListItem?)
     }
 }

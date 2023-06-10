@@ -29,10 +29,10 @@ class RegisterViewModel(private var userRepository: UserRepository) : ViewModel(
         _isLoading.value = true
         val client = userRepository.registerUser(email, password, passwordConfirm)
         client.enqueue(
-            object : Callback<RegisterResponse> {
+            object : Callback<com.capstone.moru.data.api.response.RegisterResponse> {
                 override fun onResponse(
-                    call: Call<RegisterResponse>,
-                    response: Response<RegisterResponse>
+                    call: Call<com.capstone.moru.data.api.response.RegisterResponse>,
+                    response: Response<com.capstone.moru.data.api.response.RegisterResponse>
                 ) {
                     _isLoading.value = false
 
@@ -49,7 +49,7 @@ class RegisterViewModel(private var userRepository: UserRepository) : ViewModel(
                     }
                 }
 
-                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                override fun onFailure(call: Call<com.capstone.moru.data.api.response.RegisterResponse>, t: Throwable) {
                     Log.e(TAG, "On failure ${t.message.toString()}")
 
                     _isLoading.value = false

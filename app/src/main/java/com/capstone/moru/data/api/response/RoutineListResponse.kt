@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class RoutineResponse(
 
 	@field:SerializedName("list")
-	val list: List<ListItem?>? = null,
+	val list: List<com.capstone.moru.data.api.response.ListItem?>? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,

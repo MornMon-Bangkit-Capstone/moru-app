@@ -19,7 +19,7 @@ object Injection {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         }
         val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
-        val apiService = ApiConfig.getApiService(client)
+        val apiService = com.capstone.moru.data.api.retrofit.ApiConfig.getApiService(client)
 
         val pref = SettingPreference.getInstance(context.dataStore)
 

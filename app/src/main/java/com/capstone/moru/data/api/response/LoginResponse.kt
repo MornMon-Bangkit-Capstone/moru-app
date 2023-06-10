@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class LoginResponse(
 
 	@field:SerializedName("loginResult")
-	val loginResult: LoginResult? = null,
+	val loginResult: com.capstone.moru.data.api.response.LoginResult? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,

@@ -14,8 +14,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailExerciseViewModel(private var userRepository: UserRepository) : ViewModel() {
-    private var _exerciseRoutine = MutableLiveData<List<ListItem?>?>()
-    val exerciseRoutine: LiveData<List<ListItem?>?> = _exerciseRoutine
+    private var _exerciseRoutine = MutableLiveData<List<com.capstone.moru.data.api.response.ListItem?>?>()
+    val exerciseRoutine: LiveData<List<com.capstone.moru.data.api.response.ListItem?>?> = _exerciseRoutine
 
     private var _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
@@ -35,10 +35,10 @@ class DetailExerciseViewModel(private var userRepository: UserRepository) : View
         val formatToken = "Bearer $token"
         val client = userRepository.getExerciseRoutineDetail(formatToken, id)
 
-        client.enqueue(object : Callback<RoutineResponse> {
+        client.enqueue(object : Callback<com.capstone.moru.data.api.response.RoutineResponse> {
             override fun onResponse(
-                call: Call<RoutineResponse>,
-                response: Response<RoutineResponse>
+                call: Call<com.capstone.moru.data.api.response.RoutineResponse>,
+                response: Response<com.capstone.moru.data.api.response.RoutineResponse>
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
@@ -58,7 +58,7 @@ class DetailExerciseViewModel(private var userRepository: UserRepository) : View
                 }
             }
 
-            override fun onFailure(call: Call<RoutineResponse>, t: Throwable) {
+            override fun onFailure(call: Call<com.capstone.moru.data.api.response.RoutineResponse>, t: Throwable) {
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
 

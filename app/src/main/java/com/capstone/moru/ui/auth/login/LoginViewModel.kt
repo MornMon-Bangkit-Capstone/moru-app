@@ -14,8 +14,8 @@ import retrofit2.Response
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private var userRepository: UserRepository):ViewModel() {
-    private val _user = MutableLiveData<LoginResult?>()
-    val user: LiveData<LoginResult?> = _user
+    private val _user = MutableLiveData<com.capstone.moru.data.api.response.LoginResult?>()
+    val user: LiveData<com.capstone.moru.data.api.response.LoginResult?> = _user
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -30,10 +30,10 @@ class LoginViewModel(private var userRepository: UserRepository):ViewModel() {
         _isLoading.value = true
         val client = userRepository.loginUser(email, password)
         client.enqueue(
-            object : Callback<LoginResponse>{
+            object : Callback<com.capstone.moru.data.api.response.LoginResponse>{
                 override fun onResponse(
-                    call: Call<LoginResponse>,
-                    response: Response<LoginResponse>
+                    call: Call<com.capstone.moru.data.api.response.LoginResponse>,
+                    response: Response<com.capstone.moru.data.api.response.LoginResponse>
                 ) {
                     _isLoading.value = false
                     if (response.isSuccessful){
@@ -50,7 +50,7 @@ class LoginViewModel(private var userRepository: UserRepository):ViewModel() {
                     }
                 }
 
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                override fun onFailure(call: Call<com.capstone.moru.data.api.response.LoginResponse>, t: Throwable) {
                     Log.e(TAG, "On failure ${t.message.toString()}")
 
                     _isLoading.value = false

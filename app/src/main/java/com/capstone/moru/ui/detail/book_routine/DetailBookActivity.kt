@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.capstone.moru.data.api.response.ListRoutine
 import com.capstone.moru.databinding.ActivityDetailBookBinding
 import com.capstone.moru.ui.factory.ViewModelFactory
-import com.capstone.moru.ui.routines.adapter.RoutineListAdapter.Companion.KEY_BOOK_ROUTINE
 
 class DetailBookActivity : AppCompatActivity() {
     private var _binding: ActivityDetailBookBinding? = null
@@ -48,7 +47,7 @@ class DetailBookActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRoutineData(listRoutine: ListRoutine) {
+    private fun setRoutineData(listRoutine: com.capstone.moru.data.api.response.ListRoutine) {
         var formatCategory = ""
         val separatedCategory = listRoutine.type?.split(", ")
         if (separatedCategory != null) {

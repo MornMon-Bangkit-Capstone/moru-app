@@ -12,8 +12,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class DetailBookViewModel(private var userRepository: UserRepository) : ViewModel() {
-    private var _bookRoutine = MutableLiveData<ListRoutine>()
-    val bookRoutine: LiveData<ListRoutine> = _bookRoutine
+    private var _bookRoutine = MutableLiveData<com.capstone.moru.data.api.response.ListRoutine>()
+    val bookRoutine: LiveData<com.capstone.moru.data.api.response.ListRoutine> = _bookRoutine
 
     private var _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
@@ -33,10 +33,10 @@ class DetailBookViewModel(private var userRepository: UserRepository) : ViewMode
         val formatToken = "Bearer $token"
         val client = userRepository.getBookRoutineDetail(formatToken, id)
 
-        client.enqueue(object : Callback<DetailRoutineResponse> {
+        client.enqueue(object : Callback<com.capstone.moru.data.api.response.DetailRoutineResponse> {
             override fun onResponse(
-                call: Call<DetailRoutineResponse>,
-                response: Response<DetailRoutineResponse>
+                call: Call<com.capstone.moru.data.api.response.DetailRoutineResponse>,
+                response: Response<com.capstone.moru.data.api.response.DetailRoutineResponse>
             ) {
                 _isLoading.value = false
                 if (response.isSuccessful) {
@@ -52,7 +52,7 @@ class DetailBookViewModel(private var userRepository: UserRepository) : ViewMode
                 }
             }
 
-            override fun onFailure(call: Call<DetailRoutineResponse>, t: Throwable) {
+            override fun onFailure(call: Call<com.capstone.moru.data.api.response.DetailRoutineResponse>, t: Throwable) {
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
                 Log.e("DETAIL BOOK 3", t.message.toString())

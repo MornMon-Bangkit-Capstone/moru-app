@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ProfileResponse(
 
 	@field:SerializedName("profData")
-	val profData: ProfData? = null,
+	val profData: com.capstone.moru.data.api.response.ProfData? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null,

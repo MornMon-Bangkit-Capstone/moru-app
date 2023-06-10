@@ -7,15 +7,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.moru.R
-import com.capstone.moru.data.api.response.BookListItem
-import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.databinding.ItemRoutinesBinding
 import com.capstone.moru.ui.detail.exercise_routine.DetailExerciseActivity
 import com.capstone.moru.utils.BookRoutineDiffUtil
-import com.capstone.moru.utils.DiffUtilCallback
 
-class BooksRoutineListAdapter(private val listBookRoutine: List<BookListItem?>?) :
-    ListAdapter<BookListItem, BooksRoutineListAdapter.ViewHolder>(
+class BooksRoutineListAdapter(private val listBookRoutine: List<com.capstone.moru.data.api.response.BookListItem?>?) :
+    ListAdapter<com.capstone.moru.data.api.response.BookListItem, BooksRoutineListAdapter.ViewHolder>(
         BookRoutineDiffUtil()
     ) {
 
@@ -31,18 +28,18 @@ class BooksRoutineListAdapter(private val listBookRoutine: List<BookListItem?>?)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val routineBooks = listBookRoutine?.get(position)
-        val formattedRoutine = routineBooks?.genres?.substring(
-            routineBooks.genres.indexOf("[") + 1,
-            routineBooks.genres.indexOf("]")
-        )?.split(",")?.map {
-            it.trim()
-        }
+//        val formattedRoutine = routineBooks?.genres?.substring(
+//            routineBooks.genres.indexOf("[") + 1,
+//            routineBooks.genres.indexOf("]")
+//        )?.split(",")?.map {
+//            it.trim()
+//        }
         val placeholder = holder.itemView.context.resources.getDrawable(R.drawable.placeholder_book)
 
         holder.apply {
             Glide.with(holder.itemView.context).load(routineBooks?.imageURLL)
                 .into(holder.binding.ivCardRoutine).onLoadFailed(placeholder)
-            binding.customCategory.text = formattedRoutine?.firstOrNull()
+            binding.customCategory.text = routineBooks?.genres
             binding.tvCardRoutineName.text = routineBooks?.bookTitle
             binding.tvRoutineDesc.text = routineBooks?.summary
         }
@@ -64,7 +61,7 @@ class BooksRoutineListAdapter(private val listBookRoutine: List<BookListItem?>?)
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(routineBooks: BookListItem?)
+        fun onItemClicked(routineBooks: com.capstone.moru.data.api.response.BookListItem?)
     }
 
     companion object {
