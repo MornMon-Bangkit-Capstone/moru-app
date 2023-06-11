@@ -1,6 +1,7 @@
 package com.capstone.moru.ui.schedule
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,28 +15,35 @@ import com.capstone.moru.databinding.FragmentScheduleBinding
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.schedule.adapter.ScheduleListAdapter
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ScheduleFragment : Fragment() {
     private var _binding: FragmentScheduleBinding? = null
     private val binding get() = _binding!!
     private lateinit var factory: ViewModelFactory
     private val scheduleViewModel: ScheduleViewModel by viewModels { factory }
-    private var selectedDate: String? = LocalDate.now().toString()
+    private var formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-M-yyyy")
+    private var selectedDate: String? = LocalDate.now().format(formatter)
+    private var tokenUser: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.e("SCHEDULE", selectedDate.toString())
         factory = ViewModelFactory.getInstance(requireContext())
+
+        binding.rvSchedule.isNestedScrollingEnabled = false
 
         binding.calendarView.setOnDateChangeListener(
             CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
                 selectedDate = (dayOfMonth.toString() + "-"
                         + (month + 1) + "-" + year)
-                displayToast(selectedDate!!)
+                scheduleViewModel.getCurrentSchedule(tokenUser!!, selectedDate!!)
+
             }
         )
 
         scheduleViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
+            tokenUser = token
             scheduleViewModel.getCurrentSchedule(token, selectedDate!!)
         }
 

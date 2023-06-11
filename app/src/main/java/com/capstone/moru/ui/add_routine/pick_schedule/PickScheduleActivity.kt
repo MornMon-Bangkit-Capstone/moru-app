@@ -15,8 +15,6 @@ import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityPickScheduleBinding
 import com.capstone.moru.ui.MainActivity
 import com.capstone.moru.ui.factory.ViewModelFactory
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class PickScheduleActivity : AppCompatActivity() {
@@ -168,7 +166,7 @@ class PickScheduleActivity : AppCompatActivity() {
             this,
             { view, yearPicked, monthOfYear, dayOfMonth ->
                 binding.edDate.text = Editable.Factory.getInstance()
-                    .newEditable("$dayOfMonth-$monthOfYear-$yearPicked")
+                    .newEditable("$dayOfMonth-${monthOfYear + 1}-$yearPicked")
             },
             year, month, day
         )
@@ -203,6 +201,7 @@ class PickScheduleActivity : AppCompatActivity() {
     }
 
     private fun showLoading(isLoading: Boolean) {
+        binding.btnSave.isEnabled = !isLoading
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 

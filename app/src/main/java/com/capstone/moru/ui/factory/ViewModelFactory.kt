@@ -11,6 +11,7 @@ import com.capstone.moru.ui.auth.login.LoginViewModel
 import com.capstone.moru.ui.auth.register.RegisterViewModel
 import com.capstone.moru.ui.detail.book_routine.DetailBookViewModel
 import com.capstone.moru.ui.detail.exercise_routine.DetailExerciseViewModel
+import com.capstone.moru.ui.detail.user_routine.DetailRoutineViewModel
 import com.capstone.moru.ui.profile.ProfileViewModel
 import com.capstone.moru.ui.routines.RoutineViewModel
 import com.capstone.moru.ui.schedule.ScheduleViewModel
@@ -59,6 +60,9 @@ class ViewModelFactory private constructor(
                 userRepository
             ) as T
             modelClass.isAssignableFrom(ScheduleViewModel::class.java) -> ScheduleViewModel(
+                userRepository
+            ) as T
+            modelClass.isAssignableFrom(DetailRoutineViewModel::class.java) -> DetailRoutineViewModel(
                 userRepository
             ) as T
             else -> throw java.lang.IllegalArgumentException("Unkown ViewModel class: ${modelClass.name}")
