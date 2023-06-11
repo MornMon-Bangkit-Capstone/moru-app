@@ -35,11 +35,6 @@ class PickRoutineActivity : AppCompatActivity() {
         binding.backBtnPickRoutine.setOnClickListener {
             finish()
         }
-
-        binding.btnChoose.setOnClickListener {
-            val intentToPickSchedule = Intent(this, PickScheduleActivity::class.java)
-            startActivity(intentToPickSchedule)
-        }
     }
 
     companion object {

@@ -1,14 +1,17 @@
 package com.capstone.moru.ui.add_routine.pick_routine
 
+import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.moru.data.api.response.ExerciseListItem
 import com.capstone.moru.databinding.FragmentPickExerciseRoutineBinding
 import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickExerciseRoutineAdapter
 import com.capstone.moru.ui.factory.ViewModelFactory
@@ -38,12 +41,31 @@ class PickExerciseRoutineFragment : Fragment() {
             initRecyclerView(routines)
         }
 
-        routineViewModel.error.observe(viewLifecycleOwner){
+        routineViewModel.error.observe(viewLifecycleOwner) {
             retry(it)
         }
 
-        routineViewModel.message.observe(viewLifecycleOwner){
+        routineViewModel.message.observe(viewLifecycleOwner) {
             displayToast(it)
+        }
+
+        binding.edSearchRoutines.setOnEditorActionListener { _, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                val query = binding.edSearchRoutines.text.toString().trim()
+                if (query.isNotEmpty()) {
+                    routineViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
+                        routineViewModel.findExerciseRoutine(token, query)
+                    }
+                }
+
+                val inputMethodManager =
+                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(binding.edSearchRoutines.windowToken, 0)
+
+                binding.edSearchRoutines.clearFocus()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
         }
     }
 
@@ -52,7 +74,7 @@ class PickExerciseRoutineFragment : Fragment() {
     }
 
     private fun retry(it: Boolean?) {
-        if (it!!){
+        if (it!!) {
             binding.progressBar.visibility = View.GONE
             binding.btnRetry.apply {
                 visibility = View.VISIBLE
@@ -65,7 +87,7 @@ class PickExerciseRoutineFragment : Fragment() {
                     isEnabled = false
                 }
             }
-        }else{
+        } else {
             binding.btnRetry.apply {
                 visibility = View.GONE
                 isEnabled = false
@@ -99,4 +121,8 @@ class PickExerciseRoutineFragment : Fragment() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
+    companion object {
+        const val KEY_EXERCISE_ROUTINE = "key_exercise_routine"
+        const val KEY_ID_EXERCISE = "key_id_exercise"
+    }
 }

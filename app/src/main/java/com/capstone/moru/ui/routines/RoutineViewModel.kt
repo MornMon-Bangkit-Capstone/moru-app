@@ -22,23 +22,33 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
     lateinit var userBooksRoutines: LiveData<PagingData<BooksRoutineModel>>
 
     private var _message = MutableLiveData<String>()
-    val message: LiveData<String> = _message
+    var message: LiveData<String> = _message
 
-    private val _bookRoutine =
+    private var _bookRoutine =
         MutableLiveData<List<com.capstone.moru.data.api.response.BookListItem?>?>()
-    val bookRoutine: LiveData<List<com.capstone.moru.data.api.response.BookListItem?>?> =
+    var bookRoutine: LiveData<List<com.capstone.moru.data.api.response.BookListItem?>?> =
         _bookRoutine
 
-    private val _exerciseRoutine =
+    private var _exerciseRoutine =
         MutableLiveData<List<com.capstone.moru.data.api.response.ExerciseListItem?>?>()
-    val exerciseRoutine: LiveData<List<com.capstone.moru.data.api.response.ExerciseListItem?>?> =
+    var exerciseRoutine: LiveData<List<com.capstone.moru.data.api.response.ExerciseListItem?>?> =
         _exerciseRoutine
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+    private var _searchBookRoutine =
+        MutableLiveData<List<com.capstone.moru.data.api.response.BookListItem?>?>()
+    var searchBookRoutine: LiveData<List<com.capstone.moru.data.api.response.BookListItem?>?> =
+        _searchBookRoutine
 
-    private val _error = MutableLiveData<Boolean>()
-    val error: LiveData<Boolean> = _error
+    private var _searchExerciseRoutine =
+        MutableLiveData<List<com.capstone.moru.data.api.response.ExerciseListItem?>?>()
+    var searchExerciseRoutine: LiveData<List<com.capstone.moru.data.api.response.ExerciseListItem?>?> =
+        _searchExerciseRoutine
+
+    private var _isLoading = MutableLiveData<Boolean>()
+    var isLoading: LiveData<Boolean> = _isLoading
+
+    private var _error = MutableLiveData<Boolean>()
+    var error: LiveData<Boolean> = _error
 
     fun getUserToken(): LiveData<String> {
         return userRepository.getUserToken()
@@ -174,8 +184,6 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
 
                     _exerciseRoutine.value = response.body()?.list
                     Log.e("FIND", _exerciseRoutine.value.toString())
-
-
                 } else {
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"

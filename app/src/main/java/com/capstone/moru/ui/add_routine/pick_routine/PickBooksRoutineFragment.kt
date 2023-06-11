@@ -1,9 +1,13 @@
 package com.capstone.moru.ui.add_routine.pick_routine
 
+import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -52,6 +56,28 @@ class PickBooksRoutineFragment : Fragment() {
 
         routineViewModel.message.observe(viewLifecycleOwner){
             displayToast(it)
+        }
+
+        binding.edSearchRoutines.setOnEditorActionListener { _, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                event?.action == KeyEvent.ACTION_DOWN &&
+                event.keyCode == KeyEvent.KEYCODE_ENTER
+            ) {
+                val query = binding.edSearchRoutines.text.toString().trim()
+                if (query.isNotEmpty()) {
+                    routineViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
+                        routineViewModel.findBookRoutine(token, query)
+                    }
+                }
+
+                val inputMethodManager =
+                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(binding.edSearchRoutines.windowToken, 0)
+
+                binding.edSearchRoutines.clearFocus()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
         }
     }
 

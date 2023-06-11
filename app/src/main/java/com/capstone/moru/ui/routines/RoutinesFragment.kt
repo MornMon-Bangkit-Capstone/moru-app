@@ -52,31 +52,12 @@ class RoutinesFragment : Fragment() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-        binding.edSearchRoutines.setOnEditorActionListener { _, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                event?.action == KeyEvent.ACTION_DOWN &&
-                event.keyCode == KeyEvent.KEYCODE_ENTER
-            ) {
-                val query = binding.edSearchRoutines.text.toString().trim()
-                if (query.isNotEmpty()) {
-                    routineViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
-                        if (positionSection == 0) {
-                            routineViewModel.findBookRoutine(token, query)
-                        } else {
-                            routineViewModel.findExerciseRoutine(token, query)
-                        }
-                    }
-                }
-
-                val inputMethodManager =
-                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(binding.edSearchRoutines.windowToken, 0)
-
-                binding.edSearchRoutines.clearFocus()
-                return@setOnEditorActionListener true
-            }
-            return@setOnEditorActionListener false
+        routineViewModel.bookRoutine.observe(viewLifecycleOwner){routine ->
+//            BooksRoutineListFragment().initRecyclerView(routine)
+            Log.e("SEARCH", routine.toString())
         }
+
+
     }
 
     override fun onDestroyView() {

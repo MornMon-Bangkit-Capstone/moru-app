@@ -31,7 +31,7 @@ class ExerciseRoutineListAdapter(private val listExerciseRoutine: List<com.capst
 
         holder.apply {
             Glide.with(holder.itemView.context).load(routineExercise?.visual)
-                .into(holder.binding.ivCardRoutine).onLoadFailed(placeholder)
+                .into(holder.binding.ivCardRoutine)
             binding.customCategory.text = routineExercise?.category
             binding.tvCardRoutineName.text = routineExercise?.sports
             binding.tvRoutineDesc.text = routineExercise?.description

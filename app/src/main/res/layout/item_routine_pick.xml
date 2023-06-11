@@ -18,9 +18,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_pick_routine"
-            android:background="@drawable/custom_pick_routince_card"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_pick_routince_card">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -33,18 +33,16 @@
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout2"
                 app:srcCompat="@drawable/placeholder_book" />
 
-            <CheckBox
-                android:id="@+id/radioButton"
+            <ImageView
+                android:id="@+id/btn_pick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:buttonTint="@color/orange"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                style="@android:style/Widget.DeviceDefault.Light.CompoundButton.RadioButton"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout2"
+                app:srcCompat="@drawable/ic_arrow_forward_24" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
@@ -55,7 +53,7 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/radioButton"
+                app:layout_constraintEnd_toStartOf="@+id/btn_pick"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent">
 

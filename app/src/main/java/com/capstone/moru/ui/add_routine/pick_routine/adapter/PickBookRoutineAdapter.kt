@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.add_routine.pick_routine.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.capstone.moru.R
 import com.capstone.moru.data.api.response.BookListItem
 import com.capstone.moru.databinding.ItemRoutinePickBinding
+import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleActivity
+import com.capstone.moru.ui.routines.adapter.BooksRoutineListAdapter
 import com.capstone.moru.utils.BookRoutineDiffUtil
 import com.capstone.moru.utils.PickBookRoutineDataClass
 
@@ -61,35 +64,45 @@ class PickBookRoutineAdapter(
 
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(bookRoutine)
-            updateItemSelected(holder, position, pickedRoutine)
+
+            val book = "Book"
+            val intentToPickSchedule = Intent(holder.itemView.context, PickScheduleActivity::class.java)
+            intentToPickSchedule.putExtra(BooksRoutineListAdapter.KEY_BOOK_ROUTINE, bookRoutine?.bookTitle)
+            intentToPickSchedule.putExtra(BooksRoutineListAdapter.KEY_ID_BOOK, book)
+            holder.itemView.context.startActivity(intentToPickSchedule)
         }
 
-        holder.binding.radioButton.setOnClickListener {
-            onItemClickCallback.onItemClicked(bookRoutine)
-            updateItemSelected(holder, position, pickedRoutine)
-        }
+//        holder.itemView.setOnClickListener {
+//            onItemClickCallback.onItemClicked(bookRoutine)
+//            updateItemSelected(holder, position, pickedRoutine)
+//        }
+//
+//        holder.binding.radioButton.setOnClickListener {
+//            onItemClickCallback.onItemClicked(bookRoutine)
+//            updateItemSelected(holder, position, pickedRoutine)
+//        }
     }
 
-    private fun updateItemSelected(
-        holder: ViewHolder,
-        position: Int,
-        pickedRoutine: List<PickBookRoutineDataClass?>?
-    ) {
-        if (selectedItemPosition != position && selectedItemPosition != -1) {
-            val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
-            prevHolder.let {
-                val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
-                prevRadioButton?.isChecked = false
-                notifyItemChanged(selectedItemPosition)
-            }
-            holder.binding.radioButton.isChecked =
-                pickedRoutine?.get(selectedItemPosition)?.isChecked!!
-        }
-
-        selectedItemPosition = position
-        pickedRoutine?.get(position)?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
-        holder.binding.radioButton.isChecked = pickedRoutine[position]!!.isChecked
-    }
+//    private fun updateItemSelected(
+//        holder: ViewHolder,
+//        position: Int,
+//        pickedRoutine: List<PickBookRoutineDataClass?>?
+//    ) {
+//        if (selectedItemPosition != position && selectedItemPosition != -1) {
+//            val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
+//            prevHolder.let {
+//                val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
+//                prevRadioButton?.isChecked = false
+//                notifyItemChanged(selectedItemPosition)
+//            }
+//            holder.binding.radioButton.isChecked =
+//                pickedRoutine?.get(selectedItemPosition)?.isChecked!!
+//        }
+//
+//        selectedItemPosition = position
+//        pickedRoutine?.get(position)?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
+//        holder.binding.radioButton.isChecked = pickedRoutine[position]!!.isChecked
+//    }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
@@ -98,5 +111,10 @@ class PickBookRoutineAdapter(
 
     interface OnItemClickCallback {
         fun onItemClicked(item: com.capstone.moru.data.api.response.BookListItem?)
+    }
+
+    companion object {
+        const val KEY_BOOK_ROUTINE = "key_book_routine"
+        const val KEY_ID_BOOK = "key_id_book"
     }
 }
