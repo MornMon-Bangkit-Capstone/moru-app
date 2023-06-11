@@ -105,6 +105,7 @@
     <string name="wrong_email_format">Wrong email format</string>
     <string name="wrong_password_format">Password length must at least 8 character </string>
     <string name="fill_field">Please fill every field</string>
+    <string name="incorrect_time">Please set your routine time correctly and still in the morning</string>
     <string name="wrong_credential">Wrong email or password</string>
     <string name="register_success">Register success</string>
     <string name="password_not_match">Password is not match</string>

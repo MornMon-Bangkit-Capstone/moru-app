@@ -23,7 +23,6 @@ class PickExerciseRoutineAdapter(
     class ViewHolder(val binding: ItemRoutinePickBinding) : RecyclerView.ViewHolder(binding.root)
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private var selectedItemPosition: Int = -1
 
     override fun getItemCount(): Int {
         return listExerciseRoutine?.size!!
@@ -37,15 +36,10 @@ class PickExerciseRoutineAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val exerciseRoutine = listExerciseRoutine?.get(position)
-        val pickedRoutine = listExerciseRoutine?.map {
-            PickExerciseRoutineDataClass(it)
-        }
 
-        val placeholder =
-            holder.itemView.context.resources.getDrawable(R.drawable.placeholder_exercise)
         holder.apply {
             Glide.with(holder.itemView.context).load(exerciseRoutine?.visual)
-                .into(holder.binding.imageView).onLoadFailed(placeholder)
+                .into(holder.binding.imageView)
             binding.customCategory.text = exerciseRoutine?.category
             binding.textView.text = exerciseRoutine?.sports
         }
@@ -55,8 +49,9 @@ class PickExerciseRoutineAdapter(
 
             val exercise = "Exercise"
             val intentToPickSchedule = Intent(holder.itemView.context, PickScheduleActivity::class.java)
-            intentToPickSchedule.putExtra(ExerciseRoutineListAdapter.KEY_EXERCISE_ROUTINE, exerciseRoutine?.sports)
-            intentToPickSchedule.putExtra(ExerciseRoutineListAdapter.KEY_ID_EXERCISE, exercise)
+            intentToPickSchedule.putExtra(KEY_EXERCISE_ROUTINE, exerciseRoutine?.sports)
+            intentToPickSchedule.putExtra(KEY_ID_EXERCISE, exercise)
+            holder.itemView.context.startActivity(intentToPickSchedule)
         }
 //
 //        holder.binding.radioButton.setOnClickListener {
@@ -93,5 +88,10 @@ class PickExerciseRoutineAdapter(
 
     interface OnItemClickCallback {
         fun onItemClicked(item: com.capstone.moru.data.api.response.ExerciseListItem?)
+    }
+
+    companion object {
+        const val KEY_EXERCISE_ROUTINE = "key_exercise_routine"
+        const val KEY_ID_EXERCISE = "key_id_exercise"
     }
 }

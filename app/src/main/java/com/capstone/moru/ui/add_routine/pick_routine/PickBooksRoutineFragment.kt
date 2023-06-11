@@ -111,8 +111,7 @@ class PickBooksRoutineFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvRoutine.layoutManager = layoutManager
 
-        val recyclerView = binding.rvRoutine
-        val adapter = PickBookRoutineAdapter(routines, recyclerView)
+        val adapter = PickBookRoutineAdapter(routines)
 
         binding.rvRoutine.adapter = adapter
         adapter.setOnItemClickCallback(object : PickBookRoutineAdapter.OnItemClickCallback {

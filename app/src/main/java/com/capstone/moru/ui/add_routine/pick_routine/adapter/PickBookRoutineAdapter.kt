@@ -18,14 +18,12 @@ import com.capstone.moru.utils.PickBookRoutineDataClass
 
 class PickBookRoutineAdapter(
     private val listBookRoutine: List<BookListItem?>?,
-    private val recyclerView: RecyclerView,
 
     ) : ListAdapter<BookListItem, PickBookRoutineAdapter.ViewHolder>(BookRoutineDiffUtil()) {
 
     class ViewHolder(val binding: ItemRoutinePickBinding) : RecyclerView.ViewHolder(binding.root)
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private var selectedItemPosition: Int = -1
     private val pickedRoutine = listBookRoutine?.map {
         PickBookRoutineDataClass(it)
     }
@@ -67,8 +65,8 @@ class PickBookRoutineAdapter(
 
             val book = "Book"
             val intentToPickSchedule = Intent(holder.itemView.context, PickScheduleActivity::class.java)
-            intentToPickSchedule.putExtra(BooksRoutineListAdapter.KEY_BOOK_ROUTINE, bookRoutine?.bookTitle)
-            intentToPickSchedule.putExtra(BooksRoutineListAdapter.KEY_ID_BOOK, book)
+            intentToPickSchedule.putExtra(KEY_BOOK_ROUTINE, bookRoutine?.bookTitle)
+            intentToPickSchedule.putExtra(KEY_ID_BOOK, book)
             holder.itemView.context.startActivity(intentToPickSchedule)
         }
 

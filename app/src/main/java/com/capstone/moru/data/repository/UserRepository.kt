@@ -8,8 +8,8 @@ import com.capstone.moru.data.api.retrofit.ApiService
 import com.capstone.moru.data.datastore.SettingPreference
 import com.capstone.moru.data.db.model.BooksRoutineModel
 import com.capstone.moru.data.db.model.ExerciseRoutineModel
-import com.capstone.moru.data.db.paging.BooksRoutineRemoteMediator
-import com.capstone.moru.data.db.paging.ExerciseRoutineRemoteMediator
+//import com.capstone.moru.data.db.paging.BooksRoutineRemoteMediator
+//import com.capstone.moru.data.db.paging.ExerciseRoutineRemoteMediator
 import com.capstone.moru.data.db.user_routine.UserRoutineDatabase
 import retrofit2.Call
 
@@ -92,7 +92,7 @@ class UserRepository(
         date: String,
         startTime: String,
         endTime: String,
-        description: String
+        description: String,
     ): Call<com.capstone.moru.data.api.response.DefaultResponse> {
         return apiService.postUserSchedule(
             token,
@@ -127,8 +127,8 @@ class UserRepository(
         )
     }
 
-    fun getUserScheduleList(token: String): Call<com.capstone.moru.data.api.response.ScheduleListResponse> {
-        return apiService.getUserScheduleList(token)
+    fun getUserScheduleList(token: String, date: String): Call<com.capstone.moru.data.api.response.ScheduleListResponse> {
+        return apiService.getUserScheduleList(token, date)
     }
 
     fun getUserScheduleDetail(
@@ -140,41 +140,41 @@ class UserRepository(
 
 
     // *FOR PAGINATION*
-    @OptIn(ExperimentalPagingApi::class)
-    fun getAllExercise(token: String): LiveData<PagingData<ExerciseRoutineModel>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 5,
-                enablePlaceholders = false,
-            ),
-            remoteMediator = ExerciseRoutineRemoteMediator(
-                userRoutineDatabase,
-                apiService,
-                token,
-            ),
-            pagingSourceFactory = {
-                userRoutineDatabase.userRoutineDao().getAllUserExerciseRoutines()
-            }
-        ).liveData
-    }
+//    @OptIn(ExperimentalPagingApi::class)
+//    fun getAllExercise(token: String): LiveData<PagingData<ExerciseRoutineModel>> {
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = 5,
+//                enablePlaceholders = false,
+//            ),
+//            remoteMediator = ExerciseRoutineRemoteMediator(
+//                userRoutineDatabase,
+//                apiService,
+//                token,
+//            ),
+//            pagingSourceFactory = {
+//                userRoutineDatabase.userRoutineDao().getAllUserExerciseRoutines()
+//            }
+//        ).liveData
+//    }
 
-    @OptIn(ExperimentalPagingApi::class)
-    fun getAllBooks(token: String): LiveData<PagingData<BooksRoutineModel>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 5,
-                enablePlaceholders = false,
-            ),
-            remoteMediator = BooksRoutineRemoteMediator(
-                userRoutineDatabase,
-                apiService,
-                token,
-            ),
-            pagingSourceFactory = {
-                userRoutineDatabase.userRoutineDao().getAllUserBooksRoutines()
-            }
-        ).liveData
-    }
+//    @OptIn(ExperimentalPagingApi::class)
+//    fun getAllBooks(token: String): LiveData<PagingData<BooksRoutineModel>> {
+//        return Pager(
+//            config = PagingConfig(
+//                pageSize = 5,
+//                enablePlaceholders = false,
+//            ),
+//            remoteMediator = BooksRoutineRemoteMediator(
+//                userRoutineDatabase,
+//                apiService,
+//                token,
+//            ),
+//            pagingSourceFactory = {
+//                userRoutineDatabase.userRoutineDao().getAllUserBooksRoutines()
+//            }
+//        ).liveData
+//    }
     // *FOR PAGINATION*
 
     companion object {

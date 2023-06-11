@@ -59,13 +59,13 @@ interface ApiService {
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null
 
-    ): Call<RoutineResponse>
+    ): Call<ExerciseListResponse>
 
     @GET("routine/books")
     fun getAllBooks(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null
-    ): Call<RoutineResponse>
+    ): Call<BookListResponse>
     // *PAGINATION*
 
     // *ROUTINE*
@@ -110,6 +110,7 @@ interface ApiService {
     @GET("/schedule")
     fun getUserScheduleList(
         @Header("Authorization") token: String,
+        @Query("key") key: String,
     ): Call<ScheduleListResponse>
 
     @GET("/schedule/{id}")
@@ -128,7 +129,7 @@ interface ApiService {
         @Field("startTime") startTime: String,
         @Field("endTime") endTime: String,
         @Field("description") description: String,
-    ): Call<DefaultResponse>
+        ): Call<DefaultResponse>
 
     @FormUrlEncoded
     @PUT("schedule/{id}")

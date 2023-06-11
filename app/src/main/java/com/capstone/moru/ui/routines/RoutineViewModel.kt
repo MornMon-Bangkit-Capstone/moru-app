@@ -202,13 +202,13 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
     }
 
     // *FOR PAGINATION*
-    fun getAllExercise() {
-        userExerciseRoutines = userRepository.getAllExercise("").cachedIn(viewModelScope)
-    }
-
-    fun getAllBooks() {
-        userBooksRoutines = userRepository.getAllBooks("").cachedIn(viewModelScope)
-    }
+//    fun getAllExercise() {
+//        userExerciseRoutines = userRepository.getAllExercise("").cachedIn(viewModelScope)
+//    }
+//
+//    fun getAllBooks() {
+//        userBooksRoutines = userRepository.getAllBooks("").cachedIn(viewModelScope)
+//    }
     // *FOR PAGINATION*
 
     companion object {

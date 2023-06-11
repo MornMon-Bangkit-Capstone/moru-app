@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.StringRes
 import com.capstone.moru.R
-import com.capstone.moru.data.api.response.ListItem
+//import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.databinding.ActivityPickRoutineBinding
 import com.capstone.moru.ui.MainActivity
 import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickRoutineSectionsAdapter

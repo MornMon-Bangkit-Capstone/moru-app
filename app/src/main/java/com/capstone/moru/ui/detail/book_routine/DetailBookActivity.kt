@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.capstone.moru.R
 import com.capstone.moru.data.api.response.BookListItem
 import com.capstone.moru.databinding.ActivityDetailBookBinding
+import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickBookRoutineAdapter
 import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleActivity
 import com.capstone.moru.ui.factory.ViewModelFactory
 
@@ -53,8 +54,9 @@ class DetailBookActivity : AppCompatActivity() {
 
         binding.btnStart.setOnClickListener {
             val intentToPickSchedule = Intent(this, PickScheduleActivity::class.java)
-            intentToPickSchedule.putExtra(KEY_BOOK, routineType)
-            intentToPickSchedule.putExtra(KEY_BOOK_TITLE, routineType)
+            intentToPickSchedule.putExtra(KEY_BOOK_ROUTINE, routineTitle)
+            intentToPickSchedule.putExtra(KEY_ID_BOOK, routineType)
+            startActivity(intentToPickSchedule)
         }
     }
 

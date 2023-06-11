@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.capstone.moru.R
 import com.capstone.moru.data.api.response.ExerciseListItem
-import com.capstone.moru.data.api.response.ListItem
+//import com.capstone.moru.data.api.response.ListItem
 import com.capstone.moru.data.api.response.ListRoutine
 import com.capstone.moru.databinding.ActivityDetailExerciseBinding
 import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleActivity
@@ -56,8 +56,9 @@ class DetailExerciseActivity : AppCompatActivity() {
 
         binding.btnStart.setOnClickListener {
             val intentToPickSchedule = Intent(this, PickScheduleActivity::class.java)
-            intentToPickSchedule.putExtra(KEY_EXERCISE, routineType)
-            intentToPickSchedule.putExtra(KEY_EXERCISE_TITLE, routineType)
+            intentToPickSchedule.putExtra(KEY_EXERCISE_ROUTINE, routineType)
+            intentToPickSchedule.putExtra(KEY_ID_EXERCISE, routineType)
+            startActivity(intentToPickSchedule)
         }
     }
 

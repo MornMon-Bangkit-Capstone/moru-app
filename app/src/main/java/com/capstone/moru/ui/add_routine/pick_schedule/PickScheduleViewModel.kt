@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.add_routine.pick_schedule
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -46,6 +47,7 @@ class PickScheduleViewModel(private var userRepository: UserRepository) : ViewMo
                 if (response.isSuccessful){
                     _error.value = false
                     _message.value = response.message()
+                    Log.e("PICK", _message.value.toString())
                 }else{
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"
