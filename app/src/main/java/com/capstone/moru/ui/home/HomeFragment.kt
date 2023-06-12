@@ -27,6 +27,7 @@ class HomeFragment : Fragment() {
 
     private var formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-M-yyyy")
     private var selectedDate: String? = LocalDate.now().format(formatter)
+    private var emptyListRoutine: List<ScheduleListItem?>? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,19 +72,8 @@ class HomeFragment : Fragment() {
     private fun retry(it: Boolean?) {
         if (it!!) {
             binding.progressBar.visibility = View.GONE
-//            binding.btnRetry.apply {
-//                visibility = View.VISIBLE
-//                isEnabled = true
-//
-//                setOnClickListener {
-//                    scheduleViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
-//                        scheduleViewModel.getCurrentSchedule(token, selectedDate!!)
-//                    }
-//                    visibility = View.GONE
-//                    isEnabled = false
-//                }
-//            }
             binding.btnRetry.visibility = View.VISIBLE
+            initRecyclerView(emptyListRoutine)
         } else {
             binding.btnRetry.visibility = View.GONE
         }

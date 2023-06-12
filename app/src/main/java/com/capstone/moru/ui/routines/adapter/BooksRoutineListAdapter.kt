@@ -38,8 +38,8 @@ class BooksRoutineListAdapter(private val listBookRoutine: List<com.capstone.mor
         val placeholder = holder.itemView.context.resources.getDrawable(R.drawable.placeholder_book)
 
         holder.apply {
-            Glide.with(holder.itemView.context).load(routineBooks?.imageURLL)
-                .into(holder.binding.ivCardRoutine).onLoadFailed(placeholder)
+//            Glide.with(holder.itemView.context).load(routineBooks?.imageURLL)
+//                .into(holder.binding.ivCardRoutine).onLoadFailed(placeholder)
             binding.customCategory.text = formattedRoutine?.firstOrNull()
             binding.tvCardRoutineName.text = routineBooks?.bookTitle
             binding.tvRoutineDesc.text = routineBooks?.summary

@@ -1,11 +1,8 @@
 package com.capstone.moru.ui
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +14,7 @@ import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityMainBinding
 import com.capstone.moru.ui.add_routine.add_custom_routine.AddCustomRoutineActivity
 import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineActivity
+import com.capstone.moru.ui.subscription.GetSubscriptionActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -71,11 +69,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fabAddRoutine.setOnClickListener{
-            val intentToAddRoutine = Intent(this, AddCustomRoutineActivity::class.java)
+//            val intentToAddRoutine = Intent(this, AddCustomRoutineActivity::class.java)
+//            startActivity(intentToAddRoutine)
+
+            val intentToAddRoutine = Intent(this, GetSubscriptionActivity::class.java)
             startActivity(intentToAddRoutine)
         }
     }
-
 
     private fun onFabMenuClicked() {
         setVisibility(clicked)

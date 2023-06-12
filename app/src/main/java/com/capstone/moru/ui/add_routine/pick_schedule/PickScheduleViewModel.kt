@@ -32,11 +32,13 @@ class PickScheduleViewModel(private var userRepository: UserRepository) : ViewMo
         date: String,
         startTime: String,
         endTime: String,
-        description: String
+        description: String,
+        isPublic: String,
+        refId: Int,
     ) {
         _isLoading.value = true
         val formatToken = "Bearer $token"
-        val client = userRepository.postUserSchedule(formatToken, type, title, date, startTime, endTime, description)
+        val client = userRepository.postUserSchedule(formatToken, type, title, date, startTime, endTime, description, isPublic, refId)
 
         client.enqueue(object: Callback<com.capstone.moru.data.api.response.DefaultResponse>{
             override fun onResponse(

@@ -70,7 +70,6 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
                     _message.value = response.message()
 
                     _exerciseRoutine.value = response.body()?.list
-
                 } else {
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"
@@ -107,7 +106,6 @@ class RoutineViewModel(private var userRepository: UserRepository) : ViewModel()
                     _message.value = response.message()
 
                     _bookRoutine.value = response.body()?.list
-
                 } else {
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"

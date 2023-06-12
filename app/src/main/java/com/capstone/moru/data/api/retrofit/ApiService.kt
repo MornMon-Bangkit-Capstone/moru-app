@@ -129,6 +129,8 @@ interface ApiService {
         @Field("startTime") startTime: String,
         @Field("endTime") endTime: String,
         @Field("description") description: String,
+        @Field("isPublic") isPublic: String,
+        @Field("refId") refId: Int,
         ): Call<DefaultResponse>
 
     @FormUrlEncoded

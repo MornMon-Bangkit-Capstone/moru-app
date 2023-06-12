@@ -52,10 +52,11 @@ class PickBooksRoutineFragment : Fragment() {
 
         routineViewModel.error.observe(viewLifecycleOwner){
             retry(it)
-        }
-
-        routineViewModel.message.observe(viewLifecycleOwner){
-            displayToast(it)
+            if (it){
+                routineViewModel.message.observe(viewLifecycleOwner){
+                    displayToast(it)
+                }
+            }
         }
 
         binding.edSearchRoutines.setOnEditorActionListener { _, actionId, event ->

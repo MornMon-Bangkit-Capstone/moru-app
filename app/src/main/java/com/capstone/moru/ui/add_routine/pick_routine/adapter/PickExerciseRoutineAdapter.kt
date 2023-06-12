@@ -51,6 +51,10 @@ class PickExerciseRoutineAdapter(
             val intentToPickSchedule = Intent(holder.itemView.context, PickScheduleActivity::class.java)
             intentToPickSchedule.putExtra(KEY_EXERCISE_ROUTINE, exerciseRoutine?.sports)
             intentToPickSchedule.putExtra(KEY_ID_EXERCISE, exercise)
+
+            intentToPickSchedule.putExtra(KEY_IS_PUBLIC, exerciseRoutine?.isPublic)
+            intentToPickSchedule.putExtra(KEY_REF_ID, exerciseRoutine?.id)
+
             holder.itemView.context.startActivity(intentToPickSchedule)
         }
 //
@@ -93,5 +97,8 @@ class PickExerciseRoutineAdapter(
     companion object {
         const val KEY_EXERCISE_ROUTINE = "key_exercise_routine"
         const val KEY_ID_EXERCISE = "key_id_exercise"
+
+        const val KEY_REF_ID = "key_ref_id"
+        const val KEY_IS_PUBLIC = "key_is_public"
     }
 }

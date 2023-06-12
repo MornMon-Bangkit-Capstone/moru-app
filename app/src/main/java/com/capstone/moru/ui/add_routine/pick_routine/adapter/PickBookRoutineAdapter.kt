@@ -54,8 +54,8 @@ class PickBookRoutineAdapter(
 
         val placeholder = holder.itemView.context.resources.getDrawable(R.drawable.placeholder_book)
         holder.apply {
-            Glide.with(holder.itemView.context).load(bookRoutine?.imageURLL)
-                .into(holder.binding.imageView).onLoadFailed(placeholder)
+//            Glide.with(holder.itemView.context).load(bookRoutine?.imageURLL)
+//                .into(holder.binding.imageView).onLoadFailed(placeholder)
             binding.customCategory.text = formattedRoutine?.firstOrNull()
             binding.textView.text = bookRoutine?.bookTitle
         }
@@ -67,6 +67,10 @@ class PickBookRoutineAdapter(
             val intentToPickSchedule = Intent(holder.itemView.context, PickScheduleActivity::class.java)
             intentToPickSchedule.putExtra(KEY_BOOK_ROUTINE, bookRoutine?.bookTitle)
             intentToPickSchedule.putExtra(KEY_ID_BOOK, book)
+
+            intentToPickSchedule.putExtra(KEY_IS_PUBLIC, bookRoutine?.isPublic)
+            intentToPickSchedule.putExtra(KEY_REF_ID, bookRoutine?.iSBN)
+
             holder.itemView.context.startActivity(intentToPickSchedule)
         }
 
@@ -114,5 +118,8 @@ class PickBookRoutineAdapter(
     companion object {
         const val KEY_BOOK_ROUTINE = "key_book_routine"
         const val KEY_ID_BOOK = "key_id_book"
+
+        const val KEY_REF_ID = "key_ref_id"
+        const val KEY_IS_PUBLIC = "key_is_public"
     }
 }

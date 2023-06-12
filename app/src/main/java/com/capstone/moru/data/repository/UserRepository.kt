@@ -93,6 +93,8 @@ class UserRepository(
         startTime: String,
         endTime: String,
         description: String,
+        isPublic: String,
+        refId: Int,
     ): Call<com.capstone.moru.data.api.response.DefaultResponse> {
         return apiService.postUserSchedule(
             token,
@@ -101,7 +103,9 @@ class UserRepository(
             date,
             startTime,
             endTime,
-            description
+            description,
+            isPublic,
+            refId,
         )
     }
 

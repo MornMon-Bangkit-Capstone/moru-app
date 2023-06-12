@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -14,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityPickScheduleBinding
 import com.capstone.moru.ui.MainActivity
+import com.capstone.moru.ui.alarm.receiver.AlarmReceiver
 import com.capstone.moru.ui.factory.ViewModelFactory
 import java.util.*
 
@@ -22,7 +22,9 @@ class PickScheduleActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private lateinit var factory: ViewModelFactory
     private val pickScheduleViewModel: PickScheduleViewModel by viewModels { factory }
+    private lateinit var alarmReceiver: AlarmReceiver
     private val cal = Calendar.getInstance()
+    private var alarmDate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class PickScheduleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         factory = ViewModelFactory.getInstance(this)
+        alarmReceiver = AlarmReceiver()
 
         disableEditText()
         setupView()
@@ -61,8 +64,13 @@ class PickScheduleActivity : AppCompatActivity() {
                 val startTime = binding.edStartTime.text.toString()
                 val endTime = binding.edEndTime.text.toString()
                 val notes = binding.edNotes.text.toString()
-
-                Log.e("TIME", "$startTime - $endTime")
+                val isPublic = intent.getIntExtra(KEY_IS_PUBLIC, 1)
+                val refId = intent.getIntExtra(KEY_REF_ID, 1)
+                var formattedIsPublic = if (isPublic == 1) {
+                    "YES"
+                } else {
+                    "NO"
+                }
 //                Log.e("TIME", checkTime(startTime, endTime).toString())
 //                else if (checkTime(startTime, endTime)) {
 //                val msg = getString(
@@ -84,7 +92,9 @@ class PickScheduleActivity : AppCompatActivity() {
                         date,
                         startTime,
                         endTime,
-                        notes
+                        notes,
+                        formattedIsPublic,
+                        refId,
                     )
                     pickScheduleViewModel.error.observe(this) { error ->
                         if (!error) {
@@ -92,6 +102,8 @@ class PickScheduleActivity : AppCompatActivity() {
                                 R.string.post_schedule_success
                             )
                             displayToast(msg)
+
+                            alarmReceiver.setOneTimeAlarm(this, alarmDate!!, routineName, startTime)
                         } else {
                             pickScheduleViewModel.message.observe(this) { message ->
                                 val msg = getString(
@@ -117,6 +129,8 @@ class PickScheduleActivity : AppCompatActivity() {
         pickScheduleViewModel.isLoading.observe(this) {
             showLoading(it)
         }
+
+
     }
 
     private fun fillRoutine() {
@@ -163,8 +177,13 @@ class PickScheduleActivity : AppCompatActivity() {
         val datePickerDialog = DatePickerDialog(
             this,
             { view, yearPicked, monthOfYear, dayOfMonth ->
+
+                val formattedDay = String.format("%02d", dayOfMonth)
+                val formattedMonth = String.format("%02d", monthOfYear + 1)
+
                 binding.edDate.text = Editable.Factory.getInstance()
                     .newEditable("$dayOfMonth-${monthOfYear + 1}-$yearPicked")
+                alarmDate = "$yearPicked-$formattedMonth-$formattedDay"
             },
             year, month, day
         )
@@ -216,5 +235,8 @@ class PickScheduleActivity : AppCompatActivity() {
 
         const val KEY_EXERCISE_ROUTINE = "key_exercise_routine"
         const val KEY_ID_EXERCISE = "key_id_exercise"
+
+        const val KEY_REF_ID = "key_ref_id"
+        const val KEY_IS_PUBLIC = "key_is_public"
     }
 }

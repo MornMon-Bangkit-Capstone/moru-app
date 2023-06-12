@@ -1,5 +1,6 @@
 package com.capstone.moru.data.api.response
 
+import android.app.LauncherActivity
 import com.google.gson.annotations.SerializedName
 
 data class ScheduleListResponse(
@@ -34,11 +35,20 @@ data class ScheduleListItem(
 	@field:SerializedName("description")
 	val description: String? = null,
 
+	@field:SerializedName("isPublic")
+	val isPublic: String? = null,
+
 	@field:SerializedName("id")
 	val id: Int? = null,
 
+	@field:SerializedName("refId")
+	val refId: Int? = null,
+
 	@field:SerializedName("type")
 	val type: String? = null,
+
+	@field:SerializedName("durationMin")
+	val durationMin: Int? = null,
 
 	@field:SerializedName("status")
 	val status: String? = null

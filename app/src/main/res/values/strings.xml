@@ -146,4 +146,6 @@
     <string name="default_location">Indoor</string>
     <string name="equipment">Equipment</string>
     <string name="there_is_no_schedule_in_this_day">There is no schedule in this day</string>
+    <string name="subscribe_custom_routine">Pleas subscribe to add you own routine</string>
+    <string name="subscribe_custom_routine_explaination">You will be able to add your own custom routine according your needs</string>
 </resources>

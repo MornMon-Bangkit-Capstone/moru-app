@@ -53,11 +53,14 @@ class BooksRoutineListFragment : Fragment() {
 
         routineViewModel.error.observe(viewLifecycleOwner) {
             retry(it)
+            if (it){
+                routineViewModel.message.observe(viewLifecycleOwner) {
+                    displayToast(it)
+                }
+            }
         }
 
-        routineViewModel.message.observe(viewLifecycleOwner) {
-            displayToast(it)
-        }
+
 
         binding.edSearchRoutines.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||

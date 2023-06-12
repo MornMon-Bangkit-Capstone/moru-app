@@ -16,6 +16,10 @@ class DetailRoutineActivity : AppCompatActivity() {
         _binding = ActivityDetailRoutineBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupView()
+
+//        binding.ivMenu.setOnClickListener {
+//            val popUpMenu =
+//        }
     }
 
     private fun showLoading(isLoading: Boolean) {

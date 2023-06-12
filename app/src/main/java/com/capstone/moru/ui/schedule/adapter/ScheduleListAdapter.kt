@@ -28,7 +28,6 @@ class ScheduleListAdapter(private val listSchedule: List<ScheduleListItem?>?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val schedule = listSchedule?.get(position)
-        Log.e("SCHEDULE $position", schedule.toString())
         val formatDetailSchedule = "${schedule?.startTime} - ${schedule?.endTime}"
         val formatStatus = when (schedule?.status) {
             "NOT_STARTED" -> {
