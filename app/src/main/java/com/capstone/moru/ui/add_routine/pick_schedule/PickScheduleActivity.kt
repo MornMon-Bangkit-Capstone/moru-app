@@ -135,7 +135,7 @@ class PickScheduleActivity : AppCompatActivity() {
     }
 
 //    private fun checkTime(startTime: String, endTime: String): Boolean {
-//        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+//        val formatter = DateTimeFormatter.ofPattern("HH.mm")
 //
 //        val start = LocalTime.parse(startTime, formatter)
 //        val end = LocalTime.parse(endTime, formatter)
@@ -143,9 +143,7 @@ class PickScheduleActivity : AppCompatActivity() {
 //        val rangeStart = LocalTime.parse("04.00", formatter)
 //        val rangeEnd = LocalTime.parse("10.00", formatter)
 //
-//        return start.isAfter(rangeStart) && end.isBefore(rangeEnd) && start.isBefore(end) && end.isAfter(
-//            start
-//        )
+//        return start.isAfter(rangeStart) && end.isBefore(rangeEnd) && start.isBefore(end) && end.isAfter(start)
 //    }
 
 
@@ -180,12 +178,15 @@ class PickScheduleActivity : AppCompatActivity() {
         val timePickerDialog = TimePickerDialog(
             this,
             { view, hourOfDay, minuteOfDay ->
+                val formattedHour = String.format("%02d", hourOfDay)
+                val formattedMinute = String.format("%02d", minuteOfDay)
                 if (text == "start") {
+
                     binding.edStartTime.text = Editable.Factory.getInstance()
-                        .newEditable("$hourOfDay:$minuteOfDay")
+                        .newEditable("$formattedHour:$formattedMinute")
                 } else {
                     binding.edEndTime.text = Editable.Factory.getInstance()
-                        .newEditable("$hourOfDay:$minuteOfDay")
+                        .newEditable("$formattedHour:$formattedMinute")
                 }
             },
             hour,

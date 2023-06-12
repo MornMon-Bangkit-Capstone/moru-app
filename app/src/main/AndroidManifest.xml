@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Moru"
         android:usesCleartextTraffic="true">
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <activity
             android:name=".ui.add_routine.add_custom_routine.AddCustomRoutineActivity"
             android:exported="false" />
@@ -27,10 +32,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.fill.FillExercisePrefActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".ui.routine_detail.RoutineDetailExercise"-->
-<!--            android:exported="false" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".ui.routine_detail.RoutineDetailExercise" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".ui.fill.FillBookPrefActivity"
             android:exported="false" />

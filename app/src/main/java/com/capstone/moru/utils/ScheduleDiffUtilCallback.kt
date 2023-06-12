@@ -5,8 +5,7 @@ import com.capstone.moru.data.api.response.ScheduleListItem
 
 class ScheduleDiffUtilCallback: DiffUtil .ItemCallback<ScheduleListItem>(){
     override fun areItemsTheSame(oldItem: ScheduleListItem, newItem: ScheduleListItem): Boolean {
-        return oldItem == newItem
-
+        return false
     }
 
     override fun areContentsTheSame(oldItem: ScheduleListItem, newItem: ScheduleListItem): Boolean {

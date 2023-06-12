@@ -1,12 +1,28 @@
 package com.capstone.moru.ui.detail.user_routine
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.capstone.moru.R
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import com.capstone.moru.databinding.ActivityDetailRoutineBinding
 
 class DetailRoutineActivity : AppCompatActivity() {
+    private var _binding: ActivityDetailRoutineBinding? = null
+    private val binding get() = _binding!!
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_routine)
+
+        _binding = ActivityDetailRoutineBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupView()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+//        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun setupView() {
+        supportActionBar?.hide()
     }
 }

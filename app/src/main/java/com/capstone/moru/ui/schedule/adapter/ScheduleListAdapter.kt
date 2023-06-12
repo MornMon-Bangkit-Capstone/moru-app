@@ -1,6 +1,7 @@
 package com.capstone.moru.ui.schedule.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -27,6 +28,7 @@ class ScheduleListAdapter(private val listSchedule: List<ScheduleListItem?>?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val schedule = listSchedule?.get(position)
+        Log.e("SCHEDULE $position", schedule.toString())
         val formatDetailSchedule = "${schedule?.startTime} - ${schedule?.endTime}"
         val formatStatus = when (schedule?.status) {
             "NOT_STARTED" -> {
@@ -55,7 +57,7 @@ class ScheduleListAdapter(private val listSchedule: List<ScheduleListItem?>?) :
     }
 
     override fun getItemCount(): Int {
-        return listSchedule!!.size
+        return listSchedule?.size ?: 0
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {

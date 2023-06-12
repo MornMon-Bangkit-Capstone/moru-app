@@ -113,7 +113,7 @@ class BooksRoutineListFragment : Fragment() {
         }
     }
 
-    fun initRecyclerView(routine: List<com.capstone.moru.data.api.response.BookListItem?>?) {
+    private fun initRecyclerView(routine: List<com.capstone.moru.data.api.response.BookListItem?>?) {
         val adapter = BooksRoutineListAdapter(routine)
         binding.rvRoutine.adapter = adapter
 

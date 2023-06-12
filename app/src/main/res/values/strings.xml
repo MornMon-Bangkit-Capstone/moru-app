@@ -145,4 +145,5 @@
     <string name="location">Location</string>
     <string name="default_location">Indoor</string>
     <string name="equipment">Equipment</string>
+    <string name="there_is_no_schedule_in_this_day">There is no schedule in this day</string>
 </resources>
