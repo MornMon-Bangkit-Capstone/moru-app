@@ -53,8 +53,6 @@ class ScheduleViewModel(private var userRepository: UserRepository): ViewModel()
                 _error.value = true
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
-
-                Log.e("RoutineViewModel", _message.value.toString())
             }
 
         })

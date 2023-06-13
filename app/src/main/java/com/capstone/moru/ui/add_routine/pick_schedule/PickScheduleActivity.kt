@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -25,6 +26,7 @@ class PickScheduleActivity : AppCompatActivity() {
     private lateinit var alarmReceiver: AlarmReceiver
     private val cal = Calendar.getInstance()
     private var alarmDate: String? = null
+    private var routineId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,13 +73,6 @@ class PickScheduleActivity : AppCompatActivity() {
                 } else {
                     "NO"
                 }
-//                Log.e("TIME", checkTime(startTime, endTime).toString())
-//                else if (checkTime(startTime, endTime)) {
-//                val msg = getString(
-//                    R.string.incorrect_time
-//                )
-//                displayToast(msg)
-//            }
 
                 if (type.isEmpty() || routineName.isEmpty() || date.isEmpty() || startTime.isEmpty() || endTime.isEmpty() || notes.isEmpty()) {
                     val msg = getString(
@@ -103,7 +98,7 @@ class PickScheduleActivity : AppCompatActivity() {
                             )
                             displayToast(msg)
 
-                            alarmReceiver.setOneTimeAlarm(this, alarmDate!!, routineName, startTime)
+                            alarmReceiver.setOneTimeAlarm(this, alarmDate!!, routineName, startTime, )
                         } else {
                             pickScheduleViewModel.message.observe(this) { message ->
                                 val msg = getString(

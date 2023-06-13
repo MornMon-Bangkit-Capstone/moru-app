@@ -118,6 +118,8 @@ class UserRepository(
         startTime: String,
         endTime: String,
         description: String,
+        isPublic: String,
+        refId: Int,
     ): Call<com.capstone.moru.data.api.response.DefaultResponse> {
         return apiService.putUserSchedule(
             token,
@@ -127,7 +129,9 @@ class UserRepository(
             date,
             startTime,
             endTime,
-            description
+            description,
+            isPublic,
+            refId,
         )
     }
 
@@ -137,9 +141,13 @@ class UserRepository(
 
     fun getUserScheduleDetail(
         token: String,
-        id: String
+        id: Int
     ): Call<com.capstone.moru.data.api.response.ScheduleDetailResponse> {
         return apiService.getUserScheduleDetail(token, id)
+    }
+
+    fun deleteUserSchedule(token: String, id: Int): Call<DefaultResponse>{
+        return apiService.deleteUserSchedule(token, id)
     }
 
 

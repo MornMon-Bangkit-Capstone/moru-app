@@ -116,7 +116,7 @@ interface ApiService {
     @GET("/schedule/{id}")
     fun getUserScheduleDetail(
         @Header("Authorization") token: String,
-        @Path("id") id: String,
+        @Path("id") id: Int,
     ): Call<ScheduleDetailResponse>
 
     @FormUrlEncoded
@@ -144,12 +144,15 @@ interface ApiService {
         @Field("startTime") startTime: String,
         @Field("endTime") endTime: String,
         @Field("description") description: String,
-    ): Call<DefaultResponse>
+        @Field("isPublic") isPublic: String,
+        @Field("refId") refId: Int,
+
+        ): Call<DefaultResponse>
 
     @DELETE("schedule/{id}")
     fun deleteUserSchedule(
         @Header("Authorization") token: String,
-        @Path("id") id: String,
+        @Path("id") id: Int,
     ): Call<DefaultResponse>
     // *SCHEDULE*
 }

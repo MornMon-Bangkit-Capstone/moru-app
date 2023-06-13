@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class ScheduleDetailResponse(
 
-	@field:SerializedName("schedule")
-	val schedule: List<com.capstone.moru.data.api.response.ScheduleItem?>? = null,
-
 	@field:SerializedName("error")
 	val error: Boolean? = null,
 
 	@field:SerializedName("message")
-	val message: String? = null
+	val message: String? = null,
+
+	@field:SerializedName("list")
+	val list: List<ScheduleDetailListItem?>? = null
 )
 
-data class ScheduleItem(
+data class ScheduleDetailListItem(
 
 	@field:SerializedName("date")
 	val date: String? = null,
@@ -23,7 +23,7 @@ data class ScheduleItem(
 	val startTime: String? = null,
 
 	@field:SerializedName("uid")
-	val uid: String? = null,
+	val uid: Int? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null,
@@ -34,9 +34,21 @@ data class ScheduleItem(
 	@field:SerializedName("description")
 	val description: String? = null,
 
+	@field:SerializedName("isPublic")
+	val isPublic: String? = null,
+
 	@field:SerializedName("id")
-	val id: String? = null,
+	val id: Int? = null,
+
+	@field:SerializedName("refId")
+	val refId: Int? = null,
 
 	@field:SerializedName("type")
-	val type: String? = null
+	val type: String? = null,
+
+	@field:SerializedName("durationMin")
+	val durationMin: Int? = null,
+
+	@field:SerializedName("status")
+	val status: String? = null
 )

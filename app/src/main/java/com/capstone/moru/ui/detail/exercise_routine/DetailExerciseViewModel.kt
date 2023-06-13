@@ -28,7 +28,7 @@ class DetailExerciseViewModel(private var userRepository: UserRepository) : View
         return userRepository.getUserToken()
     }
 
-    fun     getExerciseRoutineDetail(token: String, id: Int, isPublic: Int) {
+    fun getExerciseRoutineDetail(token: String, id: Int, isPublic: Int) {
         _isLoading.value = true
         val formatToken = "Bearer $token"
         val client = userRepository.getExerciseRoutineDetail(formatToken, id, isPublic)

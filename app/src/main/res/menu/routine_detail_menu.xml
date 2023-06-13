@@ -2,8 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/updateRoutine"
-        android:title="@string/update_routine" />
+        android:title="@string/update_routine"
+        />
     <item
         android:id="@+id/deleteRoutine"
-        android:title="@string/delete_routine" />
+        android:title="@string/delete_routine"
+        android:iconTint="@color/orange"/>
 </menu>

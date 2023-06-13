@@ -1,14 +1,14 @@
 package com.capstone.moru.ui.schedule.adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.moru.data.api.response.ScheduleListItem
 import com.capstone.moru.databinding.ItemRoutineUserBinding
-import com.capstone.moru.ui.detail.user_routine.DetailRoutineActivity
+import com.capstone.moru.ui.detail.user_routine.DetailUserBookRoutineActivity
+import com.capstone.moru.ui.detail.user_routine.DetailUserExerciseRoutineActivity
 import com.capstone.moru.utils.ScheduleDiffUtilCallback
 
 class ScheduleListAdapter(private val listSchedule: List<ScheduleListItem?>?) :
@@ -48,8 +48,12 @@ class ScheduleListAdapter(private val listSchedule: List<ScheduleListItem?>?) :
 
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(schedule)
-            val intentToScheduleDetail =
-                Intent(holder.itemView.context, DetailRoutineActivity::class.java)
+            val intentToScheduleDetail = if (schedule?.refId!! > 100) {
+                Intent(holder.itemView.context, DetailUserBookRoutineActivity::class.java)
+            } else {
+                Intent(holder.itemView.context, DetailUserExerciseRoutineActivity::class.java)
+            }
+
             intentToScheduleDetail.putExtra(KEY_ID_SCHEDULE, schedule?.id)
             holder.itemView.context.startActivity(intentToScheduleDetail)
         }

@@ -20,9 +20,9 @@ class DetailExerciseActivity : AppCompatActivity() {
 
     private var _binding: ActivityDetailExerciseBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var factory: ViewModelFactory
     private val detailExerciseViewModel: DetailExerciseViewModel by viewModels { factory }
+
     private var routineTitle: String? = null
     private var routineType: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {

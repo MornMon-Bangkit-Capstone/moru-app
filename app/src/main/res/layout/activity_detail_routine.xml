@@ -4,7 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.user_routine.DetailRoutineActivity">
+    tools:context=".ui.detail.user_routine.DetailUserExerciseRoutineActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_description_exercise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/grey" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_description2"
+        style="@style/textStyleMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/description"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_duration_exercise" />
+
+    <TextView
+        android:id="@+id/tv_equipment"
+        style="@style/textStyleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/equipment"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_location"
+        app:layout_constraintTop_toTopOf="@+id/tv_location" />
+
+    <TextView
+        android:id="@+id/tv_location_exercise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/default_location"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toStartOf="@+id/tv_equipment"
+        app:layout_constraintStart_toStartOf="@+id/tv_location"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        style="@style/textStyleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/location"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_duration"
+        app:layout_constraintStart_toEndOf="@+id/tv_duration"
+        app:layout_constraintTop_toTopOf="@+id/tv_duration" />
+
+    <TextView
+        android:id="@+id/tv_equipment_exercise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/yes"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_equipment"
+        app:layout_constraintTop_toBottomOf="@+id/tv_equipment" />
+
+    <TextView
+        android:id="@+id/tv_duration"
+        style="@style/textStyleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/average_duration"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_notes_routine" />
+
+    <TextView
+        android:id="@+id/tv_duration_exercise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/default_duration"
+        android:textColor="@color/grey"
+        app:layout_constraintEnd_toStartOf="@+id/tv_location"
+        app:layout_constraintStart_toStartOf="@+id/tv_duration"
+        app:layout_constraintTop_toBottomOf="@+id/tv_duration" />
 
     <ImageView
         android:id="@+id/iv_back"
@@ -84,11 +197,11 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginEnd="24dp"
+        android:contentDescription="@string/routine_name"
         app:layout_constraintBottom_toBottomOf="@+id/tv_routine_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/category_card"
-        app:srcCompat="@drawable/placeholder_book_big"
-        android:contentDescription="@string/routine_name" />
+        app:srcCompat="@drawable/placeholder_book_big" />
 
     <com.capstone.moru.ui.customview.CustomStatus
         android:id="@+id/customStatus"
@@ -101,11 +214,11 @@
 
     <TextView
         android:id="@+id/tv_date"
+        style="@style/textStyleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/date"
-        style="@style/textStyleMedium"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/customStatus"
         app:layout_constraintTop_toBottomOf="@+id/customStatus" />
@@ -124,11 +237,11 @@
 
     <TextView
         android:id="@+id/tv_start_time"
+        style="@style/textStyleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/start_time"
-        style="@style/textStyleMedium"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,11 +249,11 @@
 
     <TextView
         android:id="@+id/tv_end_time"
+        style="@style/textStyleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="@string/end_time"
-        style="@style/textStyleMedium"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_start_time"
         app:layout_constraintEnd_toEndOf="@+id/iv_routine"
@@ -160,26 +273,26 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_start_time" />
 
     <TextView
-        android:textColor="@color/grey"
         android:id="@+id/tv_end_time_routine"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
         android:text="@string/default_time"
+        android:textColor="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_end_time"
         app:layout_constraintTop_toBottomOf="@+id/tv_end_time" />
 
     <TextView
         android:id="@+id/tv_notes"
+        style="@style/textStyleMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
-        style="@style/textStyleMedium"
-        android:textSize="16sp"
         android:text="@string/notes"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date_routine" />
 
@@ -195,51 +308,17 @@
         app:layout_constraintStart_toStartOf="@+id/tv_notes"
         app:layout_constraintTop_toBottomOf="@+id/tv_notes" />
 
-    <TextView
-        android:id="@+id/textView19"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/average_duration"
-        style="@style/textStyleMedium"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_notes_routine" />
-
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="24dp"
-        android:textColor="@color/grey"
-        android:text="@string/default_avg_duration"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/description"
-        style="@style/textStyleMedium"
-        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
-    <TextView
-        android:id="@+id/tv_description_routine"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="24dp"
-        android:textColor="@color/grey"
-        android:text="@string/default_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_description"
-        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
