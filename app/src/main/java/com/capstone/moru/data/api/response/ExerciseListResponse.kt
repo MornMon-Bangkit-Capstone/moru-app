@@ -47,5 +47,8 @@ data class ExerciseListItem(
     val sports: String? = null,
 
     @field:SerializedName("Location")
-    val location: String? = null
+    val location: String? = null,
+
+    @field:SerializedName("Video")
+    val video: String? = null,
 )

@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.profile
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.moru.data.repository.UserRepository
@@ -10,5 +11,9 @@ class ProfileViewModel(private var userRepository: UserRepository): ViewModel() 
         viewModelScope.launch {
             userRepository.logout()
         }
+    }
+
+    fun getUserEmail(): LiveData<String>{
+        return userRepository.getUserEmail()
     }
 }

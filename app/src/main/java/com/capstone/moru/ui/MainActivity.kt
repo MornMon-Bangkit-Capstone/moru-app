@@ -2,10 +2,13 @@ package com.capstone.moru.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -14,12 +17,17 @@ import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityMainBinding
 import com.capstone.moru.ui.add_routine.add_custom_routine.AddCustomRoutineActivity
 import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineActivity
+import com.capstone.moru.ui.factory.ViewModelFactory
+import com.capstone.moru.ui.fill.FillProfileActivity
+import com.capstone.moru.ui.home.HomeViewModel
 import com.capstone.moru.ui.subscription.GetSubscriptionActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
+    private lateinit var factory: ViewModelFactory
+    private val homeViewModel: HomeViewModel by viewModels { factory }
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(this, R.anim.rotate_open_anim)
@@ -44,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         setupView()
 
+        factory = ViewModelFactory.getInstance(this)
         val navView: BottomNavigationView = binding.navView
         val navViewController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration.Builder(
@@ -69,11 +78,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fabAddRoutine.setOnClickListener{
-//            val intentToAddRoutine = Intent(this, AddCustomRoutineActivity::class.java)
-//            startActivity(intentToAddRoutine)
-
             val intentToAddRoutine = Intent(this, GetSubscriptionActivity::class.java)
             startActivity(intentToAddRoutine)
+        }
+
+        homeViewModel.getFillProfileStatus().observe(this){
+            Log.e("TAG", it.toString())
+            if(it != 1){
+                val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
+                startActivity(intentToFillProfile)
+            }
         }
     }
 
@@ -82,9 +96,7 @@ class MainActivity : AppCompatActivity() {
         setAnimation(clicked)
         setClickable(clicked)
         clicked = !clicked
-
     }
-
 
     private fun setVisibility(clicked: Boolean) {
         if (!clicked) {

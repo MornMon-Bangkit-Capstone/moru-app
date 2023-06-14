@@ -23,12 +23,14 @@ interface ApiService {
     ): Call<LoginResponse>
 
     @FormUrlEncoded
-    @POST("/auth/fill/data")
+    @POST("auth/fill/data")
     fun fillPersonalDataUser(
-        @Field("name") name: String,
-        @Field("birthdate") birthDate: String,
+        @Header("Authorization") token: String,
+        @Path("id") id: Int,
+        @Field("title") name: String,
         @Field("goal") goal: String,
-    ): Call<FillProfileResponse>
+        @Field("birthdate") birthDate: String,
+    ): Call<DefaultResponse>
 
     @FormUrlEncoded
     @GET("profile/{id}")
@@ -37,20 +39,6 @@ interface ApiService {
         @Path("id") id: String
     ): Call<ProfileResponse>
 
-    @PUT("profile/{id}")
-    fun updateProfileUser(
-        @Header("Authorization") token: String,
-        @Path("id") id: String,
-        @Field("Name") name: String,
-        @Field("Date") date: Date,
-        @Field("Goals") goals: String,
-        @Field("Favorite Book Category") favBookCategory: String,
-        @Field("Favorite Book") favBook: String,
-        @Field("Favorite Author") favAuthor: String,
-        @Field("Favorite Exercise Category") favExerciseCategory: String,
-        @Field("Favorite Exercise") favExercise: String,
-        @Field("Favorite Duration") faveExerciseDuration: String,
-    ): Call<ProfileResponse>
     // *USER*
 
     // *PAGINATION*
@@ -96,13 +84,23 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: Int,
         @Path("isPublic") isPublic: Int,
-        ): Call<BookListResponse>
+    ): Call<BookListResponse>
 
     @GET("routine/exercises/{id}/{isPublic}")
     fun getExerciseRoutineDetail(
         @Header("Authorization") token: String,
         @Path("id") id: Int,
         @Path("isPublic") isPublic: Int,
+    ): Call<ExerciseListResponse>
+
+    @GET("/recommendation/books")
+    fun getBookRecommendation(
+        @Header("Authorization") token: String,
+    ): Call<BookListResponse>
+
+    @GET("/recommendation/exercises")
+    fun getExerciseRecommendation(
+        @Header("Authorization") token: String,
     ): Call<ExerciseListResponse>
     // *ROUTINE*
 
@@ -131,7 +129,7 @@ interface ApiService {
         @Field("description") description: String,
         @Field("isPublic") isPublic: String,
         @Field("refId") refId: Int,
-        ): Call<DefaultResponse>
+    ): Call<DefaultResponse>
 
     @FormUrlEncoded
     @PUT("schedule/{id}")
@@ -146,7 +144,6 @@ interface ApiService {
         @Field("description") description: String,
         @Field("isPublic") isPublic: String,
         @Field("refId") refId: Int,
-
         ): Call<DefaultResponse>
 
     @DELETE("schedule/{id}")

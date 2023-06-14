@@ -1,6 +1,5 @@
 package com.capstone.moru.ui.alarm.receiver
 
-import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -19,6 +18,8 @@ import com.capstone.moru.ui.alarm.AlarmActivity
 import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
+    private val channelId = "Channel_1"
+    private val channelName = "Alarm Manager Channel"
 
     override fun onReceive(context: Context, intent: Intent) {
         val action = intent.action
@@ -35,13 +36,28 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    @SuppressLint("ObsoleteSdkInt")
-    private fun showNotification(context: Context, routineName: String, routineDetail: String) {
-        val channelId = "Channel_1"
-        val channelName = "AlarmManager channel"
+    private fun createNotificationChannel(context: Context) {
+        val channel = NotificationChannel(
+            channelId,
+            channelName,
+            NotificationManager.IMPORTANCE_DEFAULT
+        )
+
+        channel.description = "This is default channel used for all other notifications"
+        channel.enableVibration(true)
+        channel.enableLights(true)
+        channel.vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
 
         val notificationManagerCompat =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationManagerCompat.createNotificationChannel(channel)
+    }
+
+//    notificationManagerCompat.createNotificationChannel(channel)
+
+    private fun showNotification(context: Context, routineName: String, routineDetail: String) {
+
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
 
         val startRoutineIntent = Intent(context, AlarmActivity::class.java)
@@ -52,7 +68,6 @@ class AlarmReceiver : BroadcastReceiver() {
             startRoutineIntent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
-
 
         val skipRoutineIntent = Intent(context, MainActivity::class.java)
         skipRoutineIntent.action = ACTION_SKIP_ALARM
@@ -71,29 +86,17 @@ class AlarmReceiver : BroadcastReceiver() {
                 .setSound(alarmSound)
                 .addAction(R.drawable.custom_email_icon, "SKIP", skipPendingIntent)
                 .addAction(R.drawable.custom_pass_icon, "START", startPendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-            /* Create or update. */
-            val channel = NotificationChannel(
-                channelId,
-                channelName,
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-
-            channel.enableVibration(true)
-            channel.vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
-
-            builder.setChannelId(channelId)
-
-            notificationManagerCompat.createNotificationChannel(channel)
-        }
-
-        builder.setAutoCancel(true) // Close the notification when clicked
+        builder.setChannelId(channelId)
+        builder.setAutoCancel(true)
         builder.setContentIntent(startPendingIntent)
 
         val notification = builder.build()
         notification.flags = NotificationCompat.FLAG_AUTO_CANCEL
+
+        val notificationManagerCompat =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManagerCompat.notify(ID_ONETIME, notification)
     }
 
@@ -103,6 +106,7 @@ class AlarmReceiver : BroadcastReceiver() {
         routineName: String,
         routineDetail: String,
     ) {
+        createNotificationChannel(context)
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
 

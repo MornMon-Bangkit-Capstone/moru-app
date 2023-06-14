@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
+import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityFillProfileBinding
-import com.capstone.moru.ui.MainActivity
 import java.util.*
 
 class FillProfileActivity : AppCompatActivity() {
@@ -36,14 +38,96 @@ class FillProfileActivity : AppCompatActivity() {
             false
         }
 
-        binding.btnNext.setOnClickListener {
-            val intentToBookPref = Intent(this, FillBookPrefActivity::class.java)
-            startActivity(intentToBookPref)
-        }
+        val items = listOf(
+            "Jogging",
+            "Running",
+            "Jumping Rope",
+            "Aerobic",
+            "Yoga",
+            "Weightlifting",
+            "Stationary Biking",
+            "Treadmill",
+            "Cycling",
+            "Dancing",
+            "Volleyball",
+            "Zumba",
+            "Badminton",
+            "Table Tennis",
+            "Taekwondo",
+            "Tennis",
+            "Swimming",
+            "Basketball",
+            "Golf",
+            "Football",
+            "Handball",
+            "Judo",
+            "Boxing",
+            "Muay Thai",
+            "Horseback Riding",
+            "Fencing",
+            "Hockey",
+            "Rugby",
+            "Wrestling",
+            "Pilates",
+            "Wall Climbing",
+            "Futsal",
+            "Candlestick",
+            "Donkey Kickback",
+            "Elliptical Training",
+            "Crunches",
+            "Shoulder Touch",
+            "Lunges",
+            "Leg Lifts",
+            "Stepping",
+            "Scissor Kick",
+            "Windmill",
+            "Calf Raises",
+            "Plank",
+            "Side Plank",
+            "Jumping Jack",
+            "Squat",
+            "Push-up",
+            "Sit-up",
+            "Ball Crunch",
+            "Tucks Jump",
+            "Mountain Climbers",
+            "Stair Climbing",
+            "Bridge",
+            "Gym"
+        )
+
+        val adapter = ArrayAdapter(this, R.layout.list_item, items)
+        binding.dropdownMenu.setAdapter(adapter)
+        binding.dropdownMenu.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                binding.edNameExercise.isHintEnabled = p0.isNullOrEmpty()
+
+            }
+
+        })
 
         binding.birth.setOnClickListener {
             dateDialog()
         }
+
+        binding.btnNext.setOnClickListener {
+            var name = binding.name.text.toString()
+            var birthDate = binding.birth.text.toString()
+            var goals = binding.edDescgoals.text.toString()
+            var favExercise = binding.dropdownMenu.text.toString()
+            var favBookName = binding.edFavAuthor.text.toString()
+
+        }
+
+
 
     }
 
@@ -57,13 +141,15 @@ class FillProfileActivity : AppCompatActivity() {
             { view, yearPicked, monthOfYear, dayOfMonth ->
                 val dateText = dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year
                 binding.birth.text = Editable.Factory.getInstance()
-                    .newEditable("$dayOfMonth-$monthOfYear-$yearPicked")
+                    .newEditable("$yearPicked-$monthOfYear-$dayOfMonth")
             },
             year, month, day
         )
 
         datePickerDialog.show()
     }
+
+
 
     private fun disableEditText() {
         binding.birth.inputType = InputType.TYPE_NULL
@@ -72,4 +158,5 @@ class FillProfileActivity : AppCompatActivity() {
     private fun setupView() {
         supportActionBar?.hide()
     }
+
 }

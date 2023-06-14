@@ -94,6 +94,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_register2" />
 
+
     <EditText
         android:id="@+id/ed_birth"
         style="@style/textStyleMedium"
@@ -108,12 +109,12 @@
         android:hint="@string/name_you_favorite_book"
         android:inputType="text"
         android:padding="16dp"
-        android:textSize="14sp"
         android:textColorHint="@color/grey"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_name" />
-
 
     <EditText
         android:id="@+id/ed_descgoals"

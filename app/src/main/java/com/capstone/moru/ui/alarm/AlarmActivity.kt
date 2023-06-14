@@ -2,11 +2,15 @@ package com.capstone.moru.ui.alarm
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.moru.data.api.response.ScheduleDetailListItem
 import com.capstone.moru.databinding.ActivityAlarmBinding
+import com.capstone.moru.ui.customview.CompleteRoutineDialog
+import com.capstone.moru.ui.customview.ContinueRoutineDialog
+import com.capstone.moru.ui.customview.FinishRoutineDialog
 import com.capstone.moru.ui.factory.ViewModelFactory
 import java.time.Duration
 import java.time.LocalDate
@@ -75,6 +79,19 @@ class AlarmActivity : AppCompatActivity() {
             initScheduleDetail(schedule)
         }
 
+        alarmViewModel.isLoading.observe(this){
+            showLoading(it)
+        }
+
+        binding.backBtnAlarm.setOnClickListener {
+            val continueRoutineDialog = ContinueRoutineDialog()
+            continueRoutineDialog.show(supportFragmentManager, "DialogContinue")
+        }
+
+        binding.btnFinish.setOnClickListener {
+            val finishRoutineDialog = FinishRoutineDialog()
+            finishRoutineDialog.show(supportFragmentManager, "DialogFinish")
+        }
     }
 
     private fun initScheduleDetail(schedule: List<ScheduleDetailListItem?>?) {
@@ -86,14 +103,14 @@ class AlarmActivity : AppCompatActivity() {
 
     private fun startCountdownTimer(duration: Int) {
         if (!isTimerRunning) {
-            val totalMinutes = duration.toLong() // Convert duration to minutes
+            val totalMinutes = duration.toLong()
             val totalMilliseconds =
-                totalMinutes * 60 * 1000L // Convert totalMinutes to milliseconds
+                totalMinutes * 60 * 1000L
             timer =
                 object : CountDownTimer(totalMilliseconds - elapsedTimeMinutes * 60 * 1000L, 1000) {
                     override fun onTick(millisUntilFinished: Long) {
                         elapsedTimeMinutes =
-                            (totalMilliseconds - millisUntilFinished) / (60 * 1000) // Update the elapsed time in minutes
+                            (totalMilliseconds - millisUntilFinished) / (60 * 1000)
                         val minutes = millisUntilFinished / 1000 / 60
                         val seconds = (millisUntilFinished / 1000) % 60
                         val countdownText = String.format("%02d : %02d", minutes, seconds)
@@ -102,12 +119,19 @@ class AlarmActivity : AppCompatActivity() {
 
                     override fun onFinish() {
                         binding.tvTimer.text = "00 : 00"
+
+                        val finishDialog = CompleteRoutineDialog()
+                        finishDialog.show(supportFragmentManager, "DialogComplete")
                         isTimerRunning = false
                     }
                 }
             timer?.start() // Start the countdown timer
             isTimerRunning = true
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun stopTimer() {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/custom_dialog_bg"
     android:padding="20dp"
@@ -10,6 +11,8 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="12dp"
         android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
@@ -21,7 +24,7 @@
             style="@style/textStyleSemiBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/finish_your"
+            android:text="@string/congrats_on_finishing"
             android:textSize="16sp" />
 
         <TextView
@@ -41,52 +44,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
-            android:text="@string/question_mark"
+            android:text="@string/marks"
             android:textAllCaps="false"
 
             android:textSize="16sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_home"
+        style="@style/buttonTextStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/custom_rounded_btn_bg"
+        android:backgroundTint="@color/orange"
+        android:elevation="0dp"
+        android:padding="12dp"
+        android:text="@string/back_to_home"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_no"
-            style="@style/buttonTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_border_button"
-            android:elevation="0dp"
-            android:padding="8dp"
-            android:text="@string/no"
-            android:textColor="@color/black"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/btn_yes"
-            style="@style/buttonTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_rounded_btn_bg"
-            android:elevation="0dp"
-            android:padding="6dp"
-            android:text="@string/yes"
-            android:textSize="12sp" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/textView9"
@@ -94,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="@string/we_recommend"
+        android:text="@string/keep_up"
         android:textAlignment="center"
         android:textColor="@color/grey"
         app:layout_constraintBottom_toBottomOf="parent"

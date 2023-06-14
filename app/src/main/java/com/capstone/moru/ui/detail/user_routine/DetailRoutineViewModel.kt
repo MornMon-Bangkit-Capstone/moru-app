@@ -146,57 +146,6 @@ class DetailRoutineViewModel(private var userRepository: UserRepository) : ViewM
         })
     }
 
-    fun updateSchedule(
-        token: String,
-        id: String,
-        type: String,
-        title: String,
-        date: String,
-        startTime: String,
-        endTime: String,
-        description: String,
-        isPublic: String,
-        refId: Int,
-    ) {
-        _isLoading.value = true
-        val formatToken = "Bearer $token"
-        val client = userRepository.updateUserSchedule(
-            formatToken,
-            id,
-            type,
-            title,
-            date,
-            startTime,
-            endTime,
-            description,
-            isPublic,
-            refId,
-        )
-
-        client.enqueue(object : Callback<DefaultResponse> {
-            override fun onResponse(
-                call: Call<DefaultResponse>,
-                response: Response<DefaultResponse>
-            ) {
-                _isLoading.value = false
-                if (response.isSuccessful) {
-                    _error.value = false
-                    _message.value = response.message()
-                } else {
-                    _error.value = true
-                    _message.value = "onFailure: ${response.message()} + ${response.code()}"
-                }
-            }
-
-            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                _error.value = true
-                _isLoading.value = false
-                _message.value = "onFailure: ${t.message.toString()}"
-            }
-
-        })
-    }
-
     fun deleteSchedule(
         token: String,
         id: Int,

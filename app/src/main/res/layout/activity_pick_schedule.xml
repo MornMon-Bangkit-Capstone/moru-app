@@ -67,7 +67,6 @@
         android:cursorVisible="false"
         android:focusableInTouchMode="false"
         android:hint="@string/date"
-
         android:padding="16dp"
         android:textColorHint="@color/grey"
         android:textSize="14sp"

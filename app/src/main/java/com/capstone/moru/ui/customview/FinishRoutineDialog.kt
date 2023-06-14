@@ -2,14 +2,12 @@ package com.capstone.moru.ui.customview
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import com.capstone.moru.R
-import com.capstone.moru.ui.auth.login.LoginActivity
 
-class FinishRoutineDialog: DialogFragment() {
+class FinishRoutineDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity.let {
@@ -24,11 +22,10 @@ class FinishRoutineDialog: DialogFragment() {
             val yesButton = view?.findViewById<Button>(R.id.btn_yes)
 
             noButton?.setOnClickListener {
-
+                dismiss()
             }
 
             yesButton?.setOnClickListener {
-
                 activity?.finish()
             }
 

@@ -65,7 +65,7 @@ class DetailBookActivity : AppCompatActivity() {
             listRoutine.genres.indexOf("[") + 1,
             listRoutine.genres.indexOf("]")
         )?.split(",")?.map {
-            it.trim()
+            it.trim().replace("^['\"]|['\"]$".toRegex(), "")
         }
         val formattedRating = getString(R.string.default_rating_book, listRoutine?.avgRating)
 

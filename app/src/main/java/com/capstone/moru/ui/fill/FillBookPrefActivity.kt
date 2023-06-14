@@ -18,9 +18,9 @@ class FillBookPrefActivity : AppCompatActivity() {
         _binding = ActivityFillBookPrefBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnNext.setOnClickListener {
-            val intentToExercisePref = Intent(this, FillExercisePrefActivity::class.java)
-            startActivity(intentToExercisePref)
-        }
+//        binding.btnNext.setOnClickListener {
+//            val intentToExercisePref = Intent(this, FillExercisePrefActivity::class.java)
+//            startActivity(intentToExercisePref)
+//        }
     }
 }

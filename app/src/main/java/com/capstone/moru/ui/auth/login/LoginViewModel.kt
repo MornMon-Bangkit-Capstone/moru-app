@@ -5,15 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.capstone.moru.data.api.response.LoginResponse
-import com.capstone.moru.data.api.response.LoginResult
 import com.capstone.moru.data.repository.UserRepository
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlinx.coroutines.launch
 
-class LoginViewModel(private var userRepository: UserRepository):ViewModel() {
+class LoginViewModel(private var userRepository: UserRepository) : ViewModel() {
     private val _user = MutableLiveData<com.capstone.moru.data.api.response.LoginResult?>()
     val user: LiveData<com.capstone.moru.data.api.response.LoginResult?> = _user
 
@@ -26,23 +24,25 @@ class LoginViewModel(private var userRepository: UserRepository):ViewModel() {
     private val _error = MutableLiveData<Boolean>()
     val error: LiveData<Boolean> = _error
 
-    fun userLogin(email:String, password: String){
+    fun userLogin(email: String, password: String) {
+        saveUserEmail(email)
         _isLoading.value = true
         val client = userRepository.loginUser(email, password)
         client.enqueue(
-            object : Callback<com.capstone.moru.data.api.response.LoginResponse>{
+            object : Callback<com.capstone.moru.data.api.response.LoginResponse> {
                 override fun onResponse(
                     call: Call<com.capstone.moru.data.api.response.LoginResponse>,
                     response: Response<com.capstone.moru.data.api.response.LoginResponse>
                 ) {
                     _isLoading.value = false
-                    if (response.isSuccessful){
+                    if (response.isSuccessful) {
                         Log.e(TAG, "loginUser: ${response.body()}")
 
                         _user.value = response.body()?.loginResult
                         saveUserToken(_user.value?.token)
+                        saveUserId(_user.value?.userId)
                         _error.value = false
-                    }else{
+                    } else {
                         Log.e(TAG, "On failure ${response.message()} + ${response.code()}")
 
                         _message.value = response.message()
@@ -50,7 +50,10 @@ class LoginViewModel(private var userRepository: UserRepository):ViewModel() {
                     }
                 }
 
-                override fun onFailure(call: Call<com.capstone.moru.data.api.response.LoginResponse>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<com.capstone.moru.data.api.response.LoginResponse>,
+                    t: Throwable
+                ) {
                     Log.e(TAG, "On failure ${t.message.toString()}")
 
                     _isLoading.value = false
@@ -61,15 +64,31 @@ class LoginViewModel(private var userRepository: UserRepository):ViewModel() {
         )
     }
 
-    fun saveUserToken(token: String?){
+    fun saveUserToken(token: String?) {
         viewModelScope.launch {
-           if (token != null){
-               userRepository.saveUserToken(token)
-           }
+            if (token != null) {
+                userRepository.saveUserToken(token)
+            }
         }
     }
 
-    companion object{
+    fun saveUserId(id: Int?) {
+        viewModelScope.launch {
+            if (id != null) {
+                userRepository.saveUserId(id)
+            }
+        }
+    }
+
+    fun saveUserEmail(email: String) {
+        viewModelScope.launch {
+            if (email != null) {
+                userRepository.saveUserEmail(email)
+            }
+        }
+    }
+
+    companion object {
         private const val TAG = "LoginViewModel"
 
     }

@@ -18,8 +18,6 @@ import retrofit2.Response
 
 
 class RoutineViewModel(private var userRepository: UserRepository) : ViewModel() {
-    lateinit var userExerciseRoutines: LiveData<PagingData<ExerciseRoutineModel>>
-    lateinit var userBooksRoutines: LiveData<PagingData<BooksRoutineModel>>
 
     private var _message = MutableLiveData<String>()
     var message: LiveData<String> = _message

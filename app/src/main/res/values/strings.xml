@@ -41,7 +41,7 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet consectetur. Egestas purus volutpat varius neque eros eleifend blandit et elit. Augue mattis eget laoreet diam pretium sed gravida ut nequ</string>
     <string name="image_routine">Image Routine</string>
     <string name="to_detail_routines">To Detail Routines</string>
-    <string name="good_morning">Good Morning</string>
+    <string name="good_morning">Welcome Back</string>
     <string name="waving_hand">Waving Hand</string>
     <string name="title_activity_alarm">AlarmActivity</string>
     <string name="first_fragment_label">First Fragment</string>
@@ -117,7 +117,7 @@
     <string name="question_mark">\?</string>
     <string name="morning_routines">morning routines</string>
     <string name="continue_your">Continue your</string>
-    <string name="continue_routine">Hey Krisna, let’s continue your morning routines for more productive and healthy life</string>
+    <string name="continue_routine">Hey, let’s continue your morning routines for more productive and healthy life</string>
     <string name="update_routine">Update Routine</string>
     <string name="delete_routine">Delete Routine</string>
     <string name="default_notes">This is my notes</string>
@@ -137,9 +137,9 @@
     <string name="tell_us_your">Tell Us Your</string>
     <string name="book">Book</string>
     <string name="preferences">Preferences</string>
-    <string name="name_you_favorite_book">Name You Favorite Book</string>
+    <string name="name_you_favorite_book">Name You Favorite Book (Only One)</string>
     <string name="workout_duration">Workout Duration</string>
-    <string name="name_your_favorite_exercise">Name Your Favorite Exercise (Pick One)</string>
+    <string name="name_your_favorite_exercise">Favorite Exercise</string>
     <string name="release_date">Release Date</string>
     <string name="default_release_date">2000</string>
     <string name="location">Location</string>
@@ -148,4 +148,16 @@
     <string name="there_is_no_schedule_in_this_day">There is no schedule in this day</string>
     <string name="subscribe_custom_routine">Please subscribe to add you own routine</string>
     <string name="subscribe_custom_routine_explaination">You will be able to add your own custom routine according your needs</string>
+    <string name="finish_your">Finish your</string>
+    <string name="we_recommend">Hey, we recommend you to finish your morning routines according to your schedule which may improve your discipline</string>
+    <string name="congrats_on_finishing">Congrats on finishing</string>
+    <string name="marks">!</string>
+    <string name="keep_up">Keep up your consistency and you will be more healthy and productive</string>
+    <string name="back_to_home">Back To Home</string>
+    <string name="your_recom">Your Recommendations</string>
+    <string name="summary_harry_pother"><![CDATA[The story follows the mysterious deaths of the Riddle family, the discovery of Voldemort\'s return, Harry\'s involvement in the Triwizard Tournament, the revelation of Barty Crouch Jr. as the imposter, and the denial of Voldemort\'s return by the Ministry of Magic, culminating in Harry\'s return to the Dursleys for the summer.]]></string>
+    <string name="harry_poter">Harry Potter and the Goblet of Fire</string>
+    <string name="fill_your_book_preferences">Fill Your Book Preferences</string>
+    <string name="fill_your_exercise_preferences">Fill Your Exercise Preferences</string>
+
 </resources>

@@ -4,15 +4,12 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.capstone.moru.R
 import com.capstone.moru.data.api.response.BookListItem
 import com.capstone.moru.databinding.ItemRoutinePickBinding
 import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleActivity
-import com.capstone.moru.ui.routines.adapter.BooksRoutineListAdapter
 import com.capstone.moru.utils.BookRoutineDiffUtil
 import com.capstone.moru.utils.PickBookRoutineDataClass
 
@@ -47,7 +44,7 @@ class PickBookRoutineAdapter(
             bookRoutine.genres.indexOf("[") + 1,
             bookRoutine.genres.indexOf("]")
         )?.split(",")?.map {
-            it.trim()
+            it.trim().replace("^['\"]|['\"]$".toRegex(), "")
         }
 
         Log.e("TEST", pickedRoutine?.size.toString())
@@ -64,7 +61,8 @@ class PickBookRoutineAdapter(
             onItemClickCallback.onItemClicked(bookRoutine)
 
             val book = "Book"
-            val intentToPickSchedule = Intent(holder.itemView.context, PickScheduleActivity::class.java)
+            val intentToPickSchedule =
+                Intent(holder.itemView.context, PickScheduleActivity::class.java)
             intentToPickSchedule.putExtra(KEY_BOOK_ROUTINE, bookRoutine?.bookTitle)
             intentToPickSchedule.putExtra(KEY_ID_BOOK, book)
 

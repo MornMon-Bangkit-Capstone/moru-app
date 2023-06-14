@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.capstone.moru.databinding.FragmentProfileBinding
-import com.capstone.moru.ui.auth.login.LoginActivity
 import com.capstone.moru.ui.customview.LogoutDialog
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.profile.profile_data.ProfileDataActivity
 
-class ProfileFragment : Fragment(){
+class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
@@ -44,8 +43,11 @@ class ProfileFragment : Fragment(){
             logoutDialog.show(parentFragmentManager, "Dialog")
 
         }
-    }
 
+        profileViewModel.getUserEmail().observe(viewLifecycleOwner) {
+            binding.tvEmail.text = it
+        }
+    }
 
     companion object {
 

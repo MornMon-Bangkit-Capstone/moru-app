@@ -1,6 +1,5 @@
 package com.capstone.moru.ui.alarm
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -69,22 +68,22 @@ class AlarmViewModel(private val userRepository: UserRepository) : ViewModel() {
         })
     }
 
-    fun getCurrentSchedule(token: String, date: String){
+    fun getCurrentSchedule(token: String, date: String) {
         _isLoading.value = true
         val formattedToken = "Bearer $token"
         val client = userRepository.getUserScheduleList(formattedToken, date)
-        client.enqueue(object: Callback<ScheduleListResponse>{
+        client.enqueue(object : Callback<ScheduleListResponse> {
             override fun onResponse(
                 call: Call<ScheduleListResponse>,
                 response: Response<ScheduleListResponse>
             ) {
                 _isLoading.value = false
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     _error.value = false
                     _schedule.value = response.body()?.list
 
                     _message.value = response.message()
-                }else{
+                } else {
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"
                 }
@@ -159,6 +158,57 @@ class AlarmViewModel(private val userRepository: UserRepository) : ViewModel() {
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
             }
+        })
+    }
+
+    fun updateSchedule(
+        token: String,
+        id: String,
+        type: String,
+        title: String,
+        date: String,
+        startTime: String,
+        endTime: String,
+        description: String,
+        isPublic: String,
+        refId: Int,
+    ) {
+        _isLoading.value = true
+        val formatToken = "Bearer $token"
+        val client = userRepository.updateUserSchedule(
+            formatToken,
+            id,
+            type,
+            title,
+            date,
+            startTime,
+            endTime,
+            description,
+            isPublic,
+            refId,
+        )
+
+        client.enqueue(object : Callback<DefaultResponse> {
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    _error.value = false
+                    _message.value = response.message()
+                } else {
+                    _error.value = true
+                    _message.value = "onFailure: ${response.message()} + ${response.code()}"
+                }
+            }
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                _error.value = true
+                _isLoading.value = false
+                _message.value = "onFailure: ${t.message.toString()}"
+            }
+
         })
     }
 

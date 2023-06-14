@@ -1,15 +1,14 @@
 package com.capstone.moru.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
-import androidx.paging.*
-import com.capstone.moru.data.api.response.*
-import com.capstone.moru.data.api.retrofit.ApiService
-import com.capstone.moru.data.datastore.SettingPreference
-import com.capstone.moru.data.db.model.BooksRoutineModel
-import com.capstone.moru.data.db.model.ExerciseRoutineModel
 //import com.capstone.moru.data.db.paging.BooksRoutineRemoteMediator
 //import com.capstone.moru.data.db.paging.ExerciseRoutineRemoteMediator
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import com.capstone.moru.data.api.response.BookListResponse
+import com.capstone.moru.data.api.response.DefaultResponse
+import com.capstone.moru.data.api.response.ExerciseListResponse
+import com.capstone.moru.data.api.retrofit.ApiService
+import com.capstone.moru.data.datastore.SettingPreference
 import com.capstone.moru.data.db.user_routine.UserRoutineDatabase
 import retrofit2.Call
 
@@ -33,6 +32,16 @@ class UserRepository(
         return apiService.loginUser(email, password)
     }
 
+    fun fillProfile(
+        token: String,
+        id: Int,
+        title: String,
+        goal: String,
+        birthDate: String
+    ): Call<DefaultResponse> {
+        return apiService.fillPersonalDataUser(token, id, title, goal, birthDate)
+    }
+
     fun getUserToken(): LiveData<String> {
         return preference.getUserToken().asLiveData()
     }
@@ -41,16 +50,42 @@ class UserRepository(
         return preference.saveUserToken(token)
     }
 
+    fun getUserId(): LiveData<Int> {
+        return preference.getUserId().asLiveData()
+    }
+
+    suspend fun saveUserId(id: Int) {
+        return preference.saveUserId(id)
+    }
+
+    fun getUserEmail(): LiveData<String>{
+        return preference.getEmailUser().asLiveData()
+    }
+
+    suspend fun saveUserEmail(email: String){
+        return preference.saveEmailUser(email)
+    }
+
+    fun getUserFillProfileStatus(): LiveData<Int>{
+        return preference.getFillProfile().asLiveData()
+    }
+
+    suspend fun saveUserFillProfileStatus(status: Int){
+        return preference.saveFillProfile(status)
+    }
+
     suspend fun logout() {
         return preference.clearCache()
     }
 
-    suspend fun setUserIsFirstTime(status: Boolean) {
-        return preference.setUserIsFirstTime(status)
+
+
+    fun getBookRecommendation(token: String): Call<BookListResponse> {
+        return apiService.getBookRecommendation(token)
     }
 
-    suspend fun getUserIsFirstTime(): LiveData<Boolean> {
-        return preference.getUserIsFirstTime().asLiveData()
+    fun getExerciseRecommendation(token: String): Call<ExerciseListResponse> {
+        return apiService.getExerciseRecommendation(token)
     }
 
     fun getAllExerciseRoutine(token: String): Call<com.capstone.moru.data.api.response.ExerciseListResponse> {
@@ -135,7 +170,10 @@ class UserRepository(
         )
     }
 
-    fun getUserScheduleList(token: String, date: String): Call<com.capstone.moru.data.api.response.ScheduleListResponse> {
+    fun getUserScheduleList(
+        token: String,
+        date: String
+    ): Call<com.capstone.moru.data.api.response.ScheduleListResponse> {
         return apiService.getUserScheduleList(token, date)
     }
 
@@ -146,7 +184,7 @@ class UserRepository(
         return apiService.getUserScheduleDetail(token, id)
     }
 
-    fun deleteUserSchedule(token: String, id: Int): Call<DefaultResponse>{
+    fun deleteUserSchedule(token: String, id: Int): Call<DefaultResponse> {
         return apiService.deleteUserSchedule(token, id)
     }
 

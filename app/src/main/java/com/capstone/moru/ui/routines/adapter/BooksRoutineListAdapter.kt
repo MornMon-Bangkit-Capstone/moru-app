@@ -33,9 +33,9 @@ class BooksRoutineListAdapter(private val listBookRoutine: List<com.capstone.mor
             routineBooks.genres.indexOf("[") + 1,
             routineBooks.genres.indexOf("]")
         )?.split(",")?.map {
-            it.trim()
+            it.trim().replace("^['\"]|['\"]$".toRegex(), "")
         }
-        val placeholder = holder.itemView.context.resources.getDrawable(R.drawable.placeholder_book)
+
 
         holder.apply {
 //            Glide.with(holder.itemView.context).load(routineBooks?.imageURLL)

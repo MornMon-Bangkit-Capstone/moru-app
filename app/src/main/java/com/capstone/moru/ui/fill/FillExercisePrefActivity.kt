@@ -16,9 +16,9 @@ class FillExercisePrefActivity : AppCompatActivity() {
         _binding = ActivityFillProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnNext.setOnClickListener {
-            val intentToLogin = Intent(this, LoginActivity::class.java)
-            startActivity(intentToLogin)
-        }
+//        binding.btnNext.setOnClickListener {
+//            val intentToLogin = Intent(this, LoginActivity::class.java)
+//            startActivity(intentToLogin)
+//        }
     }
 }

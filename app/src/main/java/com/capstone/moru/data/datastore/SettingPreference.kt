@@ -1,7 +1,10 @@
 package com.capstone.moru.data.datastore
 
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -20,27 +23,54 @@ class SettingPreference constructor(private val dataStore: DataStore<Preferences
         }
     }
 
-    suspend fun clearCache(){
+    suspend fun saveUserId(id: Int) {
+        dataStore.edit { preferences ->
+            preferences[USER_ID_KEY] = id
+        }
+    }
+
+    fun getUserId(): Flow<Int> {
+        return dataStore.data.map { preferences ->
+            preferences[USER_ID_KEY] ?: 0
+        }
+    }
+
+    suspend fun saveEmailUser(email: String) {
+        dataStore.edit { preferences ->
+            preferences[USER_EMAIL_KEY] = email
+        }
+    }
+
+    fun getEmailUser(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[USER_EMAIL_KEY] ?: ""
+        }
+    }
+
+    suspend fun saveFillProfile(status: Int) {
+        dataStore.edit { preferences ->
+            preferences[USER_FILL_PROFILE_KEY] = status
+        }
+    }
+
+    fun getFillProfile(): Flow<Int> {
+        return dataStore.data.map { preferences ->
+            preferences[USER_FILL_PROFILE_KEY] ?: 0
+        }
+    }
+
+    suspend fun clearCache() {
         dataStore.edit {
             it.clear()
         }
     }
 
-    suspend fun setUserIsFirstTime(status: Boolean){
-        dataStore.edit {
-            preferences -> preferences[USER_LOGGED_IN_STATUS] = status
-        }
-    }
-
-    suspend fun getUserIsFirstTime(): Flow<Boolean>{
-        return dataStore.data.map{
-            preferences -> preferences[USER_LOGGED_IN_STATUS] ?: false
-        }
-    }
-
     companion object {
         private val USER_TOKEN_KEY = stringPreferencesKey("user_token_key")
-        private val USER_LOGGED_IN_STATUS = booleanPreferencesKey("user_logged_in_status")
+        private val USER_ID_KEY = intPreferencesKey("user_id_key")
+        private val USER_EMAIL_KEY = stringPreferencesKey("user_email_key")
+        private val USER_FILL_PROFILE_KEY = intPreferencesKey("user_fill_profile_key")
+
 
         @Volatile
         private var INSTANCE: SettingPreference? = null

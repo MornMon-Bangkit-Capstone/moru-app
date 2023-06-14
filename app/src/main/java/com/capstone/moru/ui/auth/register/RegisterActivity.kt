@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (!Patterns.EMAIL_ADDRESS.matcher(p0!!).matches() && p0.isEmpty()) {
+                if (!Patterns.EMAIL_ADDRESS.matcher(p0!!).matches()) {
                     binding.edEmail.error = getString(R.string.wrong_email_format)
                     binding.btnRegister.isEnabled = false
                 } else {
@@ -77,6 +77,25 @@ class RegisterActivity : AppCompatActivity() {
             }
         })
 
+        binding.edPassConfirm.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0.toString().length < 8) {
+                    binding.edPassConfirm.error = getString(R.string.wrong_password_format)
+                    binding.btnRegister.isEnabled = false
+                } else {
+                    binding.btnRegister.isEnabled = true
+                }
+            }
+        })
+
         binding.btnRegister.setOnClickListener {
             val email = binding.edEmail.text.toString()
             val password = binding.edPass.text.toString()
@@ -89,30 +108,27 @@ class RegisterActivity : AppCompatActivity() {
                 val msg = getString(R.string.password_not_match)
                 displayToast(msg)
             } else {
-                val intentToFillProfile =
-                    Intent(this, FillProfileActivity::class.java)
-                startActivity(intentToFillProfile)
                 registerViewModel.userRegister(email, password, passwordConfirm)
-//                registerViewModel.error.observe(this) { error ->
-//                    if (!error) {
-//                        registerViewModel.user.observe(this) { user ->
-//                            if (user == "User Created") {
-//                                val msg = getString(R.string.register_success)
-//                                displayToast(msg)
-//
-//                                val intentToFillProfile =
-//                                    Intent(this, FillProfileActivity::class.java)
-//                                startActivity(intentToFillProfile)
-//                                finish()
-//                            }
-//                        }
-//                    } else {
-//                        registerViewModel.message.observe(this) { message ->
-//                            val msg = getString(R.string.register_failed)
-//                            displayToast("$msg\n$message")
-//                        }
-//                    }
-//                }
+                registerViewModel.error.observe(this) { error ->
+                    if (!error) {
+                        registerViewModel.user.observe(this) { user ->
+                            if (user == "User Created") {
+                                val msg = getString(R.string.register_success)
+                                displayToast(msg)
+
+                                val intentToFillProfile =
+                                    Intent(this, FillProfileActivity::class.java)
+                                startActivity(intentToFillProfile)
+                                finish()
+                            }
+                        }
+                    } else {
+                        registerViewModel.message.observe(this) { message ->
+                            val msg = getString(R.string.register_failed)
+                            displayToast("$msg\n$message")
+                        }
+                    }
+                }
             }
         }
 
