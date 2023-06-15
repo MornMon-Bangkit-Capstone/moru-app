@@ -42,12 +42,16 @@ setupRecyclerView()
             showLoading(it)
         }
 
+        homeViewModel.isLoading1.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+
         homeViewModel.schedule.observe(viewLifecycleOwner) { schedule ->
             initRecyclerView(schedule)
         }
 
         homeViewModel.error.observe(viewLifecycleOwner) {
-            retry(it)
+            noSchedule(it)
         }
 
         homeViewModel.getUsername().observe(viewLifecycleOwner) {
@@ -60,6 +64,10 @@ setupRecyclerView()
 
         homeViewModel.exerciseRoutine.observe(viewLifecycleOwner) { exercise ->
             initRecyclerViewExercise(exercise)
+        }
+
+        homeViewModel.error1.observe(viewLifecycleOwner){
+            retryButton(it)
         }
     }
 
@@ -91,7 +99,6 @@ setupRecyclerView()
         binding.rvSchedule.layoutManager = layoutManager
 
         val adapter = ScheduleListAdapter(schedule)
-
         binding.rvSchedule.adapter = adapter
         adapter.setOnItemClickCallback(object : ScheduleListAdapter.OnItemClickCallback {
             override fun onItemClicked(routineBooks: ScheduleListItem?) {
@@ -105,7 +112,6 @@ setupRecyclerView()
 
         val adapter = BooksRoutineListAdapter(routine)
         binding.rvRecomBook.adapter = adapter
-
         adapter.setOnItemClickCallback(object : BooksRoutineListAdapter.OnItemClickCallback {
             override fun onItemClicked(routineBooks: com.capstone.moru.data.api.response.BookListItem?) {
             }
@@ -125,7 +131,7 @@ setupRecyclerView()
         })
     }
 
-    private fun retry(it: Boolean?) {
+    private fun noSchedule(it: Boolean?) {
         if (it!!) {
             binding.progressBar.visibility = View.GONE
             binding.btnRetry.visibility = View.VISIBLE
@@ -135,8 +141,31 @@ setupRecyclerView()
         }
     }
 
+    private fun retryButton(it: Boolean?) {
+        if (it!!) {
+            binding.progressBar2.visibility = View.GONE
+            binding.btnRetry2.apply {
+                visibility = View.VISIBLE
+                isEnabled = true
+                setOnClickListener {
+                    homeViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
+                        homeViewModel.getBookRecommendation(token)
+                        homeViewModel.getExerciseRecommendation(token)
+                    }
+                    visibility = View.GONE
+                    isEnabled = false
+                }
+            }
+        } else {
+            binding.btnRetry2.apply {
+                visibility = View.GONE
+                isEnabled = false
+            }
+        }
+    }
+
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-        binding.btnRetry.visibility = if (isLoading) View.GONE else View.VISIBLE
+        binding.progressBar2.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

@@ -26,6 +26,15 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
     private var _error = MutableLiveData<Boolean>()
     var error: LiveData<Boolean> = _error
 
+    private var _message1 = MutableLiveData<String>()
+    var message1: LiveData<String> = _message1
+
+    private var _isLoading1 = MutableLiveData<Boolean>()
+    var isLoading1: LiveData<Boolean> = _isLoading1
+
+    private var _error1 = MutableLiveData<Boolean>()
+    var error1: LiveData<Boolean> = _error1
+
     private var _schedule = MutableLiveData<List<ScheduleListItem?>?>()
     var schedule: LiveData<List<ScheduleListItem?>?> = _schedule
 
@@ -51,7 +60,7 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
     }
 
     fun getExerciseRecommendation(token: String) {
-        _isLoading.value = true
+        _isLoading1.value = true
         val formatToken = "Bearer $token"
         val client = userRepository.getExerciseRecommendation(formatToken)
 
@@ -60,15 +69,15 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
                 call: Call<com.capstone.moru.data.api.response.ExerciseListResponse>,
                 response: Response<com.capstone.moru.data.api.response.ExerciseListResponse>
             ) {
-                _isLoading.value = false
+                _isLoading1.value = false
                 if (response.isSuccessful) {
-                    _error.value = false
-                    _message.value = response.message()
+                    _error1.value = false
+                    _message1.value = response.message()
 
                     _exerciseRoutine.value = response.body()?.list
                 } else {
-                    _error.value = true
-                    _message.value = "onFailure: ${response.message()} + ${response.code()}"
+                    _error1.value = true
+                    _message1.value = "onFailure: ${response.message()} + ${response.code()}"
                 }
             }
 
@@ -76,9 +85,9 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
                 call: Call<com.capstone.moru.data.api.response.ExerciseListResponse>,
                 t: Throwable
             ) {
-                _error.value = true
-                _isLoading.value = false
-                _message.value = "onFailure: ${t.message.toString()}"
+                _error1.value = true
+                _isLoading1.value = false
+                _message1.value = "onFailure: ${t.message.toString()}"
 
                 Log.e("RoutineViewModel", _message.value.toString())
             }
@@ -86,7 +95,7 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
     }
 
     fun getBookRecommendation(token: String) {
-        _isLoading.value = true
+        _isLoading1.value = true
         val formatToken = "Bearer $token"
         val client = userRepository.getBookRecommendation(formatToken)
 
@@ -96,15 +105,15 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
                 response: Response<com.capstone.moru.data.api.response.BookListResponse>
             ) {
 
-                _isLoading.value = false
+                _isLoading1.value = false
                 if (response.isSuccessful) {
-                    _error.value = false
-                    _message.value = response.message()
+                    _error1.value = false
+                    _message1.value = response.message()
 
                     _bookRoutine.value = response.body()?.list
                 } else {
-                    _error.value = true
-                    _message.value = "onFailure: ${response.message()} + ${response.code()}"
+                    _error1.value = true
+                    _message1.value = "onFailure: ${response.message()} + ${response.code()}"
 
                     Log.e("RoutineViewModel", _message.value.toString())
 
@@ -115,9 +124,9 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
                 call: Call<com.capstone.moru.data.api.response.BookListResponse>,
                 t: Throwable
             ) {
-                _error.value = true
-                _isLoading.value = false
-                _message.value = "onFailure: ${t.message.toString()}"
+                _error1.value = true
+                _isLoading1.value = false
+                _message1.value = "onFailure: ${t.message.toString()}"
 
                 Log.e("RoutineViewModel", _message.value.toString())
             }
