@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.capstone.moru.R
 import com.capstone.moru.data.api.response.ScheduleListItem
 import com.capstone.moru.databinding.ItemRoutineUserBinding
 import com.capstone.moru.ui.detail.user_routine.DetailUserBookRoutineActivity
@@ -40,9 +41,15 @@ class ScheduleListAdapter(private val listSchedule: List<ScheduleListItem?>?) :
                 "Skipped"
             }
         }
+
         holder.apply {
+            if (schedule?.type != "BOOK") {
+                binding.ivRoutine.setImageResource(R.drawable.placeholder_exercise)
+            }
+
             binding.tvRoutineName.text = schedule?.name
             binding.tvRoutineDetail.text = formatDetailSchedule
+            holder.binding.scheduleStatus.setStatus(schedule?.status!!)
             binding.scheduleStatus.text = formatStatus
         }
 

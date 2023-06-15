@@ -42,10 +42,18 @@ class UserRepository(
         favExercise: String,
         favAuthor: String,
     ): Call<DefaultResponse> {
-        return apiService.fillPersonalDataUser(token, title, goal, birthDate, favBook, favExercise, favAuthor)
+        return apiService.fillPersonalDataUser(
+            token,
+            title,
+            goal,
+            birthDate,
+            favBook,
+            favExercise,
+            favAuthor
+        )
     }
 
-    fun getUserProfile(token: String): Call<ProfileResponse>{
+    fun getUserProfile(token: String): Call<ProfileResponse> {
         return apiService.getUserProfile(token)
     }
 
@@ -65,35 +73,35 @@ class UserRepository(
         return preference.saveUserId(id)
     }
 
-    fun getUserEmail(): LiveData<String>{
+    fun getUserEmail(): LiveData<String> {
         return preference.getEmailUser().asLiveData()
     }
 
-    suspend fun saveUserEmail(email: String){
+    suspend fun saveUserEmail(email: String) {
         return preference.saveEmailUser(email)
     }
 
-    fun getUserFillProfileStatus(): LiveData<Int>{
+    fun getUserFillProfileStatus(): LiveData<Int> {
         return preference.getFillProfile().asLiveData()
     }
 
-    suspend fun saveUserFillProfileStatus(status: Int){
+    suspend fun saveUserFillProfileStatus(status: Int) {
         return preference.saveFillProfile(status)
     }
 
-    fun getUsername(): LiveData<String>{
+    fun getUsername(): LiveData<String> {
         return preference.getUsername().asLiveData()
     }
 
-    suspend fun saveUsername(username: String){
+    suspend fun saveUsername(username: String) {
         return preference.saveUsername(username)
     }
 
-    fun getUserAuthor(): LiveData<String>{
+    fun getUserAuthor(): LiveData<String> {
         return preference.getUserAuthor().asLiveData()
     }
 
-    suspend fun saveUserAuthor(author: String){
+    suspend fun saveUserAuthor(author: String) {
         return preference.saveUserAuthor(author)
     }
 
@@ -101,7 +109,7 @@ class UserRepository(
         return preference.clearCache()
     }
 
-    fun postBookRate(token: String, iSBN: String, bookRating: String): Call<DefaultResponse>{
+    fun postBookRate(token: String, iSBN: String, bookRating: String): Call<DefaultResponse> {
         return apiService.postBooKRating(token, iSBN, bookRating)
     }
 
@@ -195,7 +203,11 @@ class UserRepository(
         )
     }
 
-
+    fun updateScheduleAfterRoutine(
+        token: String, id: Int, status: String, durationMin: Int
+    ): Call<DefaultResponse> {
+        return apiService.updateScheduleAfterRoutine(token, id, status, durationMin)
+    }
 
     fun getUserScheduleList(
         token: String,

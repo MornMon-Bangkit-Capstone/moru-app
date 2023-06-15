@@ -152,6 +152,15 @@ interface ApiService {
         @Field("refId") refId: Int,
         ): Call<DefaultResponse>
 
+    @FormUrlEncoded
+    @PUT("schedule/{id}")
+    fun updateScheduleAfterRoutine(
+        @Header("Authorization") token: String,
+        @Path("id") id: Int,
+        @Field("status") status: String,
+        @Field("durationMin") durationMin: Int,
+    ): Call<DefaultResponse>
+
     @DELETE("schedule/{id}")
     fun deleteUserSchedule(
         @Header("Authorization") token: String,

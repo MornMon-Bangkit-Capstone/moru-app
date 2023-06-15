@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.alarm
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -197,6 +198,41 @@ class AlarmViewModel(private val userRepository: UserRepository) : ViewModel() {
                 if (response.isSuccessful) {
                     _error.value = false
                     _message.value = response.message()
+                } else {
+                    _error.value = true
+                    _message.value = "onFailure: ${response.message()} + ${response.code()}"
+                }
+            }
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                _error.value = true
+                _isLoading.value = false
+                _message.value = "onFailure: ${t.message.toString()}"
+            }
+
+        })
+    }
+
+    fun updateScheduleAfterRoutine(
+        token: String,
+        id: Int,
+        status: String,
+        durationMin: Int
+    ) {
+        _isLoading.value = true
+        val formatToken = "Bearer $token"
+        val client = userRepository.updateScheduleAfterRoutine(formatToken, id, status, durationMin)
+
+        client.enqueue(object : Callback<DefaultResponse> {
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful) {
+                    _error.value = false
+                    _message.value = response.message()
+                    Log.e("UPDATE", response.message().toString())
                 } else {
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"

@@ -5,12 +5,18 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.capstone.moru.R
 import com.capstone.moru.ui.MainActivity
+import com.capstone.moru.ui.alarm.AlarmViewModel
+import com.capstone.moru.ui.factory.ViewModelFactory
 
 class CompleteRoutineDialog : DialogFragment() {
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
         return activity.let {
             val builder = AlertDialog.Builder(it, R.style.TransparentDialogTheme)
             val inflater = requireActivity().layoutInflater

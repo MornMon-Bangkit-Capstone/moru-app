@@ -167,5 +167,8 @@ setupRecyclerView()
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.progressBar2.visibility = if (isLoading) View.VISIBLE else View.GONE
+//        binding.btnRetry.visibility = if (isLoading) View.GONE  else
+//        binding.btnRetry2.visibility = if (isLoading) View.GONE  else
+
     }
 }

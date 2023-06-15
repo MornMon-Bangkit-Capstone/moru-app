@@ -1,13 +1,17 @@
 package com.capstone.moru.ui.alarm
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.moru.data.api.response.ScheduleDetailListItem
 import com.capstone.moru.databinding.ActivityAlarmBinding
+import com.capstone.moru.ui.alarm.web_view.BookViewActivity
+import com.capstone.moru.ui.alarm.web_view.ExerciseVideoActivity
 import com.capstone.moru.ui.customview.CompleteRoutineDialog
 import com.capstone.moru.ui.customview.ContinueRoutineDialog
 import com.capstone.moru.ui.customview.FinishRoutineDialog
@@ -35,6 +39,9 @@ class AlarmActivity : AppCompatActivity() {
     private var timer: CountDownTimer? = null
     private var isTimerRunning: Boolean = false
     private var elapsedTimeMinutes: Long = 0
+    private var savedPathId: Int? = null
+    private var saveType: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +53,7 @@ class AlarmActivity : AppCompatActivity() {
 
         alarmViewModel.getUserToken().observe(this) { token ->
             saveToken = token
+
             alarmViewModel.getCurrentSchedule(token, selectedDate!!)
         }
 
@@ -59,6 +67,8 @@ class AlarmActivity : AppCompatActivity() {
                     if ((checkTime.isAfter(startTime) && checkTime.isBefore(endTime)) || (startTime == checkTime)) {
                         duration = Duration.between(startTime, endTime).toMinutes().toInt()
                         saveScheduleId = i?.refId
+                        saveType = i?.type
+                        savedPathId = i?.id
 
                         alarmViewModel.getUserScheduleDetail(saveToken!!, i?.id!!)
                         if (saveScheduleId!! > 100) {
@@ -79,18 +89,48 @@ class AlarmActivity : AppCompatActivity() {
             initScheduleDetail(schedule)
         }
 
-        alarmViewModel.isLoading.observe(this){
+        alarmViewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
         binding.backBtnAlarm.setOnClickListener {
-            val continueRoutineDialog = ContinueRoutineDialog()
+            val continueRoutineDialog = ContinueRoutineDialog(
+                saveToken!!,
+                savedPathId!!
+            )
             continueRoutineDialog.show(supportFragmentManager, "DialogContinue")
         }
 
         binding.btnFinish.setOnClickListener {
             val finishRoutineDialog = FinishRoutineDialog()
             finishRoutineDialog.show(supportFragmentManager, "DialogFinish")
+        }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val continueRoutineDialog = ContinueRoutineDialog(
+                    saveToken!!,
+                    saveScheduleId!!
+                )
+                continueRoutineDialog.show(supportFragmentManager, "DialogContinue")
+            }
+        })
+
+        binding.btnTutor.setOnClickListener {
+            if (saveType != "BOOK") {
+                alarmViewModel.exerciseRoutine.observe(this) {
+                    val intentToExerciseVideoActivity =
+                        Intent(this, ExerciseVideoActivity::class.java)
+                    intentToExerciseVideoActivity.putExtra(LINK_KEY, it?.video)
+                    startActivity(intentToExerciseVideoActivity)
+                }
+            } else {
+                alarmViewModel.bookRoutine.observe(this) {
+                    val intentToBookViewActivity = Intent(this, BookViewActivity::class.java)
+                    intentToBookViewActivity.putExtra(LINK_KEY, it?.iSBN)
+                    startActivity(intentToBookViewActivity)
+                }
+            }
         }
     }
 
@@ -119,13 +159,19 @@ class AlarmActivity : AppCompatActivity() {
 
                     override fun onFinish() {
                         binding.tvTimer.text = "00 : 00"
+                        alarmViewModel.updateScheduleAfterRoutine(
+                            saveToken!!,
+                            savedPathId!!,
+                            "COMPLETED",
+                            duration
+                        )
 
                         val finishDialog = CompleteRoutineDialog()
                         finishDialog.show(supportFragmentManager, "DialogComplete")
                         isTimerRunning = false
                     }
                 }
-            timer?.start() // Start the countdown timer
+            timer?.start()
             isTimerRunning = true
         }
     }
@@ -145,5 +191,9 @@ class AlarmActivity : AppCompatActivity() {
 
     private fun setupView() {
         supportActionBar?.hide()
+    }
+
+    companion object {
+        const val LINK_KEY = "link_key"
     }
 }

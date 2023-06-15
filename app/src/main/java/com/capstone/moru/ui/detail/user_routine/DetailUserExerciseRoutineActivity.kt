@@ -112,6 +112,7 @@ class DetailUserExerciseRoutineActivity : AppCompatActivity() {
             }
         }
 
+        binding.customStatus.setStatus(scheduleItem?.status!!)
         binding.customStatus.text = formatStatus
         binding.tvDateRoutine.text = scheduleItem?.date
         binding.tvStartTimeRoutine.text = scheduleItem?.startTime

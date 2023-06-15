@@ -25,7 +25,6 @@ class CustomStatus : androidx.appcompat.widget.AppCompatTextView {
         defStyleAttr
     ) {
         init()
-
     }
 
 

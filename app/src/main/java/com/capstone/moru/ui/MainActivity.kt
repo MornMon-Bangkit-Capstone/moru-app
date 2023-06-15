@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityMainBinding
 import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineActivity
+import com.capstone.moru.ui.alarm.receiver.AlarmReceiver
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.fill.FillProfileActivity
 import com.capstone.moru.ui.home.HomeViewModel
@@ -46,10 +47,28 @@ class MainActivity : AppCompatActivity() {
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupView()
 
         factory = ViewModelFactory.getInstance(this)
+
+        AlarmReceiver().createNotificationChannel(this)
+
+        homeViewModel.getUserToken().observe(this) { token ->
+            homeViewModel.getUserProfile(token)
+            homeViewModel.profile.observe(this) { profile ->
+                if (!token.isNullOrEmpty() && profile.username == null) {
+//                    homeViewModel.getFillProfileStatus().observe(this) {
+//                        if (it == 2) {
+//                            val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
+//                            startActivity(intentToFillProfile)
+//                        }
+//                    }
+                    val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
+                    startActivity(intentToFillProfile)
+                }
+            }
+        }
+
         val navView: BottomNavigationView = binding.navView
         val navViewController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration.Builder(
@@ -77,22 +96,6 @@ class MainActivity : AppCompatActivity() {
         binding.fabAddRoutine.setOnClickListener {
             val intentToAddRoutine = Intent(this, GetSubscriptionActivity::class.java)
             startActivity(intentToAddRoutine)
-        }
-
-        homeViewModel.getUserToken().observe(this) { token ->
-            homeViewModel.getUserProfile(token)
-            homeViewModel.profile.observe(this) { profile ->
-                if (!token.isNullOrEmpty() && profile.username == null) {
-//                    homeViewModel.getFillProfileStatus().observe(this) {
-//                        if (it == 2) {
-//                            val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
-//                            startActivity(intentToFillProfile)
-//                        }
-//                    }
-                    val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
-                    startActivity(intentToFillProfile)
-                }
-            }
         }
     }
 

@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
-import android.os.Build
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -36,7 +35,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun createNotificationChannel(context: Context) {
+    fun createNotificationChannel(context: Context) {
         val channel = NotificationChannel(
             channelId,
             channelName,
@@ -54,9 +53,9 @@ class AlarmReceiver : BroadcastReceiver() {
         notificationManagerCompat.createNotificationChannel(channel)
     }
 
-//    notificationManagerCompat.createNotificationChannel(channel)
-
     private fun showNotification(context: Context, routineName: String, routineDetail: String) {
+
+//        createNotificationChannel(context)
 
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
 
@@ -86,7 +85,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 .setSound(alarmSound)
                 .addAction(R.drawable.custom_email_icon, "SKIP", skipPendingIntent)
                 .addAction(R.drawable.custom_pass_icon, "START", startPendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         builder.setChannelId(channelId)
         builder.setAutoCancel(true)
@@ -106,7 +105,6 @@ class AlarmReceiver : BroadcastReceiver() {
         routineName: String,
         routineDetail: String,
     ) {
-        createNotificationChannel(context)
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
 

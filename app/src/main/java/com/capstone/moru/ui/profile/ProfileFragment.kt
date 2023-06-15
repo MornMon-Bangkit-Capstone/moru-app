@@ -53,8 +53,5 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    companion object {
-
-    }
 
 }

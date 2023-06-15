@@ -97,7 +97,6 @@ class SettingPreference constructor(private val dataStore: DataStore<Preferences
         private val USER_FILL_PROFILE_KEY = intPreferencesKey("user_fill_profile_key")
         private val USER_AUTHOR_KEY = stringPreferencesKey("user_author_key")
 
-
         @Volatile
         private var INSTANCE: SettingPreference? = null
 
