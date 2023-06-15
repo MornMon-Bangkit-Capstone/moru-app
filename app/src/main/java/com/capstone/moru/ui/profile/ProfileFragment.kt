@@ -47,6 +47,10 @@ class ProfileFragment : Fragment() {
         profileViewModel.getUserEmail().observe(viewLifecycleOwner) {
             binding.tvEmail.text = it
         }
+
+        profileViewModel.getUsername().observe(viewLifecycleOwner){
+            binding.tvName.text = it
+        }
     }
 
     companion object {

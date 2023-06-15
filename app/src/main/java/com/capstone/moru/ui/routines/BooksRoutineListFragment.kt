@@ -124,7 +124,6 @@ class BooksRoutineListFragment : Fragment() {
             override fun onItemClicked(routineBooks: com.capstone.moru.data.api.response.BookListItem?) {
             }
         })
-
     }
 
     private fun showLoading(isLoading: Boolean) {

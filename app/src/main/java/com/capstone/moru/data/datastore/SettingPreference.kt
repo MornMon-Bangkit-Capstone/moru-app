@@ -47,6 +47,30 @@ class SettingPreference constructor(private val dataStore: DataStore<Preferences
         }
     }
 
+    suspend fun saveUsername(username: String) {
+        dataStore.edit { preferences ->
+            preferences[USERNAME_KEY] = username
+        }
+    }
+
+    fun getUsername(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[USERNAME_KEY] ?: ""
+        }
+    }
+
+    suspend fun saveUserAuthor(author: String) {
+        dataStore.edit { preferences ->
+            preferences[USER_AUTHOR_KEY] = author
+        }
+    }
+
+    fun getUserAuthor(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[USER_AUTHOR_KEY] ?: ""
+        }
+    }
+
     suspend fun saveFillProfile(status: Int) {
         dataStore.edit { preferences ->
             preferences[USER_FILL_PROFILE_KEY] = status
@@ -69,7 +93,9 @@ class SettingPreference constructor(private val dataStore: DataStore<Preferences
         private val USER_TOKEN_KEY = stringPreferencesKey("user_token_key")
         private val USER_ID_KEY = intPreferencesKey("user_id_key")
         private val USER_EMAIL_KEY = stringPreferencesKey("user_email_key")
+        private val USERNAME_KEY = stringPreferencesKey("username_key")
         private val USER_FILL_PROFILE_KEY = intPreferencesKey("user_fill_profile_key")
+        private val USER_AUTHOR_KEY = stringPreferencesKey("user_author_key")
 
 
         @Volatile

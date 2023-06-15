@@ -100,6 +100,7 @@ class LoginActivity : AppCompatActivity() {
                             if (!user?.token.isNullOrEmpty()) {
                                 val intentToMain = Intent(this, MainActivity::class.java)
                                 startActivity(intentToMain)
+                                loginViewModel.saveUserFillProfileStatus(2)
                                 finish()
                             }
                         }

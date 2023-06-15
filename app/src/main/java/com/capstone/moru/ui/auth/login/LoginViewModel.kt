@@ -24,6 +24,12 @@ class LoginViewModel(private var userRepository: UserRepository) : ViewModel() {
     private val _error = MutableLiveData<Boolean>()
     val error: LiveData<Boolean> = _error
 
+    fun saveUserFillProfileStatus(status: Int) {
+        viewModelScope.launch {
+            userRepository.saveUserFillProfileStatus(status)
+        }
+    }
+
     fun userLogin(email: String, password: String) {
         saveUserEmail(email)
         _isLoading.value = true

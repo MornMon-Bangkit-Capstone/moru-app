@@ -22,7 +22,7 @@ data class Data(
 	@field:SerializedName("goal")
 	val goal: String? = null,
 
-	@field:SerializedName("name")
+	@field:SerializedName("title")
 	val name: String? = null,
 
 	@field:SerializedName("userId")

@@ -41,15 +41,15 @@ class CustomStatus : androidx.appcompat.widget.AppCompatTextView {
 
     private fun updateStatus() {
         when (status) {
-            "completed" -> {
+            "COMPLETED" -> {
                 text = resources.getString(R.string.status_completed)
                 setTextColor(ContextCompat.getColor(context, R.color.green))
             }
-            "skipped" -> {
+            "SKIPPED" -> {
                 text = resources.getString(R.string.status_skipped)
                 setTextColor(ContextCompat.getColor(context, R.color.red))
             }
-            "not started" -> {
+            "NOT_STARTED" -> {
                 text = resources.getString(R.string.status_not_started)
                 setTextColor(ContextCompat.getColor(context, R.color.blue))
             }

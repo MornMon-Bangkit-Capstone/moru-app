@@ -26,19 +26,26 @@ interface ApiService {
     @POST("auth/fill/data")
     fun fillPersonalDataUser(
         @Header("Authorization") token: String,
-        @Path("id") id: Int,
-        @Field("title") name: String,
+        @Field("name") name: String,
         @Field("goal") goal: String,
         @Field("birthdate") birthDate: String,
-    ): Call<DefaultResponse>
+        @Field("favBook") favBook: String,
+        @Field("favExercise") favExercise: String,
+        @Field("favAuthor") favAuthor: String,
+        ): Call<DefaultResponse>
+
+    @GET("profile")
+    fun getUserProfile(
+        @Header("Authorization") token: String,
+        ): Call<ProfileResponse>
 
     @FormUrlEncoded
-    @GET("profile/{id}")
-    fun getProfileUser(
+    @POST("routine/bookrate")
+    fun postBooKRating(
         @Header("Authorization") token: String,
-        @Path("id") id: String
-    ): Call<ProfileResponse>
-
+        @Field("ISBN") iSBN: String,
+        @Field("bookRating") bookRating: String,
+    ): Call<DefaultResponse>
     // *USER*
 
     // *PAGINATION*
@@ -46,7 +53,6 @@ interface ApiService {
     fun getAllExercises(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null
-
     ): Call<ExerciseListResponse>
 
     @GET("routine/books")

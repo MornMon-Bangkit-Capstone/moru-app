@@ -1,7 +1,6 @@
 package com.capstone.moru.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.moru.data.api.response.ScheduleListItem
 import com.capstone.moru.databinding.FragmentHomeBinding
 import com.capstone.moru.ui.factory.ViewModelFactory
-import com.capstone.moru.ui.schedule.ScheduleViewModel
+import com.capstone.moru.ui.routines.adapter.BooksRoutineListAdapter
+import com.capstone.moru.ui.routines.adapter.ExerciseRoutineListAdapter
 import com.capstone.moru.ui.schedule.adapter.ScheduleListAdapter
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -31,10 +31,11 @@ class HomeFragment : Fragment() {
 
         factory = ViewModelFactory.getInstance(requireContext())
 
-        binding.rvSchedule.isNestedScrollingEnabled = false
-
+setupRecyclerView()
         homeViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
             homeViewModel.getCurrentSchedule(token, selectedDate!!)
+            homeViewModel.getBookRecommendation(token)
+            homeViewModel.getExerciseRecommendation(token)
         }
 
         homeViewModel.isLoading.observe(viewLifecycleOwner) {
@@ -48,6 +49,25 @@ class HomeFragment : Fragment() {
         homeViewModel.error.observe(viewLifecycleOwner) {
             retry(it)
         }
+
+        homeViewModel.getUsername().observe(viewLifecycleOwner) {
+            binding.textView4.text = it
+        }
+
+        homeViewModel.bookRoutine.observe(viewLifecycleOwner) { book ->
+            initRecyclerViewBook(book)
+        }
+
+        homeViewModel.exerciseRoutine.observe(viewLifecycleOwner) { exercise ->
+            initRecyclerViewExercise(exercise)
+        }
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvSchedule.isNestedScrollingEnabled = false
+        binding.rvRecomBook.isNestedScrollingEnabled = false
+        binding.rvRecomExercise.isNestedScrollingEnabled = false
+
     }
 
     override fun onCreateView(
@@ -75,6 +95,32 @@ class HomeFragment : Fragment() {
         binding.rvSchedule.adapter = adapter
         adapter.setOnItemClickCallback(object : ScheduleListAdapter.OnItemClickCallback {
             override fun onItemClicked(routineBooks: ScheduleListItem?) {
+            }
+        })
+    }
+
+    private fun initRecyclerViewBook(routine: List<com.capstone.moru.data.api.response.BookListItem?>?) {
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvRecomBook.layoutManager = layoutManager
+
+        val adapter = BooksRoutineListAdapter(routine)
+        binding.rvRecomBook.adapter = adapter
+
+        adapter.setOnItemClickCallback(object : BooksRoutineListAdapter.OnItemClickCallback {
+            override fun onItemClicked(routineBooks: com.capstone.moru.data.api.response.BookListItem?) {
+            }
+        })
+    }
+
+    private fun initRecyclerViewExercise(routine: List<com.capstone.moru.data.api.response.ExerciseListItem?>?) {
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvRecomExercise.layoutManager = layoutManager
+
+        val adapter = ExerciseRoutineListAdapter(routine)
+        binding.rvRecomExercise.adapter = adapter
+
+        adapter.setOnItemClickCallback(object : ExerciseRoutineListAdapter.OnItemClickCallback {
+            override fun onItemClicked(routineExercise: com.capstone.moru.data.api.response.ExerciseListItem?) {
             }
         })
     }

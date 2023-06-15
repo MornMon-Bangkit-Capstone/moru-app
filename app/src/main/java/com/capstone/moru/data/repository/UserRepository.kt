@@ -7,6 +7,7 @@ import androidx.lifecycle.asLiveData
 import com.capstone.moru.data.api.response.BookListResponse
 import com.capstone.moru.data.api.response.DefaultResponse
 import com.capstone.moru.data.api.response.ExerciseListResponse
+import com.capstone.moru.data.api.response.ProfileResponse
 import com.capstone.moru.data.api.retrofit.ApiService
 import com.capstone.moru.data.datastore.SettingPreference
 import com.capstone.moru.data.db.user_routine.UserRoutineDatabase
@@ -34,12 +35,18 @@ class UserRepository(
 
     fun fillProfile(
         token: String,
-        id: Int,
         title: String,
         goal: String,
-        birthDate: String
+        birthDate: String,
+        favBook: String,
+        favExercise: String,
+        favAuthor: String,
     ): Call<DefaultResponse> {
-        return apiService.fillPersonalDataUser(token, id, title, goal, birthDate)
+        return apiService.fillPersonalDataUser(token, title, goal, birthDate, favBook, favExercise, favAuthor)
+    }
+
+    fun getUserProfile(token: String): Call<ProfileResponse>{
+        return apiService.getUserProfile(token)
     }
 
     fun getUserToken(): LiveData<String> {
@@ -74,11 +81,29 @@ class UserRepository(
         return preference.saveFillProfile(status)
     }
 
+    fun getUsername(): LiveData<String>{
+        return preference.getUsername().asLiveData()
+    }
+
+    suspend fun saveUsername(username: String){
+        return preference.saveUsername(username)
+    }
+
+    fun getUserAuthor(): LiveData<String>{
+        return preference.getUserAuthor().asLiveData()
+    }
+
+    suspend fun saveUserAuthor(author: String){
+        return preference.saveUserAuthor(author)
+    }
+
     suspend fun logout() {
         return preference.clearCache()
     }
 
-
+    fun postBookRate(token: String, iSBN: String, bookRating: String): Call<DefaultResponse>{
+        return apiService.postBooKRating(token, iSBN, bookRating)
+    }
 
     fun getBookRecommendation(token: String): Call<BookListResponse> {
         return apiService.getBookRecommendation(token)
@@ -169,6 +194,8 @@ class UserRepository(
             refId,
         )
     }
+
+
 
     fun getUserScheduleList(
         token: String,
