@@ -116,9 +116,9 @@ class RegisterActivity : AppCompatActivity() {
                                 val msg = getString(R.string.register_success)
                                 displayToast(msg)
 
-                                val intentToFillProfile =
-                                    Intent(this, FillProfileActivity::class.java)
-                                startActivity(intentToFillProfile)
+                                val intentToLogin =
+                                    Intent(this, LoginActivity::class.java)
+                                startActivity(intentToLogin)
                                 finish()
                             }
                         }

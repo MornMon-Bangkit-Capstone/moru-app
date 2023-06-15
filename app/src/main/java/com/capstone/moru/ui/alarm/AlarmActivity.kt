@@ -61,7 +61,7 @@ class AlarmActivity : AppCompatActivity() {
             if (routine != null) {
                 for (i in routine) {
                     var startTime = LocalTime.parse(i?.startTime)
-                    var endTime = LocalTime.parse(i?.endTime)
+                    var endTime = startTime.plusMinutes(5)
                     var checkTime = LocalTime.parse(selectedTime)
 
                     if ((checkTime.isAfter(startTime) && checkTime.isBefore(endTime)) || (startTime == checkTime)) {

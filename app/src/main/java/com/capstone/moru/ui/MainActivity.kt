@@ -2,6 +2,7 @@ package com.capstone.moru.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -14,12 +15,16 @@ import androidx.navigation.ui.setupWithNavController
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityMainBinding
 import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineActivity
+import com.capstone.moru.ui.alarm.AlarmActivity
 import com.capstone.moru.ui.alarm.receiver.AlarmReceiver
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.fill.FillProfileActivity
 import com.capstone.moru.ui.home.HomeViewModel
 import com.capstone.moru.ui.subscription.GetSubscriptionActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
@@ -40,6 +45,10 @@ class MainActivity : AppCompatActivity() {
         AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim)
     }
     private var clicked: Boolean = false
+    private var formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-M-yyyy")
+    private var selectedDate: String? = LocalDate.now().format(formatter)
+    private var formatterTime: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+    private var selectedTime: String? = LocalTime.now().format(formatterTime)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         homeViewModel.getUserToken().observe(this) { token ->
             homeViewModel.getUserProfile(token)
+            homeViewModel.getCurrentSchedule(token, selectedDate!!)
             homeViewModel.profile.observe(this) { profile ->
                 if (!token.isNullOrEmpty() && profile.username == null) {
 //                    homeViewModel.getFillProfileStatus().observe(this) {
@@ -63,8 +73,25 @@ class MainActivity : AppCompatActivity() {
 //                            startActivity(intentToFillProfile)
 //                        }
 //                    }
+                    Log.e("PROFILE", "MASUK BERAPA KALI")
                     val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
                     startActivity(intentToFillProfile)
+
+                }
+            }
+        }
+
+        homeViewModel.schedule.observe(this) { routine ->
+            if (routine != null) {
+                for (i in routine) {
+                    var startTime = LocalTime.parse(i?.startTime).plusMinutes(1)
+                    var endTime = startTime.plusMinutes(5)
+                    var checkTime = LocalTime.parse(selectedTime)
+
+                    if (((checkTime.isAfter(startTime) && checkTime.isBefore(endTime)) || (startTime == checkTime)) && i?.status == "NOT_STARTED") {
+                        val intentAlarmActivity = Intent(this, AlarmActivity::class.java)
+                        startActivity(intentAlarmActivity)
+                    }
                 }
             }
         }

@@ -11,11 +11,13 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityFillProfileBinding
 import com.capstone.moru.ui.MainActivity
+import com.capstone.moru.ui.customview.ContinueRoutineDialog
 import com.capstone.moru.ui.factory.ViewModelFactory
 import java.util.*
 
@@ -41,6 +43,12 @@ class FillProfileActivity : AppCompatActivity() {
         factory = ViewModelFactory.getInstance(this)
         disableEditText()
         setupView()
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                displayToast("Please fill your profile")
+            }
+        })
 
         binding.name.setOnEditorActionListener { textView, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_NEXT || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER) {
