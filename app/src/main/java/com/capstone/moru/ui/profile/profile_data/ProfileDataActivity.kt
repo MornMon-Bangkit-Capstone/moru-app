@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.capstone.moru.R
 import com.capstone.moru.data.api.response.ProfileData
 import com.capstone.moru.databinding.ActivityProfileDataBinding
-import com.capstone.moru.databinding.FragmentProfileBinding
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.profile.ProfileViewModel
 import java.text.SimpleDateFormat
@@ -54,6 +54,8 @@ class ProfileDataActivity : AppCompatActivity() {
         binding.tvGoalsUser.text = it?.goal
         binding.tvBookUser.text =it?.favBook
         binding.tvExerciseUser.text = it?.favExercise
+        binding.tvAuthorUser.text = it?.favAuthor
+        Glide.with(this).load(it?.profilePicture).into(binding.ivProfile)
     }
 
     private fun showLoading(isLoading: Boolean) {

@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
     private var formatterTime: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
     private var selectedTime: String? = LocalTime.now().format(formatterTime)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

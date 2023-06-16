@@ -11,12 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.capstone.moru.data.api.response.ScheduleListItem
 import com.capstone.moru.databinding.FragmentHomeBinding
+import com.capstone.moru.ui.alarm.receiver.AlarmReceiver
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.routines.adapter.BooksRoutineListAdapter
 import com.capstone.moru.ui.routines.adapter.ExerciseRoutineListAdapter
 import com.capstone.moru.ui.schedule.adapter.ScheduleListAdapter
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -27,6 +30,8 @@ class HomeFragment : Fragment() {
     private var formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-M-yyyy")
     private var selectedDate: String? = LocalDate.now().format(formatter)
     private var emptyListRoutine: List<ScheduleListItem?>? = null
+    private lateinit var alarmReceiver: AlarmReceiver
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,6 +54,7 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.schedule.observe(viewLifecycleOwner) { schedule ->
+            refreshAlarm(schedule)
             initRecyclerView(schedule)
         }
 
@@ -171,10 +177,39 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun formatDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("d-M-yyyy", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("yyyy-M-d", Locale.getDefault())
+
+        val date = inputFormat.parse(inputDate)
+        return outputFormat.format(date)
+    }
+
+    private fun refreshAlarm(schedule: List<ScheduleListItem?>?) {
+        alarmReceiver.cancelAlarm(requireContext())
+
+        if (schedule != null) {
+            for (i in schedule) {
+                if (i?.status == "NOT_STARTED") {
+                    var formattedDate = formatDate(i.date!!)
+                    alarmReceiver.setOneTimeAlarm(
+                        requireContext(),
+                        formattedDate,
+                        i.name!!,
+                        i.startTime!!
+                    )
+                }
+            }
+        }
+    }
+
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.progressBar2.visibility = if (isLoading) View.VISIBLE else View.GONE
-        if (isLoading) binding.btnRetry.visibility = View.GONE
+        if (isLoading){
+            binding.btnRetry.visibility = View.GONE
+            binding.btnRetry2.visibility = View.GONE
+        }
 
 //        binding.btnRetry2.visibility = if (isLoading) View.GONE  else
 

@@ -37,11 +37,15 @@ data class ProfileData(
     @field:SerializedName("birthDate")
     val birthDate: String? = null,
 
+    @field:SerializedName("favAuthor")
+    val favAuthor: String? = null,
+
     @field:SerializedName("email")
     val email: String? = null,
 
     @field:SerializedName("fillData")
     val fillData: Int? = null,
+
 
     @field:SerializedName("username")
     val username: Any? = null

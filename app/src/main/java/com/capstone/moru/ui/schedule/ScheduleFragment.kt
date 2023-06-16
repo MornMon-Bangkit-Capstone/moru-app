@@ -12,10 +12,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.moru.data.api.response.ScheduleListItem
 import com.capstone.moru.databinding.FragmentScheduleBinding
+import com.capstone.moru.ui.alarm.receiver.AlarmReceiver
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.schedule.adapter.ScheduleListAdapter
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class ScheduleFragment : Fragment() {
     private var _binding: FragmentScheduleBinding? = null
@@ -27,6 +30,7 @@ class ScheduleFragment : Fragment() {
     private var selectedDate: String? = LocalDate.now().format(formatter)
     private var tokenUser: String? = null
     private var emptyListRoutine: List<ScheduleListItem?>? = null
+    private lateinit var alarmReceiver: AlarmReceiver
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +38,7 @@ class ScheduleFragment : Fragment() {
         factory = ViewModelFactory.getInstance(requireContext())
 
         binding.rvSchedule.isNestedScrollingEnabled = false
+        alarmReceiver = AlarmReceiver()
 
         binding.calendarView.setOnDateChangeListener(
             CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
@@ -46,7 +51,6 @@ class ScheduleFragment : Fragment() {
         scheduleViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
             tokenUser = token
             scheduleViewModel.getCurrentSchedule(token, selectedDate!!)
-            Log.e("Token", token.toString())
         }
 
         scheduleViewModel.isLoading.observe(viewLifecycleOwner) {
@@ -54,7 +58,7 @@ class ScheduleFragment : Fragment() {
         }
 
         scheduleViewModel.schedule.observe(viewLifecycleOwner) { schedule ->
-            Log.e("LIST SCHEDULE", schedule?.size.toString())
+            refreshAlarm(schedule)
             initRecyclerView(schedule)
         }
 
@@ -70,6 +74,24 @@ class ScheduleFragment : Fragment() {
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
         return binding.root
 
+    }
+
+    private fun refreshAlarm(schedule: List<ScheduleListItem?>?) {
+        alarmReceiver.cancelAlarm(requireContext())
+
+        if (schedule != null) {
+            for (i in schedule) {
+                if (i?.status == "NOT_STARTED") {
+                    var formattedDate = formatDate(i.date!!)
+                    alarmReceiver.setOneTimeAlarm(
+                        requireContext(),
+                        formattedDate,
+                        i.name!!,
+                        i.startTime!!
+                    )
+                }
+            }
+        }
     }
 
     private fun initRecyclerView(schedule: List<ScheduleListItem?>?) {
@@ -90,18 +112,6 @@ class ScheduleFragment : Fragment() {
     private fun retry(it: Boolean?) {
         if (it!!) {
             binding.progressBar.visibility = View.GONE
-//            binding.btnRetry.apply {
-//                visibility = View.VISIBLE
-//                isEnabled = true
-//
-//                setOnClickListener {
-//                    scheduleViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
-//                        scheduleViewModel.getCurrentSchedule(token, selectedDate!!)
-//                    }
-//                    visibility = View.GONE
-//                    isEnabled = false
-//                }
-//            }
             binding.btnRetry.visibility = View.VISIBLE
             initRecyclerView(emptyListRoutine)
         } else {
@@ -112,6 +122,14 @@ class ScheduleFragment : Fragment() {
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.btnRetry.visibility = if (isLoading) View.GONE else View.VISIBLE
+    }
+
+    private fun formatDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("d-M-yyyy", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("yyyy-M-d", Locale.getDefault())
+
+        val date = inputFormat.parse(inputDate)
+        return outputFormat.format(date)
     }
 
     private fun displayToast(msg: String) {

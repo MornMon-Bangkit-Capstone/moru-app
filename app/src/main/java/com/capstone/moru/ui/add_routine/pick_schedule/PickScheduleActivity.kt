@@ -125,7 +125,6 @@ class PickScheduleActivity : AppCompatActivity() {
             showLoading(it)
         }
 
-
     }
 
     private fun fillRoutine() {

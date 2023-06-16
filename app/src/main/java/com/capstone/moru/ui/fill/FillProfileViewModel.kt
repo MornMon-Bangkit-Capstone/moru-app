@@ -40,7 +40,7 @@ class FillProfileViewModel(private var userRepository: UserRepository) : ViewMod
 
     fun fillProfileUser(token: String, image: MultipartBody.Part) {
         val formatterToken = "Bearer $token"
-        _isLoading.value = false
+        _isLoading.value = true
         val client = userRepository.fillImageProfileUser(formatterToken, image)
         client.enqueue(object : Callback<DefaultResponse> {
             override fun onResponse(
@@ -86,6 +86,7 @@ class FillProfileViewModel(private var userRepository: UserRepository) : ViewMod
             favExercise,
             favAuthor
         )
+        _isLoading.value = true
         client.enqueue(object : Callback<DefaultResponse> {
             override fun onResponse(
                 call: Call<DefaultResponse>,
@@ -112,7 +113,8 @@ class FillProfileViewModel(private var userRepository: UserRepository) : ViewMod
 
     fun postBookRating(token: String, iSBN: String, bookRating: String) {
         val formatterToken = "Bearer $token"
-        val client = userRepository.postBookRate(token, iSBN, bookRating)
+        val client = userRepository.postBookRate(formatterToken, iSBN, bookRating)
+        _isLoading.value = true
         client.enqueue(object : Callback<DefaultResponse> {
             override fun onResponse(
                 call: Call<DefaultResponse>,
@@ -133,7 +135,6 @@ class FillProfileViewModel(private var userRepository: UserRepository) : ViewMod
                 _isLoading.value = false
                 _message.value = "onFailure: ${t.message.toString()}"
             }
-
         })
     }
 }

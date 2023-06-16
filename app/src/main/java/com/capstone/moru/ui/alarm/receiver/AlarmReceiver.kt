@@ -39,7 +39,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val channel = NotificationChannel(
             channelId,
             channelName,
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManager.IMPORTANCE_HIGH
         )
 
         channel.description = "This is default channel used for all other notifications"

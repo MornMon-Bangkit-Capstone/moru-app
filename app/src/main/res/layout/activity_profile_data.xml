@@ -29,11 +29,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_profile"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="32dp"
+        app:shapeAppearanceOverlay="@style/ImageView.Round"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/image_profile"
         android:src="@drawable/placeholder_profile_user"
         app:layout_constraintEnd_toEndOf="parent"

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.capstone.moru.databinding.FragmentProfileBinding
 import com.capstone.moru.ui.customview.LogoutDialog
 import com.capstone.moru.ui.factory.ViewModelFactory
@@ -50,6 +51,10 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.getUsername().observe(viewLifecycleOwner){
             binding.tvName.text = it
+        }
+
+        profileViewModel.getImageUser().observe(viewLifecycleOwner){
+            Glide.with(requireContext()).load(it).into(binding.ivProfile)
         }
     }
 

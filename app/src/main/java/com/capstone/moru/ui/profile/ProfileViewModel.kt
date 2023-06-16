@@ -44,6 +44,10 @@ class ProfileViewModel(private var userRepository: UserRepository): ViewModel() 
         return userRepository.getUsername()
     }
 
+    fun getImageUser(): LiveData<String> {
+        return userRepository.getImageUser()
+    }
+
     fun getUserProfile(token: String) {
         _isLoading.value = true
         val formattedToken = "Bearer $token"
