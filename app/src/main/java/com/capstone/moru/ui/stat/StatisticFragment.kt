@@ -74,6 +74,9 @@ class StatisticFragment : Fragment() {
             showLoading(it)
         }
 
+        scheduleViewModel.error.observe(viewLifecycleOwner) {
+            retry(it)
+        }
     }
 
     private fun resetValue(){
@@ -120,11 +123,10 @@ class StatisticFragment : Fragment() {
         binding.barChart.axisLeft.setDrawGridLines(false)
         binding.barChart.axisRight.setDrawAxisLine(false)
         binding.barChart.axisRight.setDrawGridLines(false)
-//        binding.barChart.xAxis.setDrawLabels(false)
+
         binding.barChart.axisLeft.setDrawLabels(false)
         binding.barChart.axisRight.setDrawLabels(false)
 
-        // Refresh the chart
         binding.barChart.invalidate()
     }
 
@@ -212,7 +214,12 @@ class StatisticFragment : Fragment() {
         }
     }
 
-    private fun displayToast(msg: String) {
-        return Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+    private fun retry(it: Boolean?) {
+        if (it!!) {
+            binding.progressBar.visibility = View.GONE
+            binding.btnRetry.visibility = View.VISIBLE
+        } else {
+            binding.btnRetry.visibility = View.GONE
+        }
     }
 }

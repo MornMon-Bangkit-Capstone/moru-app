@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.moru.data.repository.UserRepository
 import com.capstone.moru.di.Injection
-import com.capstone.moru.ui.add_routine.pick_routine.PickRoutineViewModel
-import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleViewModel
 import com.capstone.moru.ui.alarm.AlarmViewModel
 import com.capstone.moru.ui.auth.login.LoginViewModel
 import com.capstone.moru.ui.auth.register.RegisterViewModel
@@ -20,6 +18,7 @@ import com.capstone.moru.ui.routines.RoutineViewModel
 import com.capstone.moru.ui.schedule.ScheduleViewModel
 import com.capstone.moru.ui.splash.SplashViewModel
 
+@Suppress("UNCHECKED_CAST")
 class ViewModelFactory private constructor(
     private val userRepository: UserRepository
 ) : ViewModelProvider.NewInstanceFactory() {
@@ -56,12 +55,7 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(DetailExerciseViewModel::class.java) -> DetailExerciseViewModel(
                 userRepository
             ) as T
-            modelClass.isAssignableFrom(PickRoutineViewModel::class.java) -> PickRoutineViewModel(
-                userRepository
-            ) as T
-            modelClass.isAssignableFrom(PickScheduleViewModel::class.java) -> PickScheduleViewModel(
-                userRepository
-            ) as T
+
             modelClass.isAssignableFrom(ScheduleViewModel::class.java) -> ScheduleViewModel(
                 userRepository
             ) as T

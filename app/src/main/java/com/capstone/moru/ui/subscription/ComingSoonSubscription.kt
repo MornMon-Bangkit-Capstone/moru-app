@@ -2,9 +2,7 @@ package com.capstone.moru.ui.subscription
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityComingSoonSubscriptionBinding
-import com.capstone.moru.databinding.ActivityGetSubscriptionBinding
 
 class ComingSoonSubscription : AppCompatActivity() {
     private var _binding: ActivityComingSoonSubscriptionBinding? = null

@@ -16,8 +16,8 @@ import com.capstone.moru.ui.factory.ViewModelFactory
 class ContinueRoutineDialog(token: String, id: Int) : DialogFragment() {
     private lateinit var factory: ViewModelFactory
     private val alarmViewModel: AlarmViewModel by viewModels { factory }
-    var saveToken = token
-    var saveId = id
+    private var saveToken = token
+    private var saveId = id
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         factory = ViewModelFactory.getInstance(requireContext())

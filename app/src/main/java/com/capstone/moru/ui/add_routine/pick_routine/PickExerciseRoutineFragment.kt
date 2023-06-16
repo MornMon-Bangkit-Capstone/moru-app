@@ -122,8 +122,4 @@ class PickExerciseRoutineFragment : Fragment() {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
-    companion object {
-        const val KEY_EXERCISE_ROUTINE = "key_exercise_routine"
-        const val KEY_ID_EXERCISE = "key_id_exercise"
-    }
 }

@@ -88,15 +88,11 @@ class LoginViewModel(private var userRepository: UserRepository) : ViewModel() {
 
     fun saveUserEmail(email: String) {
         viewModelScope.launch {
-            if (email != null) {
-                userRepository.saveUserEmail(email)
-            }
+            userRepository.saveUserEmail(email)
         }
     }
 
     companion object {
         private const val TAG = "LoginViewModel"
-
     }
-
 }

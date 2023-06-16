@@ -16,7 +16,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class RoutineViewModel(private var userRepository: UserRepository) : ViewModel() {
 
     private var _message = MutableLiveData<String>()

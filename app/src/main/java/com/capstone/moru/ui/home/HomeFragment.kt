@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
     private var selectedDate: String? = LocalDate.now().format(formatter)
     private var emptyListRoutine: List<ScheduleListItem?>? = null
     private lateinit var alarmReceiver: AlarmReceiver
+    private var flag: Boolean? = false
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +56,7 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.schedule.observe(viewLifecycleOwner) { schedule ->
-            refreshAlarm(schedule)
+//            refreshAlarm(schedule)
             initRecyclerView(schedule)
         }
 
@@ -75,10 +76,17 @@ class HomeFragment : Fragment() {
 
         homeViewModel.bookRoutine.observe(viewLifecycleOwner) { book ->
             initRecyclerViewBook(book)
+            flag = (book.isNullOrEmpty())
+
+            Log.e("FLAG", flag.toString())
         }
 
         homeViewModel.exerciseRoutine.observe(viewLifecycleOwner) { exercise ->
             initRecyclerViewExercise(exercise)
+            flag = (exercise.isNullOrEmpty())
+
+            Log.e("FLAG", flag.toString())
+
         }
 
         homeViewModel.error1.observe(viewLifecycleOwner) {
@@ -161,16 +169,18 @@ class HomeFragment : Fragment() {
     private fun retryButton(it: Boolean?) {
         if (it!!) {
             binding.progressBar2.visibility = View.GONE
-            binding.btnRetry2.apply {
-                visibility = View.VISIBLE
-                isEnabled = true
-                setOnClickListener {
-                    homeViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
-                        homeViewModel.getBookRecommendation(token)
-                        homeViewModel.getExerciseRecommendation(token)
+            if (flag == true){
+                binding.btnRetry2.apply {
+                    visibility = View.VISIBLE
+                    isEnabled = true
+                    setOnClickListener {
+                        homeViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
+                            homeViewModel.getBookRecommendation(token)
+                            homeViewModel.getExerciseRecommendation(token)
+                        }
+                        visibility = View.GONE
+                        isEnabled = false
                     }
-                    visibility = View.GONE
-                    isEnabled = false
                 }
             }
         } else {

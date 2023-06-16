@@ -69,7 +69,6 @@ class DetailBookActivity : AppCompatActivity() {
         }
         val formattedRating = getString(R.string.default_rating_book, listRoutine?.avgRating)
 
-//        Glide.with(this).load(listRoutine?.imageURLL).into(binding.ivRoutine)
         binding.tvRoutineName.text = listRoutine?.bookTitle
         binding.customCategory.text = formattedRoutine?.firstOrNull()
         binding.tvDescriptionBook.text = listRoutine?.summary
@@ -91,8 +90,5 @@ class DetailBookActivity : AppCompatActivity() {
     companion object {
         const val KEY_BOOK_ROUTINE = "key_book_routine"
         const val KEY_ID_BOOK = "key_id_book"
-
-        const val KEY_BOOK = "key_book"
-        const val KEY_BOOK_TITLE = "key_book_title"
     }
 }

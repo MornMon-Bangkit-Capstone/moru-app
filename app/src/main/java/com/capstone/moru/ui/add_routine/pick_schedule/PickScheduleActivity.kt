@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -26,7 +25,6 @@ class PickScheduleActivity : AppCompatActivity() {
     private lateinit var alarmReceiver: AlarmReceiver
     private val cal = Calendar.getInstance()
     private var alarmDate: String? = null
-    private var routineId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +77,8 @@ class PickScheduleActivity : AppCompatActivity() {
                         R.string.fill_field
                     )
                     displayToast(msg)
-                } else {
+                }
+                else {
                     pickScheduleViewModel.postUserSchedule(
                         token,
                         type,
@@ -98,7 +97,12 @@ class PickScheduleActivity : AppCompatActivity() {
                             )
                             displayToast(msg)
 
-                            alarmReceiver.setOneTimeAlarm(this, alarmDate!!, routineName, startTime, )
+                            alarmReceiver.setOneTimeAlarm(
+                                this,
+                                alarmDate!!,
+                                routineName,
+                                startTime,
+                            )
                         } else {
                             pickScheduleViewModel.message.observe(this) { message ->
                                 val msg = getString(
@@ -124,7 +128,6 @@ class PickScheduleActivity : AppCompatActivity() {
         pickScheduleViewModel.isLoading.observe(this) {
             showLoading(it)
         }
-
     }
 
     private fun fillRoutine() {
@@ -141,19 +144,6 @@ class PickScheduleActivity : AppCompatActivity() {
             binding.edRoutineName.setText(bookName)
         }
     }
-
-//    private fun checkTime(startTime: String, endTime: String): Boolean {
-//        val formatter = DateTimeFormatter.ofPattern("HH.mm")
-//
-//        val start = LocalTime.parse(startTime, formatter)
-//        val end = LocalTime.parse(endTime, formatter)
-//
-//        val rangeStart = LocalTime.parse("04.00", formatter)
-//        val rangeEnd = LocalTime.parse("10.00", formatter)
-//
-//        return start.isAfter(rangeStart) && end.isBefore(rangeEnd) && start.isBefore(end) && end.isAfter(start)
-//    }
-
 
     private fun disableEditText() {
         binding.edDate.inputType = InputType.TYPE_NULL

@@ -2,7 +2,6 @@ package com.capstone.moru.ui.subscription
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityGetSubscriptionBinding
 
 class GetSubscriptionActivity : AppCompatActivity() {

@@ -1,5 +1,6 @@
 package com.capstone.moru.ui.alarm.web_view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.webkit.WebView
@@ -12,6 +13,7 @@ class ExerciseVideoActivity : AppCompatActivity() {
     private var _binding: ActivityExerciseVideoBinding? = null
     private val binding get() = _binding!!
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityExerciseVideoBinding.inflate(layoutInflater)

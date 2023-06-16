@@ -105,6 +105,8 @@
     <string name="wrong_email_format">Wrong email format</string>
     <string name="wrong_password_format">Password length must at least 8 character </string>
     <string name="fill_field">Please fill every field</string>
+    <string name="time_data">We recommend you to do your morning routines around 04.00 – 10.00 AM</string>
+
     <string name="incorrect_time">Please set your routine time correctly and still in the morning</string>
     <string name="wrong_credential">Wrong email or password</string>
     <string name="register_success">Register success</string>

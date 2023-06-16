@@ -51,8 +51,6 @@ class PickBookRoutineAdapter(
 
         val placeholder = holder.itemView.context.resources.getDrawable(R.drawable.placeholder_book)
         holder.apply {
-//            Glide.with(holder.itemView.context).load(bookRoutine?.imageURLL)
-//                .into(holder.binding.imageView).onLoadFailed(placeholder)
             binding.customCategory.text = formattedRoutine?.firstOrNull()
             binding.textView.text = bookRoutine?.bookTitle
         }
@@ -71,38 +69,7 @@ class PickBookRoutineAdapter(
 
             holder.itemView.context.startActivity(intentToPickSchedule)
         }
-
-//        holder.itemView.setOnClickListener {
-//            onItemClickCallback.onItemClicked(bookRoutine)
-//            updateItemSelected(holder, position, pickedRoutine)
-//        }
-//
-//        holder.binding.radioButton.setOnClickListener {
-//            onItemClickCallback.onItemClicked(bookRoutine)
-//            updateItemSelected(holder, position, pickedRoutine)
-//        }
     }
-
-//    private fun updateItemSelected(
-//        holder: ViewHolder,
-//        position: Int,
-//        pickedRoutine: List<PickBookRoutineDataClass?>?
-//    ) {
-//        if (selectedItemPosition != position && selectedItemPosition != -1) {
-//            val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
-//            prevHolder.let {
-//                val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
-//                prevRadioButton?.isChecked = false
-//                notifyItemChanged(selectedItemPosition)
-//            }
-//            holder.binding.radioButton.isChecked =
-//                pickedRoutine?.get(selectedItemPosition)?.isChecked!!
-//        }
-//
-//        selectedItemPosition = position
-//        pickedRoutine?.get(position)?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
-//        holder.binding.radioButton.isChecked = pickedRoutine[position]!!.isChecked
-//    }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback

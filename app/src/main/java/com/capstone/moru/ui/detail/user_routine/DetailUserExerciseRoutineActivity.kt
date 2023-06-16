@@ -38,8 +38,12 @@ class DetailUserExerciseRoutineActivity : AppCompatActivity() {
             popUpMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.deleteRoutine -> {
-                        Log.e("UPDATE", "UPDATE ROUTINE")
                         detailRoutineViewModel.deleteSchedule(saveToken!!, id)
+                        detailRoutineViewModel.error.observe(this) {
+                            if (!it) {
+                                displayToast("Your schedule successfully deleted")
+                            }
+                        }
                         finish()
                         true
                     }

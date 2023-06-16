@@ -1,7 +1,5 @@
 package com.capstone.moru.data.repository
 
-//import com.capstone.moru.data.db.paging.BooksRoutineRemoteMediator
-//import com.capstone.moru.data.db.paging.ExerciseRoutineRemoteMediator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.capstone.moru.data.api.response.BookListResponse
@@ -82,9 +80,6 @@ class UserRepository(
         return preference.saveEmailUser(email)
     }
 
-    fun getUserFillProfileStatus(): LiveData<Int> {
-        return preference.getFillProfile().asLiveData()
-    }
 
     suspend fun saveUserFillProfileStatus(status: Int) {
         return preference.saveFillProfile(status)

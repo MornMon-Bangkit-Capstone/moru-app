@@ -1,6 +1,7 @@
 package com.capstone.moru.ui.detail.user_routine
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -53,8 +54,6 @@ class DetailRoutineViewModel(private var userRepository: UserRepository) : ViewM
                 if (response.isSuccessful) {
                     _error.value = false
                     _schedule.value = response.body()?.list
-
-                    _message.value = response.message()
                 } else {
                     _error.value = true
                     _message.value = "onFailure: ${response.message()} + ${response.code()}"
@@ -177,5 +176,6 @@ class DetailRoutineViewModel(private var userRepository: UserRepository) : ViewM
         })
 
     }
+
 
 }

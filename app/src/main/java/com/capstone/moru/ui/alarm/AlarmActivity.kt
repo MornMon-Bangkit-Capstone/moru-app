@@ -43,7 +43,6 @@ class AlarmActivity : AppCompatActivity() {
     private var savedPathId: Int? = null
     private var saveType: String? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

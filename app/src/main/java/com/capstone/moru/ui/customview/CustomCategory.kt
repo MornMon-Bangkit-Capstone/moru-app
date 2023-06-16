@@ -34,18 +34,12 @@ class CustomCategory : androidx.appcompat.widget.AppCompatTextView {
 
     }
 
-    fun setCategory(category: String) {
-        this.category = category
-        updateCategory()
-    }
-
     override fun onDraw(canvas: Canvas?) {
 
         super.onDraw(canvas)
     }
 
     private fun init() {
-//        text = resources.getString(R.string.category_default)
         setTextColor(ContextCompat.getColor(context, R.color.orange))
         setBackgroundColor(
             ColorUtils.setAlphaComponent(

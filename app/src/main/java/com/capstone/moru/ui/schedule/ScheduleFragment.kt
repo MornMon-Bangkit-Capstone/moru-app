@@ -57,7 +57,7 @@ class ScheduleFragment : Fragment() {
         }
 
         scheduleViewModel.schedule.observe(viewLifecycleOwner) { schedule ->
-            refreshAlarm(schedule)
+//            refreshAlarm(schedule)
             initRecyclerView(schedule)
         }
 

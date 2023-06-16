@@ -3,17 +3,13 @@ package com.capstone.moru.ui.add_routine.pick_routine.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.capstone.moru.R
 import com.capstone.moru.data.api.response.ExerciseListItem
 import com.capstone.moru.databinding.ItemRoutinePickBinding
 import com.capstone.moru.ui.add_routine.pick_schedule.PickScheduleActivity
-import com.capstone.moru.ui.routines.adapter.ExerciseRoutineListAdapter
 import com.capstone.moru.utils.ExerciseRoutineDiffUtil
-import com.capstone.moru.utils.PickExerciseRoutineDataClass
 
 class PickExerciseRoutineAdapter(
     private val listExerciseRoutine: List<ExerciseListItem?>?,
@@ -57,33 +53,7 @@ class PickExerciseRoutineAdapter(
 
             holder.itemView.context.startActivity(intentToPickSchedule)
         }
-//
-//        holder.binding.radioButton.setOnClickListener {
-//            onItemClickCallback.onItemClicked(exerciseRoutine)
-//            updateItemSelected(holder, position, pickedRoutine)
-//        }
     }
-
-//    private fun updateItemSelected(
-//        holder: ViewHolder,
-//        position: Int,
-//        pickedRoutine: List<PickExerciseRoutineDataClass>?
-//    ) {
-//        if (selectedItemPosition != position && selectedItemPosition != -1) {
-//            val prevHolder = recyclerView.findViewHolderForAdapterPosition(selectedItemPosition)
-//            prevHolder.let {
-//                val prevRadioButton = it?.itemView?.findViewById<CheckBox>(R.id.radioButton)
-//                prevRadioButton?.isChecked = false
-//                notifyItemChanged(selectedItemPosition)
-//            }
-//            holder.binding.radioButton.isChecked =
-//                pickedRoutine?.get(selectedItemPosition)?.isChecked!!
-//        }
-//
-//        selectedItemPosition = position
-//        pickedRoutine?.get(position)?.isChecked = !pickedRoutine?.get(position)?.isChecked!!
-//        holder.binding.radioButton.isChecked = pickedRoutine[position]!!.isChecked
-//    }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback

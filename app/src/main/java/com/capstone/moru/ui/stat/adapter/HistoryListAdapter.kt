@@ -81,9 +81,4 @@ class HistoryListAdapter(private val listSchedule: List<ScheduleListItem?>?) :
     interface OnItemClickCallback {
         fun onItemClicked(routineBooks: com.capstone.moru.data.api.response.ScheduleListItem?)
     }
-
-
-    companion object {
-        const val KEY_ID_SCHEDULE = "key_id_schedule"
-    }
 }

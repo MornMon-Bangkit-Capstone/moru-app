@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -55,8 +56,6 @@ class AlarmReceiver : BroadcastReceiver() {
 
     private fun showNotification(context: Context, routineName: String, routineDetail: String) {
 
-//        createNotificationChannel(context)
-
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
 
         val startRoutineIntent = Intent(context, AlarmActivity::class.java)
@@ -68,23 +67,13 @@ class AlarmReceiver : BroadcastReceiver() {
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-//        val skipRoutineIntent = Intent(context, MainActivity::class.java)
-//        skipRoutineIntent.action = ACTION_SKIP_ALARM
-//        val skipPendingIntent = PendingIntent.getActivity(
-//            context,
-//            REQUEST_CODE_SKIP,
-//            skipRoutineIntent,
-//            PendingIntent.FLAG_UPDATE_CURRENT
-//        )
-
         val builder =
-            NotificationCompat.Builder(context, channelId).setSmallIcon(R.drawable.icon_day_time)
+            NotificationCompat.Builder(context, channelId).setSmallIcon(R.drawable.ic_run_24)
                 .setContentTitle(routineName).setContentText(routineDetail)
                 .setColor(ContextCompat.getColor(context, android.R.color.white))
                 .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
                 .setSound(alarmSound)
-//                .addAction(R.drawable.custom_email_icon, "SKIP", skipPendingIntent)
-                .addAction(R.drawable.custom_pass_icon, "START", startPendingIntent)
+                .addAction(R.drawable.ic_calendar_month_24, "START", startPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         builder.setChannelId(channelId)
@@ -105,6 +94,8 @@ class AlarmReceiver : BroadcastReceiver() {
         routineName: String,
         routineDetail: String,
     ) {
+        Log.e("ALARM", routineDetail)
+
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
 
@@ -124,6 +115,9 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val pendingIntent =
             PendingIntent.getBroadcast(context, ID_ONETIME, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        Log.e("CHECK ALARM", calendar.toString())
+        Log.e("CHECK ALARM2", calendar.timeInMillis.toString())
 
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
@@ -146,17 +140,11 @@ class AlarmReceiver : BroadcastReceiver() {
         alarmManager.cancel(pendingIntent)
     }
 
-    private fun displayToast(msg: String, context: Context) {
-        return Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-    }
-
     companion object {
         private const val ROUTINE_NAME = "routine_name"
         private const val ROUTINE_DETAIL = "routine_detail"
         private const val ID_ONETIME = 100
         private const val REQUEST_CODE_START = 1
-        private const val REQUEST_CODE_SKIP = 2
-        const val KEY_ID_SCHEDULE = "key_id_schedule"
         private const val ACTION_SKIP_ALARM = "com.capstone.moru.action.SKIP_ALARM"
         private const val ACTION_START_ALARM = "com.capstone.moru.action.START_ALARM"
     }

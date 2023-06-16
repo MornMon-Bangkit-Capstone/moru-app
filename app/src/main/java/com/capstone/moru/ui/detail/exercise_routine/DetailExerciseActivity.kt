@@ -89,8 +89,5 @@ class DetailExerciseActivity : AppCompatActivity() {
     companion object {
         const val KEY_EXERCISE_ROUTINE = "key_exercise_routine"
         const val KEY_ID_EXERCISE = "key_id_exercise"
-
-        const val KEY_EXERCISE = "key_book"
-        const val KEY_EXERCISE_TITLE = "key_book_title"
     }
 }

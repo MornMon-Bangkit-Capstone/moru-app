@@ -1,14 +1,11 @@
 package com.capstone.moru.ui.detail.user_routine
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.bumptech.glide.Glide
 import com.capstone.moru.R
 import com.capstone.moru.data.api.response.BookListItem
 import com.capstone.moru.data.api.response.ScheduleDetailListItem
@@ -37,8 +34,12 @@ class DetailUserBookRoutineActivity : AppCompatActivity() {
             popUpMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.deleteRoutine -> {
-                        Log.e("DELETE", "DELETE ROUTINE")
                         detailRoutineViewModel.deleteSchedule(saveToken!!, id)
+                        detailRoutineViewModel.error.observe(this) {
+                            if (!it) {
+                                displayToast("Your schedule successfully deleted")
+                            }
+                        }
                         finish()
                         true
                     }
@@ -73,10 +74,6 @@ class DetailUserBookRoutineActivity : AppCompatActivity() {
             showLoading(it)
         }
 
-        detailRoutineViewModel.message.observe(this){
-            displayToast(it)
-        }
-
         binding.ivBack.setOnClickListener {
             finish()
         }
@@ -91,7 +88,6 @@ class DetailUserBookRoutineActivity : AppCompatActivity() {
         }
         val formattedRating = getString(R.string.default_rating_book, listRoutine?.avgRating)
 
-        Glide.with(this).load(listRoutine?.imageURLL).into(binding.ivRoutine)
         binding.tvRoutineName.text = listRoutine?.bookTitle
         binding.customCategory.text = formattedRoutine?.firstOrNull()
         binding.tvDescriptionBook.text = listRoutine?.summary
@@ -117,7 +113,7 @@ class DetailUserBookRoutineActivity : AppCompatActivity() {
         binding.customStatus.text = formatStatus
         binding.tvDateRoutine.text = scheduleItem?.date
         binding.tvStartTimeRoutine.text = scheduleItem?.startTime
-        binding.tvStartTimeRoutine.text = scheduleItem?.endTime
+        binding.tvEndTimeRoutine.text = scheduleItem?.endTime
         binding.tvNotesRoutine.text = scheduleItem?.description
     }
 
