@@ -1,12 +1,14 @@
 package com.capstone.moru.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.capstone.moru.data.api.response.ScheduleListItem
 import com.capstone.moru.databinding.FragmentHomeBinding
 import com.capstone.moru.ui.factory.ViewModelFactory
@@ -31,7 +33,7 @@ class HomeFragment : Fragment() {
 
         factory = ViewModelFactory.getInstance(requireContext())
 
-setupRecyclerView()
+        setupRecyclerView()
         homeViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
             homeViewModel.getCurrentSchedule(token, selectedDate!!)
             homeViewModel.getBookRecommendation(token)
@@ -58,6 +60,12 @@ setupRecyclerView()
             binding.textView4.text = it
         }
 
+        homeViewModel.getImageUser().observe(viewLifecycleOwner){
+            Log.e("IMAGE", it)
+            Glide.with(this).load(it).into(binding.ivHeaderProfile)
+        }
+
+
         homeViewModel.bookRoutine.observe(viewLifecycleOwner) { book ->
             initRecyclerViewBook(book)
         }
@@ -66,7 +74,7 @@ setupRecyclerView()
             initRecyclerViewExercise(exercise)
         }
 
-        homeViewModel.error1.observe(viewLifecycleOwner){
+        homeViewModel.error1.observe(viewLifecycleOwner) {
             retryButton(it)
         }
     }
@@ -75,7 +83,6 @@ setupRecyclerView()
         binding.rvSchedule.isNestedScrollingEnabled = false
         binding.rvRecomBook.isNestedScrollingEnabled = false
         binding.rvRecomExercise.isNestedScrollingEnabled = false
-
     }
 
     override fun onCreateView(
@@ -167,7 +174,8 @@ setupRecyclerView()
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.progressBar2.visibility = if (isLoading) View.VISIBLE else View.GONE
-//        binding.btnRetry.visibility = if (isLoading) View.GONE  else
+        if (isLoading) binding.btnRetry.visibility = View.GONE
+
 //        binding.btnRetry2.visibility = if (isLoading) View.GONE  else
 
     }

@@ -1,6 +1,7 @@
 package com.capstone.moru.data.api.retrofit
 
 import com.capstone.moru.data.api.response.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 import java.util.*
@@ -38,6 +39,13 @@ interface ApiService {
     fun getUserProfile(
         @Header("Authorization") token: String,
         ): Call<ProfileResponse>
+
+    @Multipart
+    @POST("/auth/fill/image")
+    fun fillImageProfileUser(
+        @Header("Authorization") token: String,
+        @Part image: MultipartBody.Part,
+    ): Call<DefaultResponse>
 
     @FormUrlEncoded
     @POST("routine/bookrate")

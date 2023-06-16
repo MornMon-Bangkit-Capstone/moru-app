@@ -16,6 +16,11 @@
         <item name="fontFamily">@font/poppinssemibold</item>
     </style>
 
+    <style name="ImageView.Round" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="textStyleSemiBold">
         <item name="android:textColor">@color/black</item>
         <item name="fontFamily">@font/poppinssemibold</item>

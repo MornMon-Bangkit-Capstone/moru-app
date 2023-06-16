@@ -11,6 +11,7 @@ import com.capstone.moru.data.api.response.ProfileResponse
 import com.capstone.moru.data.api.retrofit.ApiService
 import com.capstone.moru.data.datastore.SettingPreference
 import com.capstone.moru.data.db.user_routine.UserRoutineDatabase
+import okhttp3.MultipartBody
 import retrofit2.Call
 
 class UserRepository(
@@ -97,12 +98,12 @@ class UserRepository(
         return preference.saveUsername(username)
     }
 
-    fun getUserAuthor(): LiveData<String> {
-        return preference.getUserAuthor().asLiveData()
+    fun getImageUser(): LiveData<String> {
+        return preference.getImageUser().asLiveData()
     }
 
-    suspend fun saveUserAuthor(author: String) {
-        return preference.saveUserAuthor(author)
+    suspend fun saveImageUser(author: String) {
+        return preference.saveImageUser(author)
     }
 
     suspend fun logout() {
@@ -225,6 +226,12 @@ class UserRepository(
 
     fun deleteUserSchedule(token: String, id: Int): Call<DefaultResponse> {
         return apiService.deleteUserSchedule(token, id)
+    }
+
+    fun fillImageProfileUser(
+        token: String, image: MultipartBody.Part,
+    ): Call<DefaultResponse> {
+        return apiService.fillImageProfileUser(token, image)
     }
 
 

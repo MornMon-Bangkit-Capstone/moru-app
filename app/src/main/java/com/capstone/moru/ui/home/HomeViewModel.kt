@@ -146,7 +146,11 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
                 if (response.isSuccessful) {
                     _error.value = false
                     _profile.value = response.body()?.data!!
+
                     saveUsername(response.body()?.data!!.username.toString())
+                    saveUserImage(response.body()?.data!!.profilePicture.toString())
+
+                    Log.e("IMAGE2", response.body()?.data!!.profilePicture.toString())
 
                     _message.value = response.message()
                 } else {
@@ -194,13 +198,23 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
         })
     }
 
-    fun saveUsername(username: String){
+    fun saveUsername(username: String) {
         viewModelScope.launch {
             userRepository.saveUsername(username)
         }
     }
 
-    fun getUsername(): LiveData<String>{
+    fun saveUserImage(imageUrl: String) {
+        viewModelScope.launch {
+            userRepository.saveImageUser(imageUrl)
+        }
+    }
+
+    fun getImageUser(): LiveData<String> {
+        return userRepository.getImageUser()
+    }
+
+    fun getUsername(): LiveData<String> {
         return userRepository.getUsername()
     }
 }

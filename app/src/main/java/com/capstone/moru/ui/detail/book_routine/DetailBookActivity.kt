@@ -69,7 +69,7 @@ class DetailBookActivity : AppCompatActivity() {
         }
         val formattedRating = getString(R.string.default_rating_book, listRoutine?.avgRating)
 
-        Glide.with(this).load(listRoutine?.imageURLL).into(binding.ivRoutine)
+//        Glide.with(this).load(listRoutine?.imageURLL).into(binding.ivRoutine)
         binding.tvRoutineName.text = listRoutine?.bookTitle
         binding.customCategory.text = formattedRoutine?.firstOrNull()
         binding.tvDescriptionBook.text = listRoutine?.summary

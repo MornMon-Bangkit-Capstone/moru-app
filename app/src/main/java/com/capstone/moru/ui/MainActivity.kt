@@ -2,7 +2,6 @@ package com.capstone.moru.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -45,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim)
     }
     private var clicked: Boolean = false
+    private var flagProfile: Boolean = true
+    private var savedToken: String? = null
     private var formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-M-yyyy")
     private var selectedDate: String? = LocalDate.now().format(formatter)
     private var formatterTime: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
@@ -63,21 +64,26 @@ class MainActivity : AppCompatActivity() {
         AlarmReceiver().createNotificationChannel(this)
 
         homeViewModel.getUserToken().observe(this) { token ->
+            savedToken = token
             homeViewModel.getUserProfile(token)
             homeViewModel.getCurrentSchedule(token, selectedDate!!)
-            homeViewModel.profile.observe(this) { profile ->
-                if (!token.isNullOrEmpty() && profile.username == null) {
+        }
+
+        homeViewModel.profile.observe(this) { profile ->
+            if (!savedToken.isNullOrEmpty() && profile.username == null) {
 //                    homeViewModel.getFillProfileStatus().observe(this) {
 //                        if (it == 2) {
 //                            val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
 //                            startActivity(intentToFillProfile)
 //                        }
 //                    }
-                    Log.e("PROFILE", "MASUK BERAPA KALI")
-                    val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
-                    startActivity(intentToFillProfile)
 
-                }
+               if (flagProfile){
+                   val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
+                   startActivity(intentToFillProfile)
+                   flagProfile = false
+               }
+
             }
         }
 

@@ -47,6 +47,18 @@ class SettingPreference constructor(private val dataStore: DataStore<Preferences
         }
     }
 
+    suspend fun saveImageUser(imageUrl: String) {
+        dataStore.edit { preferences ->
+            preferences[USER_PHOTO_KEY] = imageUrl
+        }
+    }
+
+    fun getImageUser(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[USER_PHOTO_KEY] ?: ""
+        }
+    }
+
     suspend fun saveUsername(username: String) {
         dataStore.edit { preferences ->
             preferences[USERNAME_KEY] = username
@@ -96,6 +108,8 @@ class SettingPreference constructor(private val dataStore: DataStore<Preferences
         private val USERNAME_KEY = stringPreferencesKey("username_key")
         private val USER_FILL_PROFILE_KEY = intPreferencesKey("user_fill_profile_key")
         private val USER_AUTHOR_KEY = stringPreferencesKey("user_author_key")
+        private val USER_PHOTO_KEY = stringPreferencesKey("user_photo_key")
+
 
         @Volatile
         private var INSTANCE: SettingPreference? = null

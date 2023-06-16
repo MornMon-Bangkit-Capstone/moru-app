@@ -2,6 +2,7 @@ package com.capstone.moru.ui.fill
 
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -12,6 +13,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.moru.R
@@ -19,6 +21,12 @@ import com.capstone.moru.databinding.ActivityFillProfileBinding
 import com.capstone.moru.ui.MainActivity
 import com.capstone.moru.ui.customview.ContinueRoutineDialog
 import com.capstone.moru.ui.factory.ViewModelFactory
+import com.capstone.moru.utils.reduceFileImage
+import com.capstone.moru.utils.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import java.util.*
 
 class FillProfileActivity : AppCompatActivity() {
@@ -27,6 +35,7 @@ class FillProfileActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private lateinit var factory: ViewModelFactory
     private val fillProfileViewModel: FillProfileViewModel by viewModels { factory }
+    private var getFile: File? = null
 
     private val cal = Calendar.getInstance()
     private var rating2: Float = 0.0F
@@ -49,6 +58,10 @@ class FillProfileActivity : AppCompatActivity() {
                 displayToast("Please fill your profile")
             }
         })
+
+        binding.ivProfile.setOnClickListener {
+            startGallery()
+        }
 
         binding.name.setOnEditorActionListener { textView, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_NEXT || keyEvent?.keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -158,13 +171,23 @@ class FillProfileActivity : AppCompatActivity() {
             var favBookName = binding.edFavBook.text.toString()
             var favAuthor = binding.edFavAuthor.text.toString()
 
-            if (name.isEmpty() || birthDate.isEmpty() || goals.isEmpty() || favExercise.isEmpty() || favBookName.isEmpty() || favAuthor.isEmpty() || rating2 == 0.0f || rating3 == 0.0f || rating4 == 0.0f) {
+
+            if (name.isEmpty() || birthDate.isEmpty() || goals.isEmpty() || favExercise.isEmpty() || favBookName.isEmpty() || favAuthor.isEmpty() || rating2 == 0.0f || rating3 == 0.0f || rating4 == 0.0f || getFile == null) {
                 val msg = getString(R.string.fill_field)
                 displayToast(msg)
             } else {
+                val file = reduceFileImage(getFile as File)
+                val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
+                val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                    KEY_IMAGE,
+                    file.name,
+                    requestImageFile
+                )
+
                 fillProfileViewModel.getUserId().observe(this) {id ->
                     fillProfileViewModel.getUserToken().observe(this) {
                         token ->
+                        fillProfileViewModel.fillProfileUser(token, imageMultipart)
                         fillProfileViewModel.fillUserProfile(token, name, birthDate, goals, favBookName, favExercise, favAuthor)
                         fillProfileViewModel.postBookRating(token, "613496744", rating2.toString())
                         fillProfileViewModel.postBookRating(token, "385504209", rating3.toString())
@@ -207,6 +230,26 @@ class FillProfileActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg = result.data?.data as Uri
+            selectedImg.let { uri ->
+                val myFile = uriToFile(uri, this@FillProfileActivity)
+                getFile = myFile
+                binding.ivProfile.setImageURI(uri)
+            }
+        }
+    }
+
+    private fun startGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
+    }
 
     private fun disableEditText() {
         binding.birth.inputType = InputType.TYPE_NULL
@@ -230,4 +273,7 @@ class FillProfileActivity : AppCompatActivity() {
         return Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
+    companion object{
+        const val KEY_IMAGE = "image"
+    }
 }
