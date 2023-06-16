@@ -17,7 +17,6 @@ import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickExerciseRoutine
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.routines.RoutineViewModel
 
-
 class PickExerciseRoutineFragment : Fragment() {
     private var _binding: FragmentPickExerciseRoutineBinding? = null
     private val binding get() = _binding!!

@@ -17,7 +17,6 @@ import com.capstone.moru.ui.add_routine.pick_routine.adapter.PickBookRoutineAdap
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.routines.RoutineViewModel
 
-
 class PickBooksRoutineFragment : Fragment() {
     private var _binding: FragmentPickBooksRoutineBinding? = null
     private val binding get() = _binding!!
