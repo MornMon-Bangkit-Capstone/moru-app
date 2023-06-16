@@ -2,6 +2,7 @@ package com.capstone.moru.ui.profile.profile_data
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
@@ -50,7 +51,7 @@ class ProfileDataActivity : AppCompatActivity() {
 
     private fun setUserProfile(it: ProfileData?) {
         binding.tvNameUser.text = it?.username.toString()
-        binding.tvBirthUser.text = formatDateString(it?.birthDate!!)
+        binding.tvBirthUser.text = formatDateString(it?.birthDate.toString())
         binding.tvGoalsUser.text = it?.goal
         binding.tvBookUser.text =it?.favBook
         binding.tvExerciseUser.text = it?.favExercise
@@ -71,8 +72,9 @@ class ProfileDataActivity : AppCompatActivity() {
     }
 
     private fun formatDateString(inputDateString: String): String {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        val outputFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        Log.e("DATE", inputDateString)
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd-M-yyyy", Locale.getDefault())
 
         try {
             val date = inputFormat.parse(inputDateString)
@@ -81,6 +83,6 @@ class ProfileDataActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        return "" // Return an empty string in case of an error
+        return ""
     }
 }

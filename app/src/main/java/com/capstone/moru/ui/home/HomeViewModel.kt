@@ -55,10 +55,6 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
         return userRepository.getUserToken()
     }
 
-    fun getFillProfileStatus(): LiveData<Int> {
-        return userRepository.getUserFillProfileStatus()
-    }
-
     fun getExerciseRecommendation(token: String) {
         _isLoading1.value = true
         val formatToken = "Bearer $token"
@@ -78,6 +74,8 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
                 } else {
                     _error1.value = true
                     _message1.value = "onFailure: ${response.message()} + ${response.code()}"
+
+                    Log.e("RECOM", _message1.value.toString())
                 }
             }
 
@@ -89,7 +87,7 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
                 _isLoading1.value = false
                 _message1.value = "onFailure: ${t.message.toString()}"
 
-                Log.e("RoutineViewModel", _message.value.toString())
+                Log.e("RoutineViewModel", _message1.value.toString())
             }
         })
     }
@@ -115,7 +113,7 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
                     _error1.value = true
                     _message1.value = "onFailure: ${response.message()} + ${response.code()}"
 
-                    Log.e("RoutineViewModel", _message.value.toString())
+                    Log.e("RECOM", _message1.value.toString())
 
                 }
             }
@@ -128,7 +126,8 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
                 _isLoading1.value = false
                 _message1.value = "onFailure: ${t.message.toString()}"
 
-                Log.e("RoutineViewModel", _message.value.toString())
+                Log.e("RECOM", _message1.value.toString())
+
             }
         })
     }
@@ -149,8 +148,6 @@ class HomeViewModel(private var userRepository: UserRepository) : ViewModel() {
 
                     saveUsername(response.body()?.data!!.username.toString())
                     saveUserImage(response.body()?.data!!.profilePicture.toString())
-
-                    Log.e("IMAGE2", response.body()?.data!!.profilePicture.toString())
 
                     _message.value = response.message()
                 } else {

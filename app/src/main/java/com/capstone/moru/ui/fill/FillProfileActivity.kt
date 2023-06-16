@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.capstone.moru.R
 import com.capstone.moru.databinding.ActivityFillProfileBinding
 import com.capstone.moru.ui.MainActivity
-import com.capstone.moru.ui.customview.ContinueRoutineDialog
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.utils.reduceFileImage
 import com.capstone.moru.utils.uriToFile
@@ -41,6 +40,7 @@ class FillProfileActivity : AppCompatActivity() {
     private var rating2: Float = 0.0F
     private var rating3: Float = 0.0F
     private var rating4: Float = 0.0F
+    private var flag: Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -171,7 +171,6 @@ class FillProfileActivity : AppCompatActivity() {
             var favBookName = binding.edFavBook.text.toString()
             var favAuthor = binding.edFavAuthor.text.toString()
 
-
             if (name.isEmpty() || birthDate.isEmpty() || goals.isEmpty() || favExercise.isEmpty() || favBookName.isEmpty() || favAuthor.isEmpty() || rating2 == 0.0f || rating3 == 0.0f || rating4 == 0.0f || getFile == null) {
                 val msg = getString(R.string.fill_field)
                 displayToast(msg)
@@ -184,31 +183,40 @@ class FillProfileActivity : AppCompatActivity() {
                     requestImageFile
                 )
 
-                fillProfileViewModel.getUserId().observe(this) {id ->
-                    fillProfileViewModel.getUserToken().observe(this) {
-                        token ->
+                fillProfileViewModel.getUserId().observe(this) { id ->
+                    fillProfileViewModel.getUserToken().observe(this) { token ->
                         fillProfileViewModel.fillProfileUser(token, imageMultipart)
-                        fillProfileViewModel.fillUserProfile(token, name, goals,birthDate, favBookName, favExercise, favAuthor)
+                        fillProfileViewModel.fillUserProfile(
+                            token,
+                            name,
+                            goals,
+                            birthDate,
+                            favBookName,
+                            favExercise,
+                            favAuthor
+                        )
                         fillProfileViewModel.postBookRating(token, "613496744", rating2.toString())
                         fillProfileViewModel.postBookRating(token, "385504209", rating3.toString())
                         fillProfileViewModel.postBookRating(token, "44023722", rating4.toString())
                     }
                 }
 
-                fillProfileViewModel.error.observe(this){
-                    if (!it){
+                fillProfileViewModel.error.observe(this) {
+                    if (!it) {
                         fillProfileViewModel.saveUserFillProfileStatus(1)
-
-                        val intentToMainActivity = Intent(this, MainActivity::class.java)
-                        intentToMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        startActivity(intentToMainActivity)
-                        finish()
+                        if (flag) {
+                            flag = false
+                            val intentToMainActivity = Intent(this, MainActivity::class.java)
+                            intentToMainActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intentToMainActivity)
+                            finish()
+                        }
                     }
                 }
             }
         }
 
-        fillProfileViewModel.isLoading.observe(this){
+        fillProfileViewModel.isLoading.observe(this) {
             showLoading(it)
         }
     }
@@ -223,6 +231,7 @@ class FillProfileActivity : AppCompatActivity() {
             { view, yearPicked, monthOfYear, dayOfMonth ->
                 binding.birth.text = Editable.Factory.getInstance()
                     .newEditable("$yearPicked-${monthOfYear + 1}-$dayOfMonth")
+                displayToast(binding.birth.text.toString())
             },
             year, month, day
         )
@@ -273,7 +282,7 @@ class FillProfileActivity : AppCompatActivity() {
         return Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
-    companion object{
+    companion object {
         const val KEY_IMAGE = "image"
     }
 }

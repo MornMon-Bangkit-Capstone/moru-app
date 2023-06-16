@@ -3,6 +3,7 @@ package com.capstone.moru.ui.alarm
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -61,7 +62,7 @@ class AlarmActivity : AppCompatActivity() {
             if (routine != null) {
                 for (i in routine) {
                     var startTime = LocalTime.parse(i?.startTime)
-                    var endTime = startTime.plusMinutes(5)
+                    var endTime =  LocalTime.parse(i?.endTime)
                     var checkTime = LocalTime.parse(selectedTime)
 
                     if ((checkTime.isAfter(startTime) && checkTime.isBefore(endTime)) || (startTime == checkTime)) {
@@ -102,7 +103,10 @@ class AlarmActivity : AppCompatActivity() {
         }
 
         binding.btnFinish.setOnClickListener {
-            val finishRoutineDialog = FinishRoutineDialog()
+            val finishRoutineDialog = FinishRoutineDialog(
+                saveToken!!,
+                savedPathId!!
+            )
             finishRoutineDialog.show(supportFragmentManager, "DialogFinish")
         }
 
@@ -142,6 +146,8 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     private fun startCountdownTimer(duration: Int) {
+        Log.e("DURATION", duration.toString())
+
         if (!isTimerRunning) {
             val totalMinutes = duration.toLong()
             val totalMilliseconds =

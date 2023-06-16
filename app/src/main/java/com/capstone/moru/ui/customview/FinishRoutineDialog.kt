@@ -11,9 +11,12 @@ import com.capstone.moru.R
 import com.capstone.moru.ui.alarm.AlarmViewModel
 import com.capstone.moru.ui.factory.ViewModelFactory
 
-class FinishRoutineDialog : DialogFragment() {
+class FinishRoutineDialog(token: String, id: Int) : DialogFragment() {
+
     private lateinit var factory: ViewModelFactory
     private val alarmViewModel: AlarmViewModel by viewModels { factory }
+    var saveToken = token
+    var saveId = id
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         factory = ViewModelFactory.getInstance(requireContext())
@@ -34,6 +37,7 @@ class FinishRoutineDialog : DialogFragment() {
             }
 
             yesButton?.setOnClickListener {
+                alarmViewModel.updateScheduleAfterRoutine(saveToken, saveId, "SKIPPED", 0)
                 activity?.finish()
             }
 

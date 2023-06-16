@@ -46,7 +46,6 @@ data class ProfileData(
     @field:SerializedName("fillData")
     val fillData: Int? = null,
 
-
     @field:SerializedName("username")
     val username: Any? = null
 )

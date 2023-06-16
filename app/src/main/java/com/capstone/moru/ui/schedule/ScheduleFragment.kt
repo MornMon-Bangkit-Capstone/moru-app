@@ -34,7 +34,6 @@ class ScheduleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("SCHEDULE", selectedDate.toString())
         factory = ViewModelFactory.getInstance(requireContext())
 
         binding.rvSchedule.isNestedScrollingEnabled = false

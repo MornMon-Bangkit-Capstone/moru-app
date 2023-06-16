@@ -12,6 +12,7 @@ import com.capstone.moru.databinding.FragmentProfileBinding
 import com.capstone.moru.ui.customview.LogoutDialog
 import com.capstone.moru.ui.factory.ViewModelFactory
 import com.capstone.moru.ui.profile.profile_data.ProfileDataActivity
+import com.capstone.moru.ui.subscription.ComingSoonSubscription
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
@@ -36,7 +37,11 @@ class ProfileFragment : Fragment() {
         binding.profileData.setOnClickListener {
             val intentToProfileData = Intent(requireContext(), ProfileDataActivity::class.java)
             startActivity(intentToProfileData)
+        }
 
+        binding.subscription.setOnClickListener {
+            val intentToSubscription = Intent(requireContext(), ComingSoonSubscription::class.java)
+            startActivity(intentToSubscription)
         }
 
         binding.logout.setOnClickListener {
@@ -49,11 +54,11 @@ class ProfileFragment : Fragment() {
             binding.tvEmail.text = it
         }
 
-        profileViewModel.getUsername().observe(viewLifecycleOwner){
+        profileViewModel.getUsername().observe(viewLifecycleOwner) {
             binding.tvName.text = it
         }
 
-        profileViewModel.getImageUser().observe(viewLifecycleOwner){
+        profileViewModel.getImageUser().observe(viewLifecycleOwner) {
             Glide.with(requireContext()).load(it).into(binding.ivProfile)
         }
     }

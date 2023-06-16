@@ -29,7 +29,7 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Field("name") name: String,
         @Field("goal") goal: String,
-        @Field("birthdate") birthDate: String,
+        @Field("birthDate") birthDate: String,
         @Field("favBook") favBook: String,
         @Field("favExercise") favExercise: String,
         @Field("favAuthor") favAuthor: String,

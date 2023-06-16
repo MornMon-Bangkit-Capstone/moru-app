@@ -37,10 +37,6 @@ class DetailUserExerciseRoutineActivity : AppCompatActivity() {
             popUpMenu.menuInflater.inflate(R.menu.routine_detail_menu, popUpMenu.menu)
             popUpMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
-                    R.id.updateRoutine -> {
-                        detailRoutineViewModel.deleteSchedule(saveToken!!, id)
-                        true
-                    }
                     R.id.deleteRoutine -> {
                         Log.e("UPDATE", "UPDATE ROUTINE")
                         detailRoutineViewModel.deleteSchedule(saveToken!!, id)

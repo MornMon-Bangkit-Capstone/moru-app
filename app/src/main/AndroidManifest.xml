@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Moru"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.subscription.ComingSoonSubscription"
+            android:exported="false" />
+        <activity
             android:name=".ui.alarm.web_view.ExerciseVideoActivity"
             android:exported="false" />
         <activity

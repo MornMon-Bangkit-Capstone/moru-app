@@ -68,14 +68,14 @@ class AlarmReceiver : BroadcastReceiver() {
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 
-        val skipRoutineIntent = Intent(context, MainActivity::class.java)
-        skipRoutineIntent.action = ACTION_SKIP_ALARM
-        val skipPendingIntent = PendingIntent.getActivity(
-            context,
-            REQUEST_CODE_SKIP,
-            skipRoutineIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
+//        val skipRoutineIntent = Intent(context, MainActivity::class.java)
+//        skipRoutineIntent.action = ACTION_SKIP_ALARM
+//        val skipPendingIntent = PendingIntent.getActivity(
+//            context,
+//            REQUEST_CODE_SKIP,
+//            skipRoutineIntent,
+//            PendingIntent.FLAG_UPDATE_CURRENT
+//        )
 
         val builder =
             NotificationCompat.Builder(context, channelId).setSmallIcon(R.drawable.icon_day_time)
@@ -83,7 +83,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 .setColor(ContextCompat.getColor(context, android.R.color.white))
                 .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
                 .setSound(alarmSound)
-                .addAction(R.drawable.custom_email_icon, "SKIP", skipPendingIntent)
+//                .addAction(R.drawable.custom_email_icon, "SKIP", skipPendingIntent)
                 .addAction(R.drawable.custom_pass_icon, "START", startPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
@@ -144,7 +144,6 @@ class AlarmReceiver : BroadcastReceiver() {
 
         pendingIntent.cancel()
         alarmManager.cancel(pendingIntent)
-        displayToast("Your routine schedule is canceled", context)
     }
 
     private fun displayToast(msg: String, context: Context) {

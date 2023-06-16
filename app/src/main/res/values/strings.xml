@@ -159,5 +159,8 @@
     <string name="harry_poter">Harry Potter and the Goblet of Fire</string>
     <string name="fill_your_book_preferences">Fill Your Book Preferences</string>
     <string name="fill_your_exercise_preferences">Fill Your Exercise Preferences</string>
+    <string name="total_routine">Total routine</string>
+    <string name="subscription_feature_is_coming_soon">Subscription feature is coming soon!</string>
+    <string name="with_subscription_moru_will_provide_you_with_a_lot_of_new_features_for_your_morning_routines">With subscription, Moru will provide you with a lot of new features for your morning routines</string>
 
 </resources>

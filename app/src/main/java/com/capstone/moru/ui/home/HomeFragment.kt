@@ -37,6 +37,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         factory = ViewModelFactory.getInstance(requireContext())
+        alarmReceiver = AlarmReceiver()
 
         setupRecyclerView()
         homeViewModel.getUserToken().observe(viewLifecycleOwner) { token ->
@@ -146,10 +147,13 @@ class HomeFragment : Fragment() {
 
     private fun noSchedule(it: Boolean?) {
         if (it!!) {
-            binding.progressBar.visibility = View.GONE
+            Log.e("HOME", "ERROR")
             binding.btnRetry.visibility = View.VISIBLE
+
+            binding.progressBar.visibility = View.GONE
             initRecyclerView(emptyListRoutine)
         } else {
+            Log.e("HOME", "KAGA ERROR")
             binding.btnRetry.visibility = View.GONE
         }
     }
@@ -206,12 +210,5 @@ class HomeFragment : Fragment() {
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         binding.progressBar2.visibility = if (isLoading) View.VISIBLE else View.GONE
-        if (isLoading){
-            binding.btnRetry.visibility = View.GONE
-            binding.btnRetry2.visibility = View.GONE
-        }
-
-//        binding.btnRetry2.visibility = if (isLoading) View.GONE  else
-
     }
 }

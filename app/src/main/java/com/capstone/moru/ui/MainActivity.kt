@@ -70,13 +70,6 @@ class MainActivity : AppCompatActivity() {
 
         homeViewModel.profile.observe(this) { profile ->
             if (!savedToken.isNullOrEmpty() && profile.username == null) {
-//                    homeViewModel.getFillProfileStatus().observe(this) {
-//                        if (it == 2) {
-//                            val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
-//                            startActivity(intentToFillProfile)
-//                        }
-//                    }
-
                if (flagProfile){
                    val intentToFillProfile = Intent(this, FillProfileActivity::class.java)
                    startActivity(intentToFillProfile)
@@ -89,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         homeViewModel.schedule.observe(this) { routine ->
             if (routine != null) {
                 for (i in routine) {
-                    var startTime = LocalTime.parse(i?.startTime).plusMinutes(1)
+                    var startTime = LocalTime.parse(i?.startTime)
                     var endTime = startTime.plusMinutes(5)
                     var checkTime = LocalTime.parse(selectedTime)
 
