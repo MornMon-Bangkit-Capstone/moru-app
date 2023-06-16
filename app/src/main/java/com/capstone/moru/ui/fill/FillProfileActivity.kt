@@ -188,7 +188,7 @@ class FillProfileActivity : AppCompatActivity() {
                     fillProfileViewModel.getUserToken().observe(this) {
                         token ->
                         fillProfileViewModel.fillProfileUser(token, imageMultipart)
-                        fillProfileViewModel.fillUserProfile(token, name, birthDate, goals, favBookName, favExercise, favAuthor)
+                        fillProfileViewModel.fillUserProfile(token, name, goals,birthDate, favBookName, favExercise, favAuthor)
                         fillProfileViewModel.postBookRating(token, "613496744", rating2.toString())
                         fillProfileViewModel.postBookRating(token, "385504209", rating3.toString())
                         fillProfileViewModel.postBookRating(token, "44023722", rating4.toString())
