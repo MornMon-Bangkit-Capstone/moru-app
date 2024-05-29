@@ -1,8 +1,8 @@
 <!-- git remote add origin https|ssh:path/to/the/repository.git  -->
 <!-- git pull origin main --rebase -->
-<h1> [Project Name] </h1>
+<h1> Moru - Your Morning Routine App </h1>
 <a href="https://github.com/MornMon-Bangkit-Capstone/moru-app">
-    <img src="./img/header.png" alt="readme-project-template">
+    <img src="./img/moru.png" alt="readme-project-template">
 </a>
 
 <!-- You can make badge by read on official documentation at https://shields.io/badges -->
@@ -23,7 +23,7 @@
 <a href="#-reference">Reference</a>&nbsp;&bull;&nbsp;
 <a href="#-issue">Issue</a>&nbsp;&bull;&nbsp;
 <a href="#-license">License</a>&nbsp;&bull;&nbsp;
-<a href="#-author">Author</a>
+<a href="#-author">I Putu Krisna Erlangga</a>
 </p>
 
 ## 📄 Introduction
