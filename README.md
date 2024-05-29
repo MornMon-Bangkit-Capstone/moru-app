@@ -48,7 +48,7 @@ To address this, my team and I developed `Moru`, an application designed to help
 
 ## ⚙️ Installation
 
-1. Clone this repository `https://github.com/MornMon-Bangkit-Capstone/moru-app` or click `Clone or Download` button and then click `Download ZIP`
+1. Clone this repository `git clone https://github.com/MornMon-Bangkit-Capstone/moru-app.git` or click `Clone or Download` button and then click `Download ZIP`
 2. Open this project in Android Studio
 3. Make sure your Android Virtual Device (AVD) is already activated
 4. Run the app
