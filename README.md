@@ -1,8 +1,7 @@
 <!-- git remote add origin https|ssh:path/to/the/repository.git  -->
 <!-- git pull origin main --rebase -->
-<div align="center">
 <h1> [Project Name] </h1>
-<a href="https://github.com/zero-911/readme-project-template/header.png">
+<a href="https://github.com/MornMon-Bangkit-Capstone/moru-app">
     <img src="./img/header.png" alt="readme-project-template">
 </a>
 
@@ -29,7 +28,9 @@
 
 ## 📄 Introduction
 
-`[Project Name]`is a Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id rhoncus dapibus, diam nunc faucibus nisi, vel tincidunt nisl nunc vitae libero. Donec euismod, diam id rhoncus dapibus, diam nunc faucibus nisi, vel tincidunt nisl nunc vitae libero.
+BMC Public Health states that consistency in morning routines, such as reading and exercising, can improve physical and mental health. Morning routines can also enhance productivity and performance at work. However, maintaining a morning routine is challenging for many people due to the required consistency.
+
+To address this, my team and I developed `Moru`, an application designed to help users cultivate and maintain consistent morning routines. The app offers features such as exercise and book recommendations based on user preferences, routine management, and morning routine alarms. With a minimalist interface, the application provides a good user experience, making it easy for users to organize and execute their morning routines consistently and on schedule. Moru offers a variety of book options (sourced from the Google Books API) and exercise tutorials (in the form of video tutorials).
 
 ## 💻 Tech Stack
 
@@ -37,12 +38,17 @@
 
 <!-- You can search the logo with https://simpleicons.org and copy the name in logo=copyhere same with color after badge/YourText-YourColor-->
 
--
--
+- Kotlin
+- Android Studio
+- Postman
+- Rertrofit
+- Hilt
+- DataStore
+- AlarmManager
 
 ## ⚙️ Installation
 
-1. Clone this repository `git clone https://github.com/zer0-911/readme-project-template.git` or click `Clone or Download` button and then click `Download ZIP`
+1. Clone this repository `https://github.com/MornMon-Bangkit-Capstone/moru-app` or click `Clone or Download` button and then click `Download ZIP`
 2. Open this project in Android Studio
 3. Make sure your Android Virtual Device (AVD) is already activated
 4. Run the app
@@ -62,7 +68,7 @@
 
 ## 🚩 Issue
 
-If you found a bug or an issue, please report by opening a new issue on [this repository](https://github.com/zer0-911/paper-drone/issues).
+If you found a bug or an issue, please report by opening a new issue on [this repository](https://github.com/MornMon-Bangkit-Capstone/moru-app/issues).
 
 ## 📝 License
 
